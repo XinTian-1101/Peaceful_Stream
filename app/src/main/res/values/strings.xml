@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Assignments</string>
+    <string name="google_maps_key">AIzaSyAuKJq9Uo0Y-uvwKP6c7-eFK9xaNdy4mVQ</string>
+
+    <string-array name="voice_types">
+        <item>Mature Male</item>
+        <item>Adult Female</item>
+    </string-array>
+
+</resources>

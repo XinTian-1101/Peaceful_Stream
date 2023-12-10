@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1072742826751",
+    "project_id": "flawless-will-405516",
+    "storage_bucket": "flawless-will-405516.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1072742826751:android:2fb42c8c261ec71f0582ca",
+        "android_client_info": {
+          "package_name": "com.example.assignments"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLjRgN3cqtOfJvtxOMEDb8HQv6yo3Gbjw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
