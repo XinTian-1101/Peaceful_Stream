@@ -51,8 +51,9 @@ public class IncidentClusterItem implements ClusterItem {
                 '}';
     }
 
-
-
+    public String getPlace() {
+        return place;
+    }
 
     public String getType(){return type;}
 

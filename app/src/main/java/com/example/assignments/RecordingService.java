@@ -29,7 +29,10 @@ public class RecordingService extends Service {
     long StartingTimeMillis=0;
     long ElapseMillis=0;
 
-    private int recordingCount = 0;
+    private SharedPreferences prefs;
+    private static final String PREFS_NAME = "MySoundRecPrefs";
+    private static final String RECORDING_COUNT_KEY = "recordingCountKey";
+    private int recordingCount;
 
     File file;
     String fileName;
@@ -40,10 +43,8 @@ public class RecordingService extends Service {
 
         super.onCreate();
         dbHelper = new DBHelper(getApplicationContext());
-
-
-
-
+        prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        recordingCount = prefs.getInt(RECORDING_COUNT_KEY, 0); // Retrieve the last recording count
 
     }
 
@@ -62,11 +63,8 @@ public class RecordingService extends Service {
 
     public void startRecording(){
 
-        Long howlong = System.currentTimeMillis()/1000;
-        String ts = howlong.toString();
-
-        recordingCount++;
-
+        recordingCount++; // Increment the count
+        prefs.edit().putInt(RECORDING_COUNT_KEY, recordingCount).apply(); // Store the new count
 
         fileName = "MyRecording_" + recordingCount + ".mp3";
 
