@@ -68,7 +68,6 @@ public class RecordFragment extends Fragment {
         binding.btnPause.setVisibility(View.GONE);
         binding.recordBtn.setColorPressed(R.color.record_pressed_color);
 
-
         binding.recordBtn.setOnClickListener(v -> {
             if (isStartRecord) {
                 if (checkStoragePermissions()) {
