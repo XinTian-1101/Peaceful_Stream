@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RealTimeLocation">
+
+    <fragment
+        android:id="@+id/google_map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="351dp"
+        android:layout_height="500dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="69dp"
+        android:layout_marginEnd="30dp" />
+
+    <TextView
+        android:id="@+id/LocateTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="18dp"
+        android:text="@string/locationTitle"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="33dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="24dp"
+        android:layout_toEndOf="@+id/LocateTitle"
+        app:srcCompat="@drawable/location_icon" />
+
+
+    <FrameLayout
+        android:id="@+id/shareBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="61dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="600dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/fourside_roundbutton"
+        >
+
+        <ImageButton
+            android:id="@+id/BtnshareLocation"
+            android:layout_width="312dp"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/baloo"
+            android:paddingTop="11dp"
+            android:background="@drawable/fourside_roundbutton"
+            android:text="@string/shareLocation"
+            android:textAlignment="textEnd"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:id="@+id/TVshareLocation"
+            android:layout_width="312dp"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/baloo"
+            android:paddingTop="11dp"
+            android:text="@string/shareLocation"
+            android:textAlignment="textEnd"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:layout_marginLeft="15dp"/>
+
+        <ImageView
+            android:id="@+id/shareIcon"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="10dp"
+            app:srcCompat="@drawable/share_icon" />
+
+    </FrameLayout>
+
+</RelativeLayout>

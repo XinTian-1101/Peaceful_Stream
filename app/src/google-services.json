@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "765095463892",
+    "project_id": "chatlist-be0cf",
+    "storage_bucket": "chatlist-be0cf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:765095463892:android:f964c0a7c5cbc875dca441",
+        "android_client_info": {
+          "package_name": "com.example.group_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCf-9h60LDNJW40NViD6XzqG93hOxUZ9A4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
