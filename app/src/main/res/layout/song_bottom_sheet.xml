@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/bottomSheetLayout"
+    android:padding="30dp"
+    android:background="@color/blue">
+
+    <ImageView
+        android:id="@+id/songImageBtmSheet"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:1"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/songTitleBtmSheet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Song Title"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/songImageBtmSheet" />
+
+    <TextView
+        android:id="@+id/songArtistBtmSheet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Artist"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/songTitleBtmSheet" />
+
+    <ImageButton
+        android:id="@+id/favouriteBtmSheet"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/blue"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toStartOf="@+id/addToPlaylistBtmSheet"
+        app:layout_constraintTop_toBottomOf="@+id/songImageBtmSheet"
+        app:srcCompat="@drawable/ic_pause" />
+
+    <ImageButton
+        android:id="@+id/addToPlaylistBtmSheet"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/blue"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/songImageBtmSheet"
+        app:srcCompat="@drawable/ic_playlist_add" />
+
+    <SeekBar
+        android:id="@+id/seekBarBtmSheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:progress="40"
+        android:progressBackgroundTint="@color/white"
+        android:progressTint="#D9D9D9"
+        android:thumbTint="#D9D9D9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/songArtistBtmSheet" />
+
+    <TextView
+        android:id="@+id/currTimeBtmSheet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Current Time"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBarBtmSheet" />
+
+    <TextView
+        android:id="@+id/totalDurationBtmSheet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Total Duration"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBarBtmSheet" />
+
+    <ImageButton
+        android:id="@+id/prevSongBtmSheet"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:background="@color/blue"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toStartOf="@+id/playPauseBtmSheet"
+        app:layout_constraintTop_toBottomOf="@+id/currTimeBtmSheet"
+        app:srcCompat="@drawable/ic_skip_prev_white" />
+
+    <ImageButton
+        android:id="@+id/nextSongBtmSheet"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/blue"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toEndOf="@+id/playPauseBtmSheet"
+        app:layout_constraintTop_toBottomOf="@+id/totalDurationBtmSheet"
+        app:srcCompat="@drawable/ic_skip_next_white" />
+
+    <ImageButton
+        android:id="@+id/playPauseBtmSheet"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/blue"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currTimeBtmSheet"
+        app:srcCompat="@drawable/ic_pause_white" />
+
+    <ImageButton
+        android:id="@+id/shuffleBtmSheet"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="60dp"
+        android:background="@color/blue"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toStartOf="@+id/prevSongBtmSheet"
+        app:layout_constraintTop_toBottomOf="@+id/currTimeBtmSheet"
+        app:srcCompat="@drawable/ic_shuffle_white" />
+
+    <ImageButton
+        android:id="@+id/repeatBtmSheet"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toEndOf="@+id/nextSongBtmSheet"
+        app:layout_constraintTop_toBottomOf="@+id/totalDurationBtmSheet"
+        app:srcCompat="@drawable/ic_repeat_white"
+        android:scaleType="fitXY"
+        android:background="@color/blue"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
