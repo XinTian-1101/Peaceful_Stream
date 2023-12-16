@@ -20,33 +20,23 @@ public class EmergencyMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.emergency_menu);
 
-//        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.theme_darkblue)));
-//        getSupportActionBar().setTitle("Emergency Assistance Module");
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Emergency Assistance Module");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        btnSOS = (Button)findViewById(R.id.emergencyDailButton);
-        btnLocate = (Button)findViewById(R.id.shareLocationButton);
-        btnChat = (Button)findViewById(R.id.emergencyChatButton);
+        btnSOS = findViewById(R.id.emergencyDailButton);
+        btnLocate = findViewById(R.id.shareLocationButton);
+        btnChat = findViewById(R.id.emergencyChatButton);
 
-        btnSOS.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btnSOS.setOnClickListener(v -> {
                 openEmergencyDialing();
-            }
         });
 
-        btnLocate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btnLocate.setOnClickListener(v-> {
                 openRealTimeLocation();
-            }
         });
 
-        btnChat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btnChat.setOnClickListener(v-> {
                 openEmergencyChat();
-            }
         });
     }
 

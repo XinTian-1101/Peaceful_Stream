@@ -1,9 +1,7 @@
 package com.example.group_project.activties;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.location.Location;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
@@ -58,13 +56,15 @@ public class ChatActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getSupportActionBar().setTitle("Emergency Assistance Module");
+
         binding = ActivityChatBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setListeners();
         loadReceiverDetails();
         init();
         listenMessages();
-
     }
 
     private void init(){
@@ -80,16 +80,27 @@ public class ChatActivity extends BaseActivity {
     }
 
     private void sendMessage(){
+        // Create a HashMap to store the message details
         HashMap<String,Object> message = new HashMap<>();
+
+        // Put various details into the message HashMap
         message.put(Constants.KEY_SENDER_ID, preferenceManager.getString(Constants.KEY_USER_ID));
         message.put(Constants.KEY_RECEIVER_ID, receiverUser.id);
         message.put(Constants.KEY_MESSAGE, binding.inputMessage.getText().toString());
         message.put(Constants.KEY_TIMESTAMP, new Date());
+
+        // Add the message to the "chat" collection in Firestore
         database.collection(Constants.KEY_COLLECTION_CHAT).add(message);
+
+        // Check if a conversation ID exists
         if(conversionId != null){
+            // If yes, update the conversation with the new message
             updateConversion(binding.inputMessage.getText().toString());
         }else{
+            // If no, create a new conversation HashMap
             HashMap<String , Object> conversion = new HashMap<>();
+
+            // Put various details into the conversation HashMap
             conversion.put(Constants.KEY_SENDER_ID, preferenceManager.getString(Constants.KEY_USER_ID));
             conversion.put(Constants.KEY_SENDER_NAME, preferenceManager.getString(Constants.KEY_NAME));
             conversion.put(Constants.KEY_SENDER_IMAGE,preferenceManager.getString(Constants.KEY_IMAGE));
@@ -98,29 +109,36 @@ public class ChatActivity extends BaseActivity {
             conversion.put(Constants.KEY_RECEIVER_IMAGE,receiverUser.image);
             conversion.put(Constants.KEY_LAST_MESSAGE, binding.inputMessage.getText().toString());
             conversion.put(Constants.KEY_TIMESTAMP,new Date());
+
+            // Add the new conversation to Firestore
             addConversion(conversion);
         }
-        if(!isReceiverAvailable){
+        if(!isReceiverAvailable){   // Check if the receiver is not available
             try{
+                // Create a JSONArray to store the receiver's FCM token
                 JSONArray tokens = new JSONArray();
                 tokens.put(receiverUser.token);
 
+                // Create a JSONObject to store data for push notification
                 JSONObject data = new JSONObject();
                 data.put(Constants.KEY_USER_ID, preferenceManager.getString(Constants.KEY_USER_ID));
                 data.put(Constants.KEY_NAME, preferenceManager.getString(Constants.KEY_NAME));
                 data.put(Constants.KEY_FCM_TOKEN, preferenceManager.getString(Constants.KEY_FCM_TOKEN));
                 data.put(Constants.KEY_MESSAGE, binding.inputMessage.getText().toString());
 
+                // Create a JSONObject to store the overall push notification body
                 JSONObject body = new JSONObject();
                 body.put(Constants.REMOTE_MSG_DATA,data);
                 body.put(Constants.REMOTE_MSG_REGISTRATION_IDS, tokens);
 
+                // Send the push notification
                 sendNotification(body.toString());
 
             }catch(Exception exception){
                 showToast(exception.getMessage());
             }
         }
+        // Clear the input message field
         binding.inputMessage.setText(null);
     }
 
@@ -147,7 +165,7 @@ public class ChatActivity extends BaseActivity {
                             }
                         }
                     }catch(JSONException e){
-                        e.printStackTrace();;
+                        e.printStackTrace();
                     }
                     showToast("Notification sent successfully");
                 }else{
@@ -189,6 +207,9 @@ public class ChatActivity extends BaseActivity {
 
         });
     }
+
+//    Listens for changes in the "chat" collection in Firestore.
+//    Updates the UI with new chat messages.
     private void listenMessages(){
         database.collection(Constants.KEY_COLLECTION_CHAT)
                 .whereEqualTo(Constants.KEY_SENDER_ID, preferenceManager.getString(Constants.KEY_USER_ID))
@@ -201,6 +222,9 @@ public class ChatActivity extends BaseActivity {
                 .addSnapshotListener(eventListener);
     }
 
+
+//    Handles changes in the Firestore documents, specifically when new messages are added.
+//    Updates the local list of chat messages and notifies the adapter.
     private final EventListener<QuerySnapshot> eventListener = (value, error) -> {
         if(error != null){
             return;

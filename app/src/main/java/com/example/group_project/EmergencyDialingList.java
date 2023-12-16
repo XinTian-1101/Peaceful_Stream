@@ -23,9 +23,8 @@ public class EmergencyDialingList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emergency_dialing_list);
 
-//        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.theme_darkblue)));
-//        getSupportActionBar().setTitle("Emergency Dialing");
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Emergency Dialing");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         ambulanceBtn =  findViewById(R.id.callButton1);
@@ -33,8 +32,8 @@ public class EmergencyDialingList extends AppCompatActivity {
         fireBrigadeBtn = findViewById(R.id.callButton3);
         disasterBtn = findViewById(R.id.callButton4);
 
-        ambulanceBtn.setOnClickListener(v -> CallButton("011-15085448"));    // 123
-        policeBtn.setOnClickListener(v -> CallButton("911"));
+        ambulanceBtn.setOnClickListener(v -> CallButton("911"));    // 123
+        policeBtn.setOnClickListener(v -> CallButton("999"));
         fireBrigadeBtn.setOnClickListener(v -> CallButton("110"));  // 111
         disasterBtn.setOnClickListener(v -> CallButton("112"));
 
@@ -57,9 +56,9 @@ public class EmergencyDialingList extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                 if (getCurrentFocus() == ambulanceBtn) {
-                    CallButton("011-15085448");
-                } else if (getCurrentFocus() == policeBtn) {
                     CallButton("911");
+                } else if (getCurrentFocus() == policeBtn) {
+                    CallButton("999");
                 } else if (getCurrentFocus() == fireBrigadeBtn) {
                     CallButton("110");
                 } else if (getCurrentFocus() == disasterBtn) {

@@ -7,9 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.group_project.EmergencyDialingList;
-import com.example.group_project.EmergencyMenu;
-import com.example.group_project.R;
 
 public class MenuBtn extends AppCompatActivity {
 
@@ -18,6 +15,7 @@ public class MenuBtn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_btn);
+        getSupportActionBar().setTitle("Emergency Assistance Module");
 
         btnEnter =(Button) findViewById(R.id.button);
         btnEnter.setOnClickListener(new View.OnClickListener() {

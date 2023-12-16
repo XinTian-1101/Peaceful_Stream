@@ -41,9 +41,8 @@ public class RealTimeLocation extends AppCompatActivity implements OnMapReadyCal
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_real_time_location);
 
-//        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.theme_darkblue)));
-//        getSupportActionBar().setTitle("Sharing Location");
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Sharing Location");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         map = findViewById(R.id.google_map);
 
@@ -66,18 +65,18 @@ public class RealTimeLocation extends AppCompatActivity implements OnMapReadyCal
             String locationLink = "https://maps.google.com/?q=" + currentLocation.getLatitude() + "," + currentLocation.getLongitude();
             String message = "Check out my real-time location: " + locationLink;
 
-//            // Create an intent to share the message
-//            Intent shareIntent = new Intent(Intent.ACTION_SEND);
-//            shareIntent.setType("text/plain");
-//            shareIntent.putExtra(Intent.EXTRA_TEXT, message);
+            // Create an intent to share the message
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, message);
 
-            // Create an intent to open UsersActivity
-            Intent intent = new Intent(this, UsersActivity.class);
-            intent.putExtra(Constants.KEY_LOCATION_MESSAGE, message);
-            startActivity(intent);
+//            // Create an intent to open UsersActivity
+//            Intent intent = new Intent(this, UsersActivity.class);
+//            intent.putExtra(Constants.KEY_LOCATION_MESSAGE, message);
+//            startActivity(intent);
 
-//            // Launch the default messaging app
-//            startActivity(Intent.createChooser(shareIntent, "Share location via"));
+            // Launch the default messaging app
+            startActivity(Intent.createChooser(shareIntent, "Share location via"));
         } else {
             Toast.makeText(this, "Location not available", Toast.LENGTH_SHORT).show();
         }

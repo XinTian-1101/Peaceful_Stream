@@ -25,6 +25,11 @@ public class UsersActivity extends BaseActivity implements UserListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityUsersBinding.inflate(getLayoutInflater());
+
+        getSupportActionBar().setTitle("Emergency Chat");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         setContentView(binding.getRoot());
         preferenceManager = new PreferenceManager(getApplicationContext());
         setListeners();

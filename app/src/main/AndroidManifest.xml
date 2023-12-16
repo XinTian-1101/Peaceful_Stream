@@ -47,22 +47,26 @@
 
         <activity
             android:name=".RealTimeLocation"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".EmergencyMenu"/>
         <activity
             android:name=".activties.ChatActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activties.MainActivity"
-            android:exported="true">
+            android:exported="false"
+            android:parentActivityName=".EmergencyMenu">
 
         </activity>
         <activity
             android:name=".EmergencyMenu"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MenuBtn"/>
         <activity
             android:name=".EmergencyDialingList"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".EmergencyMenu"/>
 
         <meta-data
             android:name="preloaded_fonts"

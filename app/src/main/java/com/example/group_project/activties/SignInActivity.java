@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.group_project.EmergencyMenu;
 import com.example.group_project.databinding.ActivitySignInBinding;
 import com.example.group_project.utilities.Constants;
 import com.example.group_project.MenuBtn;

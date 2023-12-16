@@ -3,11 +3,13 @@ package com.example.group_project.activties;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.group_project.R;
 import com.example.group_project.adapter.RecentConversationsAdapter;
 import com.example.group_project.databinding.ActivityMainBinding;
 import com.example.group_project.listeners.ConversionListener;
@@ -41,8 +43,9 @@ public class MainActivity extends BaseActivity implements ConversionListener {
         setContentView(binding.getRoot());
         preferenceManager = new PreferenceManager(getApplicationContext());
 
-//        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.theme_darkblue)));
-//        getSupportActionBar().setTitle("Emergency Assistance Module");
+        getSupportActionBar().setTitle("Emergency Chat");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         init();
         loadUserDetails();
         getToken();
