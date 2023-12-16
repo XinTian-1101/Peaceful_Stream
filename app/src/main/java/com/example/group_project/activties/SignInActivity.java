@@ -7,8 +7,10 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.group_project.databinding.ActivitySignInBinding;
 import com.example.group_project.utilities.Constants;
+import com.example.group_project.MenuBtn;
 import com.example.group_project.utilities.PreferenceManager;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -22,7 +24,7 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         preferenceManager = new PreferenceManager(getApplicationContext());
         if(preferenceManager.getBoolean(Constants.KEY_IS_SIGNED_IN)){
-            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             finish();
         }
@@ -57,9 +59,10 @@ public class SignInActivity extends AppCompatActivity {
                         preferenceManager.putString(Constants.KEY_USER_ID, documentSnapshot.getId());
                         preferenceManager.putString(Constants.KEY_NAME, documentSnapshot.getString(Constants.KEY_NAME));
                         preferenceManager.putString(Constants.KEY_IMAGE, documentSnapshot.getString(Constants.KEY_IMAGE));
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
+                        openEmergencyMenu();
+//                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                        startActivity(intent);
                     }else{
                         loading(false);
                         showToast("Unable to sign in");
@@ -93,5 +96,10 @@ public class SignInActivity extends AppCompatActivity {
         }else{
             return true;
         }
+    }
+
+    public void openEmergencyMenu(){
+        Intent intentDialing = new Intent(this, MenuBtn.class);
+        startActivity(intentDialing);
     }
 }

@@ -15,6 +15,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.group_project.activties.UsersActivity;
+import com.example.group_project.utilities.Constants;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -39,9 +41,9 @@ public class RealTimeLocation extends AppCompatActivity implements OnMapReadyCal
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_real_time_location);
 
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.theme_darkblue)));
-        getSupportActionBar().setTitle("Sharing Location");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.theme_darkblue)));
+//        getSupportActionBar().setTitle("Sharing Location");
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         map = findViewById(R.id.google_map);
 
@@ -64,16 +66,22 @@ public class RealTimeLocation extends AppCompatActivity implements OnMapReadyCal
             String locationLink = "https://maps.google.com/?q=" + currentLocation.getLatitude() + "," + currentLocation.getLongitude();
             String message = "Check out my real-time location: " + locationLink;
 
-            // Create an intent to share the message
-            Intent shareIntent = new Intent(Intent.ACTION_SEND);
-            shareIntent.setType("text/plain");
-            shareIntent.putExtra(Intent.EXTRA_TEXT, message);
+//            // Create an intent to share the message
+//            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+//            shareIntent.setType("text/plain");
+//            shareIntent.putExtra(Intent.EXTRA_TEXT, message);
 
-            // Launch the default messaging app
-            startActivity(Intent.createChooser(shareIntent, "Share location via"));
+            // Create an intent to open UsersActivity
+            Intent intent = new Intent(this, UsersActivity.class);
+            intent.putExtra(Constants.KEY_LOCATION_MESSAGE, message);
+            startActivity(intent);
+
+//            // Launch the default messaging app
+//            startActivity(Intent.createChooser(shareIntent, "Share location via"));
         } else {
             Toast.makeText(this, "Location not available", Toast.LENGTH_SHORT).show();
         }
+
     }
     private void getLocation(){
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {

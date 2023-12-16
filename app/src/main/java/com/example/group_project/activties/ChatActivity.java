@@ -1,7 +1,9 @@
 package com.example.group_project.activties;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
@@ -62,6 +64,7 @@ public class ChatActivity extends BaseActivity {
         loadReceiverDetails();
         init();
         listenMessages();
+
     }
 
     private void init(){
@@ -151,7 +154,6 @@ public class ChatActivity extends BaseActivity {
                     showToast("Error: " + response.code());
                 }
             }
-
             @Override
             public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
                 showToast(t.getMessage());
@@ -298,4 +300,5 @@ public class ChatActivity extends BaseActivity {
         super.onResume();
         listenAvailabilityOfReceiver();
     }
+
 }

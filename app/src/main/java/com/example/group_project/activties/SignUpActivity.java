@@ -37,8 +37,6 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         preferenceManager = new PreferenceManager(getApplicationContext());
         setListeners();
-
-
     }
 
     private void setListeners(){

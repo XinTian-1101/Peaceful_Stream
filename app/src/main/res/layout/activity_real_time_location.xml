@@ -50,15 +50,15 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="600dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="50dp"
         android:background="@drawable/fourside_roundbutton"
         >
 
         <ImageButton
             android:id="@+id/BtnshareLocation"
-            android:layout_width="312dp"
+            android:layout_width="300dp"
             android:layout_height="match_parent"
             android:fontFamily="@font/baloo"
             android:paddingTop="11dp"
@@ -67,25 +67,25 @@
             android:textAlignment="textEnd"
             android:textColor="@color/black"
             android:textSize="25sp"
-            android:layout_marginLeft="20dp"/>
+            android:layout_marginLeft="10dp"/>
 
         <TextView
             android:id="@+id/TVshareLocation"
-            android:layout_width="312dp"
+            android:layout_width="200dp"
             android:layout_height="match_parent"
+            android:layout_marginLeft="80dp"
             android:fontFamily="@font/baloo"
-            android:paddingTop="11dp"
+            android:gravity="center"
+            android:paddingTop="4dp"
             android:text="@string/shareLocation"
-            android:textAlignment="textEnd"
             android:textColor="@color/black"
-            android:textSize="25sp"
-            android:layout_marginLeft="15dp"/>
+            android:textSize="25sp" />
 
         <ImageView
             android:id="@+id/shareIcon"
             android:layout_width="50dp"
             android:layout_height="40dp"
-            android:layout_marginHorizontal="15dp"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginVertical="10dp"
             app:srcCompat="@drawable/share_icon" />
 

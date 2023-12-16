@@ -1,5 +1,6 @@
 package com.example.group_project.firebase;
 
+import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -29,6 +30,7 @@ public class MessagingService extends FirebaseMessagingService {
 
     }
 
+    @SuppressLint("MissingPermission")
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {

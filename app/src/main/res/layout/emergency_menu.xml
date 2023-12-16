@@ -6,78 +6,60 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="375dp"
-        android:layout_height="94dp"
+        android:layout_width="350dp"
+        android:layout_height="100dp"
         android:layout_marginTop="100dp"
         android:layout_marginBottom="80dp"
+        android:gravity="center"
         android:background="@color/white"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_editor_absoluteX="20dp"
-        app:layout_editor_absoluteY="100dp">
-
+        >
 
         <ImageButton
             android:id="@+id/sosIcon"
-            android:layout_width="96dp"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:background="@drawable/left_round_icon"
             android:contentDescription="@string/app_name"
             android:scrollbarSize="5dp"
             android:src="@drawable/sos_icon_foreground"
-            tools:ignore="DuplicateSpeakableTextCheck,ImageContrastCheck" />
-
-<!--        imrpove this-->
-<!--        <com.google.android.material.button.MaterialButton-->
-<!--            android:id="@+id/buttonSignUp"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="@dimen/_50sdp"-->
-<!--            android:layout_marginTop="@dimen/_15sdp"-->
-<!--            android:text="Sign Up"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:textStyle="bold"-->
-<!--            android:textSize="@dimen/_13ssp"-->
-<!--            app:cornerRadius="@dimen/_8sdp"-->
-<!--            /> -->
+             />
 
         <Button
             android:id="@+id/emergencyDailButton"
-            android:layout_width="279dp"
+            android:layout_width="250dp"
             android:layout_height="match_parent"
             android:background="@drawable/right_round_icon"
             android:fontFamily="@font/baloo"
             android:keepScreenOn="true"
             android:text="@string/emergency"
-            android:textSize="28sp"
-            tools:ignore="MissingConstraints,TextSizeCheck" />
+            android:textSize="28sp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="376dp"
-        android:layout_height="96dp"
-        android:layout_marginTop="200dp"
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="20dp"
-
+        android:gravity="center"
         android:background="@color/white"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_editor_absoluteX="20dp"
-        app:layout_editor_absoluteY="200dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        >
 
         <ImageButton
             android:id="@+id/locationIcon"
-            android:layout_width="96dp"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:background="@drawable/left_round_icon"
             android:contentDescription="@string/app_name"
@@ -87,7 +69,7 @@
 
         <Button
             android:id="@+id/shareLocationButton"
-            android:layout_width="280dp"
+            android:layout_width="250dp"
             android:layout_height="match_parent"
             android:background="@drawable/right_round_icon"
             android:fontFamily="@font/baloo"
@@ -102,22 +84,18 @@
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="376dp"
-        android:layout_height="98dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="160dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
         android:background="@color/white"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_editor_absoluteX="20dp"
-        app:layout_editor_absoluteY="400dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout2">
 
         <ImageButton
             android:id="@+id/emergencyChatIcon"
-            android:layout_width="96dp"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:background="@drawable/left_round_icon"
             android:contentDescription="@string/app_name"
@@ -127,7 +105,7 @@
 
         <Button
             android:id="@+id/emergencyChatButton"
-            android:layout_width="279dp"
+            android:layout_width="250dp"
             android:layout_height="match_parent"
             android:background="@drawable/right_round_icon"
             android:fontFamily="@font/baloo"

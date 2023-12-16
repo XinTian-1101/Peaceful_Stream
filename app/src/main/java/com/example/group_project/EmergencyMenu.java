@@ -3,10 +3,11 @@ package com.example.group_project;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.group_project.activties.MainActivity;
 
 public class EmergencyMenu extends AppCompatActivity {
 
@@ -19,9 +20,9 @@ public class EmergencyMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.emergency_menu);
 
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.theme_darkblue)));
-        getSupportActionBar().setTitle("Emergency Assistance Module");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.theme_darkblue)));
+//        getSupportActionBar().setTitle("Emergency Assistance Module");
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         btnSOS = (Button)findViewById(R.id.emergencyDailButton);
         btnLocate = (Button)findViewById(R.id.shareLocationButton);
@@ -57,11 +58,10 @@ public class EmergencyMenu extends AppCompatActivity {
     public void openRealTimeLocation(){
         Intent intentLocate = new Intent(this, RealTimeLocation.class);
         startActivity(intentLocate);
-
-
     }
+
     public void openEmergencyChat(){
-        Intent intentChat = new Intent(this, EmergencyChat.class);
+        Intent intentChat = new Intent(this, MainActivity.class);
         startActivity(intentChat);
     }
 

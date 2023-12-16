@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Base.Theme.Group_Project" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Base.Theme.Group_Project" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/theme_darkblue</item>
         <item name="android:titleTextAppearance">@string/moduleTitle</item>
         <item name="statusBarBackground">@color/theme_darkblue</item>
