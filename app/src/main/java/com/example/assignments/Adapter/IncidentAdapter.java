@@ -1,4 +1,4 @@
-package com.example.assignments;
+package com.example.assignments.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +7,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.assignments.Item.IncidentClusterItem;
+import com.example.assignments.R;
 
 import java.util.List;
 

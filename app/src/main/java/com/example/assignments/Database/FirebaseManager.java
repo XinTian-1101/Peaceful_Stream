@@ -1,4 +1,4 @@
-package com.example.assignments;
+package com.example.assignments.Database;
 
 import android.util.Log;
 

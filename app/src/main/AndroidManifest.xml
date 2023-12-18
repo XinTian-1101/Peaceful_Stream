@@ -12,6 +12,12 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+
 
 
     <application
@@ -27,7 +33,7 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,21 +44,27 @@
         </activity>
 
         <activity
-            android:name=".crime_map"
+            android:name=".Activity.crime_map"
             android:exported="true">
 
         </activity>
 
         <activity
-            android:name=".voice_recording"
+            android:name=".Activity.voice_recording"
             android:exported="true">
 
         </activity>
 
 
+        <!-- BroadcastReceiver -->
+        <receiver android:name=".GeofenceBroadcastReceiver" android:exported="true">
+            <intent-filter>
+                <action android:name="ACTION_GEOFENCE_EVENT"/>
+            </intent-filter>
 
+        </receiver>
 
-        <service android:name=".RecordingService"></service>
+        <service android:name=".Service.RecordingService"></service>
 
 
         <meta-data

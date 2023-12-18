@@ -5,6 +5,7 @@ plugins {
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     // Add the Google services Gradle plugin
     id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 
 }
 
@@ -52,6 +53,7 @@ dependencies {
     //Glide dependencies
     implementation("com.github.bumptech.glide:glide:4.12.0")
     implementation("androidx.cardview:cardview:1.0.0")
+    implementation("com.google.firebase:firebase-crashlytics:18.6.0")
     kapt("com.github.bumptech.glide:compiler:4.12.0")  //It simplifies the process of making network requests and managing API calls.
 
 
@@ -64,6 +66,9 @@ dependencies {
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
 
+    //For snackbar
+    implementation ("com.google.android.material:material:<version>")
+
     // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:32.6.0"))
     implementation("com.google.firebase:firebase-analytics")
@@ -73,6 +78,11 @@ dependencies {
 
     //For recycle view
     implementation ("androidx.recyclerview:recyclerview:1.2.1")
+
+
+    //For swipe background
+    implementation ("it.xabaras.android:recyclerview-swipedecorator:1.4")
+
 
 
     testImplementation("junit:junit:4.13.2")

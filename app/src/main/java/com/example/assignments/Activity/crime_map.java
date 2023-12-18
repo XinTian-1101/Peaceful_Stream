@@ -1,8 +1,9 @@
-package com.example.assignments;
+package com.example.assignments.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -28,7 +29,15 @@ import androidx.core.content.ContextCompat;
 //For map
 import android.Manifest;
 
+import com.example.assignments.Adapter.IncidentAdapter;
+import com.example.assignments.Database.FirebaseManager;
+import com.example.assignments.Helper.GeofenceHelper;
+import com.example.assignments.Item.IncidentClusterItem;
+import com.example.assignments.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.Geofence;
+import com.google.android.gms.location.GeofencingClient;
+import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationServices;
 import android.location.Location;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -78,14 +87,19 @@ public class crime_map extends AppCompatActivity implements OnMapReadyCallback {
     private IncidentAdapter incidentAdapter;
     private HashMap<Marker, IncidentClusterItem> markerIncidentMap = new HashMap<>();
 
+    private GeofencingClient geofencingClient;
+    private GeofenceHelper geofenceHelper;
+    private float Geofence_Radius = 100;
+    private GoogleMap googleMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.crime_map);
 
+        geofencingClient = LocationServices.getGeofencingClient(this);
+        geofenceHelper= new GeofenceHelper(this);
 
         //For Intent
         ImageView backarroe_map = findViewById(R.id.back_arrow_map);
@@ -94,7 +108,7 @@ public class crime_map extends AppCompatActivity implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(crime_map.this,MainActivity.class);
+                Intent intent = new Intent(crime_map.this, MainActivity.class);
                 startActivity(intent);
 
             }
@@ -111,11 +125,11 @@ public class crime_map extends AppCompatActivity implements OnMapReadyCallback {
 
         FirebaseManager.Incident incident1 = new FirebaseManager.Incident(
                 "Malicios Injury",
-                "Lamiso Bar, Lakin Street",
+                "Lamiso Bar, Seventeen Mall",
                 "5 November 2023",
                 "During a heated argument in a bar, an individual threw a glass bottle at another patron, causing severe lacerations to the victim's face. The perpetrator was arrested for maliciously injuring the victim and is facing charges for assault and causing grievous bodily harm. ",
-                3.12841,
-                101.63397
+                3.12866,
+                101.63483
 
 
         );
@@ -191,7 +205,7 @@ public class crime_map extends AppCompatActivity implements OnMapReadyCallback {
                 // If false (off), positionStart is set to 0f (indicating the switch is on the left side).
 
                 ObjectAnimator animator = ObjectAnimator.ofFloat(circle_notification, "translationX", positionStart, positionEnd);
-                animator.setDuration(0); // duration of the animation in milliseconds
+                animator.setDuration(30); // duration of the animation in milliseconds
                 animator.start();
 
                 // Change the background drawable based on the state of the switch
@@ -240,6 +254,8 @@ public class crime_map extends AppCompatActivity implements OnMapReadyCallback {
     }
 
 
+
+
     private void updateButtonBackground(boolean isOn, ImageButton button) {
         if (isOn) {
             button.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.switchtoggle));
@@ -269,6 +285,8 @@ public class crime_map extends AppCompatActivity implements OnMapReadyCallback {
     //Add the OnMapReadyCallback here
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
+        this.googleMap = googleMap;
 
         // Check for location permission before enabling the My Location layer
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
@@ -325,6 +343,10 @@ public class crime_map extends AppCompatActivity implements OnMapReadyCallback {
                 return true;
             }
         });
+
+
+
+
     }
 
     private Marker getMarkerFromClusterItem(IncidentClusterItem item) {
@@ -432,7 +454,69 @@ public class crime_map extends AppCompatActivity implements OnMapReadyCallback {
     }
 
 
-}
+
+
+    private void fetchIncidentsFromFirebase() {
+        FirebaseManager firebaseManager = new FirebaseManager();
+        firebaseManager.readIncident(new FirebaseManager.OnIncidentReadListener() {
+            @Override
+            public void onIncidentRead(List<FirebaseManager.Incident> incidentList) {
+
+                List<Geofence> myGeofences  = new ArrayList<>();
+                for (FirebaseManager.Incident incident : incidentList) {
+                    LatLng latLng = new LatLng(incident.getLatitude(), incident.getLongitude());
+                    String geofenceId = incident.getPlace();
+                    Geofence geofence = geofenceHelper.getGeofence(geofenceId, latLng, Geofence_Radius,
+                            Geofence.GEOFENCE_TRANSITION_ENTER);
+                    myGeofences.add(geofence);
+                }
+                GeofencingRequest geofencingRequest = geofenceHelper.getGeofencingRequest(myGeofences);
+                PendingIntent pendingIntent = geofenceHelper.getPendingIntent();
+                addGeofenceToClient(geofencingRequest, pendingIntent);
+
+
+
+
+                }
+
+
+            @Override
+            public void onError(DatabaseError error) {
+                Log.e(GeofenceHelper.Tag, "Failed to read incidents", error.toException());
+            }
+        });
+    }
+
+    private void addGeofenceToClient(GeofencingRequest geofencingRequest, PendingIntent pendingIntent) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // Handle permission check
+            return;
+        }
+        geofencingClient.addGeofences(geofencingRequest, pendingIntent)
+                .addOnSuccessListener(aVoid -> Log.d(GeofenceHelper.Tag, "Successfully added geofence"))
+                .addOnFailureListener(e -> Log.d(GeofenceHelper.Tag, "Failed to add geofence", e));
+    }
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,4 +1,4 @@
-package com.example.assignments;
+package com.example.assignments.Item;
 
 import java.io.Serializable;
 
@@ -6,17 +6,28 @@ public class RecordingItem implements Serializable {
 
     private String name,path;
     private long length,time_added;
+    private long id;
 
     public RecordingItem(){
 
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public RecordingItem(String name, String path, long length, long time_added) {
+        this.id=id;
         this.name = name;
         this.path = path;
         this.length = length;
         this.time_added = time_added;
     }
+
 
     public String getName() {
         return name;

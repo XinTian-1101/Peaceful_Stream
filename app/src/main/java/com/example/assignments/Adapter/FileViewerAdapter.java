@@ -1,8 +1,9 @@
-package com.example.assignments;
+package com.example.assignments.Adapter;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +14,17 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.assignments.Database.DBHelper;
+import com.example.assignments.Interface.OnDatabaseChangedListener;
+import com.example.assignments.Fragment.PlayBackFragment;
+import com.example.assignments.R;
+import com.example.assignments.Item.RecordingItem;
+
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 
-public class FileViewerAdapter extends RecyclerView.Adapter <FileViewerAdapter.FileViewerViewHolder>implements OnDatabaseChangedListener{
+public class FileViewerAdapter extends RecyclerView.Adapter <FileViewerAdapter.FileViewerViewHolder>implements OnDatabaseChangedListener {
 
     Context context;
     ArrayList<RecordingItem> arrayList;
@@ -25,25 +32,70 @@ public class FileViewerAdapter extends RecyclerView.Adapter <FileViewerAdapter.F
     DBHelper dbHelper;
 
 
-    public FileViewerAdapter(Context context, ArrayList<RecordingItem>arrayList, LinearLayoutManager llm){
+    public FileViewerAdapter(Context context, ArrayList<RecordingItem> arrayList, LinearLayoutManager llm) {
 
         this.context = context;
-        this.arrayList=arrayList;
-        this.llm=llm;
+        this.arrayList = arrayList;
+        this.llm = llm;
 
-        dbHelper=new DBHelper(context);
+        dbHelper = new DBHelper(context);
         dbHelper.setOnDatabaseChangedListener(this);
 
 
+    }
+
+
+    public interface OnItemClickListener {
+        void onItemLongClick(RecordingItem recordingItem);
+    }
+
+
+    @Override
+    public void onNewDatabaseEntryAdded(RecordingItem recordingItem) {
+        arrayList.add(recordingItem);
+        notifyItemInserted(arrayList.size() - 1);
 
     }
 
     @Override
-    public void onNewDatabaseEntryAdded(RecordingItem recordingItem){
-        arrayList.add(recordingItem);
-        notifyItemInserted(arrayList.size()-1);
+    public void onDatabaseEntryDeleted(long id) {
+
+
+        for (int i = 0; i < arrayList.size(); i++) {
+            if (arrayList.get(i).getId() == id) { // Assuming RecordingItem has a method getId()
+                arrayList.remove(i);
+                notifyItemRemoved(i);
+                break;
+            }
+        }
 
     }
+
+
+    @Override
+    public void onDatabaseEntryRenamed(long id, String newName, String newPath) {
+        // Find the index of the item with the given ID
+        int indexToUpdate = -1;
+        for (int i = 0; i < arrayList.size(); i++) {
+            if (arrayList.get(i).getId() == id) {
+                indexToUpdate = i;
+                break;
+            }
+        }
+
+        // If the item was found, update its name and path
+        if (indexToUpdate != -1) {
+            RecordingItem itemToUpdate = arrayList.get(indexToUpdate);
+            itemToUpdate.setName(newName);
+            itemToUpdate.setPath(newPath);
+            // Notify the adapter of the item change
+            notifyItemChanged(indexToUpdate);
+        } else {
+            Log.e("FileViewerAdapter", "Unable to find recording with ID: " + id);
+        }
+    }
+
+
 
     @NonNull
     @Override
@@ -63,7 +115,10 @@ public class FileViewerAdapter extends RecyclerView.Adapter <FileViewerAdapter.F
         holder.lengthText.setText(String.format("%02d:%02d",minutes,seconds));
         holder.timeAdded.setText(DateUtils.formatDateTime(context,recordingItem.getTime_added(),DateUtils.FORMAT_SHOW_DATE| DateUtils.FORMAT_NUMERIC_DATE|DateUtils.FORMAT_SHOW_TIME|DateUtils.FORMAT_SHOW_YEAR));
 
+
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -103,6 +158,10 @@ public class FileViewerAdapter extends RecyclerView.Adapter <FileViewerAdapter.F
                     }
                 }
             });
+
+
+
+
 
 
         }

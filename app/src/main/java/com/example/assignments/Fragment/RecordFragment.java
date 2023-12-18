@@ -1,4 +1,4 @@
-package com.example.assignments;
+package com.example.assignments.Fragment;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -19,8 +19,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+
+import com.example.assignments.R;
+import com.example.assignments.Service.RecordingService;
 import com.example.assignments.databinding.FragmentRecordBinding;
 import java.io.File;
 import android.Manifest;
@@ -120,9 +122,6 @@ public class RecordFragment extends Fragment {
 
     private void startRecording() {
 
-
-
-
             // Start the service with the Intent when recording starts
             getActivity().startService(recordingServiceIntent);
             binding.recordBtn.setImageResource(R.drawable.ic_media_stop);
@@ -136,7 +135,6 @@ public class RecordFragment extends Fragment {
 
             binding.chronometer.setBase(SystemClock.elapsedRealtime());
             binding.chronometer.start();
-
 
             //let the screen on when the user record
             getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);

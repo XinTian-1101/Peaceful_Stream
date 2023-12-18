@@ -48,8 +48,8 @@
 
     <ImageButton
         android:id="@+id/circle_bell"
-        android:layout_width="25dp"
-        android:layout_height="26dp"
+        android:layout_width="29dp"
+        android:layout_height="29dp"
         android:layout_marginTop="76dp"
         android:layout_marginEnd="57dp"
         android:background="@drawable/circle_button"
@@ -64,27 +64,27 @@
 
     <ImageButton
         android:id="@+id/switch_notification"
-        android:layout_width="30dp"
-        android:layout_height="17dp"
+        android:layout_width="35dp"
+        android:layout_height="21dp"
         android:layout_marginTop="81dp"
         android:layout_marginEnd="14dp"
         android:background="@drawable/switchtoggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <ImageView
         android:id="@+id/Button_forswitch"
-        android:layout_width="11dp"
-        android:layout_height="13dp"
+        android:layout_width="12dp"
+        android:layout_height="17dp"
         android:layout_marginTop="83dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="34dp"
         android:paddingStart="0.5dp"
         android:paddingTop="0.5dp"
         android:paddingBottom="0.5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/switchcircle" />
-
 
     <TextView
         android:id="@+id/brief"

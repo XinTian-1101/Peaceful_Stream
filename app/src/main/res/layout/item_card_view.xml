@@ -62,7 +62,7 @@
                     android:textColor="#8A8A8A"
                     android:textStyle="bold"
                     android:textSize="12sp"
-                    android:text="09/12/2023"
+                    android:text="09/12/2023, 19:44"
                     android:fontFamily="sans-serif-condensed"
                     android:id="@+id/file_timeAdded_text"></TextView>
 

@@ -1,4 +1,4 @@
-package com.example.assignments;
+package com.example.assignments.Fragment;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -17,6 +17,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.DialogFragment;
+
+import com.example.assignments.R;
+import com.example.assignments.Item.RecordingItem;
 import com.melnykov.fab.FloatingActionButton;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -56,6 +59,7 @@ public class PlayBackFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+
         Dialog dialog = super.onCreateDialog(savedInstanceState);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
@@ -74,14 +78,18 @@ public class PlayBackFragment extends DialogFragment {
             public void onClick(View v) {
 
                 try {
-                    onPlay(isPlaying);
+                    if (!isPlaying) {
+                        startPlaying();
+                    } else {
+                        pausePlaying();
+                    }
+                    isPlaying = !isPlaying;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                isPlaying=!isPlaying;
-
             }
         });
+
 
         fileName.setText(item.getName());
         fileLength_text.setText(String.format("%02d:%02d",minutes,seconds));
@@ -92,21 +100,6 @@ public class PlayBackFragment extends DialogFragment {
 
     }
 
-
-    private void onPlay(boolean isPlaying) throws IOException {
-
-        if(!isPlaying){
-
-            if(mediaPlayer==null){
-                startPlaying();
-            }
-            else{
-                pausePlaying();
-            }
-
-        }
-
-    }
 
     private void pausePlaying() {
 
@@ -119,30 +112,39 @@ public class PlayBackFragment extends DialogFragment {
     private void startPlaying() throws IOException {
 
 
-        playBtn.setImageResource(R.drawable.ic_media_pause);
-        mediaPlayer = new MediaPlayer();
+        if(mediaPlayer==null) {
+            playBtn.setImageResource(R.drawable.ic_media_pause);
+            mediaPlayer = new MediaPlayer();
 
-        mediaPlayer.setDataSource(item.getPath());
-        mediaPlayer.prepare();
-        progressRecord.setMax(mediaPlayer.getDuration());
+            mediaPlayer.setDataSource(item.getPath());
+            mediaPlayer.prepare();
+            progressRecord.setMax(mediaPlayer.getDuration());
 
-        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                mediaPlayer.start();
+            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mp) {
+                    mediaPlayer.start();
 
-            }
-        });
+                }
+            });
 
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                stopPlaying();
-            }
-        });
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    stopPlaying();
+                }
+            });
 
-        updateProgressBar();
-        getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }else {
+
+            mediaPlayer.start(); //Resume playback
+        }
+
+
+            playBtn.setImageResource(R.drawable.ic_media_pause);
+            updateProgressBar();
+            getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
 
     }
 

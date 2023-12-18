@@ -1,8 +1,7 @@
-package com.example.assignments;
+package com.example.assignments.Activity;
 
 import android.content.Intent;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -13,9 +12,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.astuetz.PagerSlidingTabStrip;
+import com.example.assignments.Adapter.MyTabAdapter;
+import com.example.assignments.R;
 import com.example.assignments.R.id;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class voice_recording extends AppCompatActivity {
 
@@ -24,6 +23,7 @@ public class voice_recording extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.voice_recording);
+
 
 
         PagerSlidingTabStrip  pagerSlidingTabStrip = findViewById(id.pagerSliding);
@@ -47,7 +47,7 @@ public class voice_recording extends AppCompatActivity {
         backArrow_voice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(voice_recording.this,MainActivity.class);
+                Intent intent = new Intent(voice_recording.this, MainActivity.class);
                 startActivity(intent);
             }
         });
