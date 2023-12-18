@@ -1,119 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <FrameLayout
+        android:id="@+id/framelayout1"
         android:layout_width="350dp"
         android:layout_height="100dp"
         android:layout_marginTop="100dp"
         android:layout_marginBottom="80dp"
         android:gravity="center"
-        android:background="@color/white"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        android:background="@drawable/fourside_roundbutton"
+        app:layout_constraintBottom_toTopOf="@+id/framelayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         >
 
-        <ImageButton
+        <ImageView
             android:id="@+id/sosIcon"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:background="@drawable/left_round_icon"
             android:contentDescription="@string/app_name"
-            android:scrollbarSize="5dp"
             android:src="@drawable/sos_icon_foreground"
-             />
+            />
 
         <Button
             android:id="@+id/emergencyDailButton"
             android:layout_width="250dp"
             android:layout_height="match_parent"
+            android:layout_marginStart="100dp"
             android:background="@drawable/right_round_icon"
             android:fontFamily="@font/baloo"
             android:keepScreenOn="true"
             android:text="@string/emergency"
             android:textSize="28sp" />
 
-    </LinearLayout>
+    </FrameLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
+    <FrameLayout
+        android:id="@+id/framelayout2"
         android:layout_width="350dp"
         android:layout_height="100dp"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="20dp"
         android:gravity="center"
-        android:background="@color/white"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout"
+        android:background="@drawable/fourside_roundbutton"
+        app:layout_constraintTop_toBottomOf="@id/framelayout1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         >
 
-        <ImageButton
+        <ImageView
             android:id="@+id/locationIcon"
             android:layout_width="100dp"
-            android:layout_height="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/left_round_icon"
-            android:contentDescription="@string/app_name"
-            android:scrollbarSize="5dp"
             android:src="@drawable/share_location"
-            android:visibility="visible" />
+             />
 
         <Button
             android:id="@+id/shareLocationButton"
             android:layout_width="250dp"
             android:layout_height="match_parent"
+            android:layout_marginStart="100dp"
             android:background="@drawable/right_round_icon"
             android:fontFamily="@font/baloo"
             android:keepScreenOn="true"
             android:text="@string/location"
-            android:textSize="28sp"
-            tools:ignore="TextSizeCheck" />
+            android:textSize="28sp" />
 
-    </LinearLayout>
+    </FrameLayout>
 
 
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="376dp"
+    <FrameLayout
+        android:id="@+id/framelayout3"
+        android:layout_width="350dp"
         android:layout_height="100dp"
         android:layout_marginTop="50dp"
         android:gravity="center"
-        android:background="@color/white"
-        android:orientation="horizontal"
+        android:background="@drawable/fourside_roundbutton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout2">
+        app:layout_constraintTop_toBottomOf="@id/framelayout2">
 
-        <ImageButton
+        <ImageView
             android:id="@+id/emergencyChatIcon"
             android:layout_width="100dp"
-            android:layout_height="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/left_round_icon"
             android:contentDescription="@string/app_name"
             android:paddingStart="5dp"
-            android:src="@drawable/service_chat"
-            tools:ignore="RtlSymmetry,ImageContrastCheck" />
+            android:src="@drawable/medical_icon" />
 
         <Button
             android:id="@+id/emergencyChatButton"
             android:layout_width="250dp"
             android:layout_height="match_parent"
+            android:layout_marginStart="100dp"
             android:background="@drawable/right_round_icon"
             android:fontFamily="@font/baloo"
-            android:keepScreenOn="true"
             android:text="@string/chat"
-            android:textSize="28sp"
-            tools:ignore="MissingConstraints,TextSizeCheck" />
+            android:textSize="28sp" />
 
-    </LinearLayout>
+    </FrameLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
