@@ -21,7 +21,6 @@ import android.widget.ImageView;
 import android.animation.ObjectAnimator;
 
 
-
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -34,19 +33,24 @@ import com.example.assignments.Database.FirebaseManager;
 import com.example.assignments.Helper.GeofenceHelper;
 import com.example.assignments.Item.IncidentClusterItem;
 import com.example.assignments.R;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationServices;
+
 import android.location.Location;
+
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+
 import android.content.pm.PackageManager;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -87,19 +91,17 @@ public class crime_map extends AppCompatActivity implements OnMapReadyCallback {
     private IncidentAdapter incidentAdapter;
     private HashMap<Marker, IncidentClusterItem> markerIncidentMap = new HashMap<>();
 
-    private GeofencingClient geofencingClient;
-    private GeofenceHelper geofenceHelper;
-    private float Geofence_Radius = 100;
     private GoogleMap googleMap;
+    private GeofencingClient geofencingClient;
+    private static final int GEOFENCE_RADIUS = 100;
+    private GeofenceHelper geofenceHelper;
+    private static final String TAG = "crime_map";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.crime_map);
-
-        geofencingClient = LocationServices.getGeofencingClient(this);
-        geofenceHelper= new GeofenceHelper(this);
 
         //For Intent
         ImageView backarroe_map = findViewById(R.id.back_arrow_map);
@@ -113,6 +115,7 @@ public class crime_map extends AppCompatActivity implements OnMapReadyCallback {
 
             }
         });
+
 
         recyclerView = findViewById(R.id.incident_details);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -166,8 +169,15 @@ public class crime_map extends AppCompatActivity implements OnMapReadyCallback {
 
         //For map (to obtain current location)
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
+        //Initialize the GeofencingClient
+        geofencingClient = LocationServices.getGeofencingClient(this);
+        geofenceHelper = new GeofenceHelper(this);
+        setUpGeoference(firebaseManager);
+
         fetchLocation();
         fetchIncidents(firebaseManager);
+
 
         //For setting specific text BOLD
         TextView briefDangerousArea = findViewById(R.id.brief);
@@ -211,6 +221,8 @@ public class crime_map extends AppCompatActivity implements OnMapReadyCallback {
                 // Change the background drawable based on the state of the switch
                 updateButtonBackground(isSwitchOn[0], button_notification);
 
+
+
                 // Toggle the state of the switch
                 isSwitchOn[0] = !isSwitchOn[0];
 
@@ -221,8 +233,6 @@ public class crime_map extends AppCompatActivity implements OnMapReadyCallback {
 
             }
         });
-
-
 
 
     }
@@ -254,8 +264,6 @@ public class crime_map extends AppCompatActivity implements OnMapReadyCallback {
     }
 
 
-
-
     private void updateButtonBackground(boolean isOn, ImageButton button) {
         if (isOn) {
             button.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.switchtoggle));
@@ -279,7 +287,6 @@ public class crime_map extends AppCompatActivity implements OnMapReadyCallback {
             markerOptions.title(item.getTitle());
         }
     }
-
 
 
     //Add the OnMapReadyCallback here
@@ -327,8 +334,6 @@ public class crime_map extends AppCompatActivity implements OnMapReadyCallback {
         googleMap.setOnMarkerClickListener(clusterManager);
 
 
-
-
         clusterManager.setOnClusterItemClickListener(new ClusterManager.OnClusterItemClickListener<IncidentClusterItem>() {
             @Override
             public boolean onClusterItemClick(IncidentClusterItem incidentClusterItem) {
@@ -342,9 +347,9 @@ public class crime_map extends AppCompatActivity implements OnMapReadyCallback {
                 }
                 return true;
             }
+
+
         });
-
-
 
 
     }
@@ -402,14 +407,77 @@ public class crime_map extends AppCompatActivity implements OnMapReadyCallback {
     }
 
 
-
-    private BitmapDescriptor resizeMapIcon(String iconName, int width, int height){
-        Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(),getResources().getIdentifier(iconName,"drawable",getPackageName()));
-        Bitmap resizedBitmap = Bitmap.createScaledBitmap(imageBitmap,width,height,false);
+    private BitmapDescriptor resizeMapIcon(String iconName, int width, int height) {
+        Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), getResources().getIdentifier(iconName, "drawable", getPackageName()));
+        Bitmap resizedBitmap = Bitmap.createScaledBitmap(imageBitmap, width, height, false);
         return BitmapDescriptorFactory.fromBitmap(resizedBitmap);
 
     }
 
+
+
+    private void setUpGeoference(FirebaseManager firebaseManager) {
+
+        firebaseManager.readIncident(new FirebaseManager.OnIncidentReadListener() {
+            @Override
+            public void onIncidentRead(List<FirebaseManager.Incident> incidentList) {
+
+                if(ContextCompat.checkSelfPermission(crime_map.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    List<Geofence> geofenceList = new ArrayList<>();
+                    for (FirebaseManager.Incident incident : incidentList) {
+                        Geofence geofence = new Geofence.Builder()
+                                .setRequestId(incident.getPlace())
+                                .setCircularRegion(
+                                        incident.getLatitude(),
+                                        incident.getLongitude(),
+                                        GEOFENCE_RADIUS
+                                )
+                                .setExpirationDuration(Geofence.NEVER_EXPIRE)
+                                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER|Geofence.GEOFENCE_TRANSITION_EXIT)
+                                .setLoiteringDelay(60000)
+                                .build();
+                        geofenceList.add(geofence);
+                        System.out.println("Added all geofence");
+                    }
+
+
+                    GeofencingRequest geofencingRequest = geofenceHelper.getGeofencingRequest(geofenceList);
+                    PendingIntent pendingIntent = geofenceHelper.getPendingIntent();
+
+
+                    geofencingClient.addGeofences(geofencingRequest, pendingIntent)
+
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+
+                                    Log.d(TAG,"Geofence List Added");
+
+                                }
+
+                            })
+
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+
+                                    String errorMessage = geofenceHelper.getErrorString(e);
+                                    Log.e(TAG, "Failed to add geofences: " + e.getMessage());
+
+                                }
+                            });
+
+    }
+
+
+            }
+
+            @Override
+            public void onError(DatabaseError error) {
+                Log.e("FirebaseManager", "Error reading incidents", error.toException());
+            }
+        });
+    }
 
 
     @Override
@@ -455,47 +523,6 @@ public class crime_map extends AppCompatActivity implements OnMapReadyCallback {
 
 
 
-
-    private void fetchIncidentsFromFirebase() {
-        FirebaseManager firebaseManager = new FirebaseManager();
-        firebaseManager.readIncident(new FirebaseManager.OnIncidentReadListener() {
-            @Override
-            public void onIncidentRead(List<FirebaseManager.Incident> incidentList) {
-
-                List<Geofence> myGeofences  = new ArrayList<>();
-                for (FirebaseManager.Incident incident : incidentList) {
-                    LatLng latLng = new LatLng(incident.getLatitude(), incident.getLongitude());
-                    String geofenceId = incident.getPlace();
-                    Geofence geofence = geofenceHelper.getGeofence(geofenceId, latLng, Geofence_Radius,
-                            Geofence.GEOFENCE_TRANSITION_ENTER);
-                    myGeofences.add(geofence);
-                }
-                GeofencingRequest geofencingRequest = geofenceHelper.getGeofencingRequest(myGeofences);
-                PendingIntent pendingIntent = geofenceHelper.getPendingIntent();
-                addGeofenceToClient(geofencingRequest, pendingIntent);
-
-
-
-
-                }
-
-
-            @Override
-            public void onError(DatabaseError error) {
-                Log.e(GeofenceHelper.Tag, "Failed to read incidents", error.toException());
-            }
-        });
-    }
-
-    private void addGeofenceToClient(GeofencingRequest geofencingRequest, PendingIntent pendingIntent) {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // Handle permission check
-            return;
-        }
-        geofencingClient.addGeofences(geofencingRequest, pendingIntent)
-                .addOnSuccessListener(aVoid -> Log.d(GeofenceHelper.Tag, "Successfully added geofence"))
-                .addOnFailureListener(e -> Log.d(GeofenceHelper.Tag, "Failed to add geofence", e));
-    }
 
 
 

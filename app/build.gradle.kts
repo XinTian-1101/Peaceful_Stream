@@ -65,6 +65,8 @@ dependencies {
     implementation("com.google.android.material:material:1.0.0")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
+    //For notification
+    implementation("androidx.core:core:1.12.0")
 
     //For snackbar
     implementation ("com.google.android.material:material:<version>")
@@ -82,7 +84,6 @@ dependencies {
 
     //For swipe background
     implementation ("it.xabaras.android:recyclerview-swipedecorator:1.4")
-
 
 
     testImplementation("junit:junit:4.13.2")
