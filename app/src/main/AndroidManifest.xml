@@ -52,6 +52,7 @@
         <activity
             android:name=".activties.ChatActivity"
             android:exported="false"
+            android:parentActivityName=".activties.UsersActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activties.MainActivity"

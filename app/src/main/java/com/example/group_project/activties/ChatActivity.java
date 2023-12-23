@@ -57,7 +57,8 @@ public class ChatActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getSupportActionBar().setTitle("Emergency Assistance Module");
+        getSupportActionBar().setTitle("Emergency Chat");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         binding = ActivityChatBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -269,8 +270,6 @@ public class ChatActivity extends BaseActivity {
         binding.textName.setText(receiverUser.name);
     }
     private void setListeners(){
-
-        binding.imageBack.setOnClickListener(v -> onBackPressed());
         binding.layoutSend.setOnClickListener(v -> sendMessage());
     }
 

@@ -8,7 +8,6 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageButton;
@@ -32,10 +31,10 @@ public class EmergencyDialingList extends AppCompatActivity {
         fireBrigadeBtn = findViewById(R.id.callButton3);
         disasterBtn = findViewById(R.id.callButton4);
 
-        ambulanceBtn.setOnClickListener(v -> CallButton("911"));    // 123
+        ambulanceBtn.setOnClickListener(v -> CallButton("113"));
         policeBtn.setOnClickListener(v -> CallButton("999"));
-        fireBrigadeBtn.setOnClickListener(v -> CallButton("110"));  // 111
-        disasterBtn.setOnClickListener(v -> CallButton("112"));
+        fireBrigadeBtn.setOnClickListener(v -> CallButton("110"));
+        disasterBtn.setOnClickListener(v -> CallButton("991"));
 
     }
 
@@ -44,7 +43,7 @@ public class EmergencyDialingList extends AppCompatActivity {
         if(ContextCompat.checkSelfPermission(EmergencyDialingList.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED)
             ActivityCompat.requestPermissions(EmergencyDialingList.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
         else {
-            Intent dialIntent = new Intent(Intent.ACTION_DIAL);
+//            Intent dialIntent = new Intent(Intent.ACTION_DIAL);
             startActivity(new Intent(Intent.ACTION_DIAL,Uri.parse("tel: " + phoneNumber)));
 
         }
@@ -56,17 +55,17 @@ public class EmergencyDialingList extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                 if (getCurrentFocus() == ambulanceBtn) {
-                    CallButton("911");
+                    CallButton("113");
                 } else if (getCurrentFocus() == policeBtn) {
                     CallButton("999");
                 } else if (getCurrentFocus() == fireBrigadeBtn) {
                     CallButton("110");
                 } else if (getCurrentFocus() == disasterBtn) {
-                    CallButton("112");
+                    CallButton("991");
                 }
             }
         } else {
-            Toast.makeText(this, "permission Denied", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
         }
     }
 }
