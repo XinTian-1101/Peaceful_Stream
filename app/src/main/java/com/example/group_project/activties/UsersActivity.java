@@ -32,14 +32,10 @@ public class UsersActivity extends BaseActivity implements UserListener {
 
         setContentView(binding.getRoot());
         preferenceManager = new PreferenceManager(getApplicationContext());
-        setListeners();
         getUsers();
     }
 
-    private void setListeners(){
 
-        binding.imageBack.setOnClickListener(v -> onBackPressed());
-    }
     private void getUsers(){
         loading(true);
         FirebaseFirestore database = FirebaseFirestore.getInstance();
