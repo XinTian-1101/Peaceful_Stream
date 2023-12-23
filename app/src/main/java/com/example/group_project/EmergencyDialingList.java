@@ -43,7 +43,6 @@ public class EmergencyDialingList extends AppCompatActivity {
         if(ContextCompat.checkSelfPermission(EmergencyDialingList.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED)
             ActivityCompat.requestPermissions(EmergencyDialingList.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
         else {
-//            Intent dialIntent = new Intent(Intent.ACTION_DIAL);
             startActivity(new Intent(Intent.ACTION_DIAL,Uri.parse("tel: " + phoneNumber)));
 
         }
