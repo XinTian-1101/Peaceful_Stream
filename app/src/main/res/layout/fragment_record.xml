@@ -66,22 +66,20 @@
         android:progressDrawable="@drawable/progress_record_bar" />
 
 
-
-
     <Button
         android:id="@+id/btnPause"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
         android:backgroundTint="#A3B4CB"
+        android:fontFamily="sans-serif"
         android:text="Pause"
         android:textAllCaps="true"
         android:textColor="#3069AB"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
 
 
 </RelativeLayout>

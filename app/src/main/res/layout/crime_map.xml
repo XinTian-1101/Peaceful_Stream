@@ -28,7 +28,6 @@
         android:layout_marginStart="62dp"
         android:layout_marginTop="16dp"
         android:text="Crime Map"
-
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -95,6 +94,7 @@
 
 
         android:layout_marginEnd="58dp"
+        android:fontFamily="sans-serif-medium"
         android:text="Below alert pin location is DANGEROUS AREA near you :"
         android:textColor="#D42428"
         android:textSize="13sp"

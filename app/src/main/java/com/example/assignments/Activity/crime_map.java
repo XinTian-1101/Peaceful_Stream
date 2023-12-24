@@ -325,6 +325,7 @@ public class crime_map extends AppCompatActivity implements OnMapReadyCallback {
         clusterManager = new ClusterManager<IncidentClusterItem>(this, googleMap);
         clusterManager.setRenderer(new IncidentRenderer(this, googleMap, clusterManager));
 
+
         // Fetch and add incidents to the ClusterManager
         fetchAndClusterIncidents();
 
