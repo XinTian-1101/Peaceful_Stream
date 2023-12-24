@@ -17,22 +17,22 @@
 
     <application
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:dataExtractionRules="@xml/m4_data_extraction_rules"
+        android:fullBackupContent="@xml/m4_backup_rules"
+        android:icon="@mipmap/m4_ic_launcher"
         android:label="Peaceful Stream"
         android:requestLegacyExternalStorage="true"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/m4_ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Assignments"
         tools:targetApi="31">
         <receiver
-            android:name=".Receiver.GeofenceBroadcastReceiver"
+            android:name=".M4_Receiver.M4_GeofenceBroadcastReceiver"
             android:enabled="true"
             android:exported="true"></receiver>
 
         <activity
-            android:name=".Activity.MainActivity"
+            android:name=".M4_Activity.M4_MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,13 +41,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.crime_map"
+            android:name=".M4_Activity.M4_crime_map"
             android:exported="true" />
         <activity
-            android:name=".Activity.voice_recording"
+            android:name=".M4_Activity.M4_voice_recording"
             android:exported="true" />
 
-        <service android:name=".Service.RecordingService" />
+        <service android:name=".M4_Service.M4_RecordingService" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
