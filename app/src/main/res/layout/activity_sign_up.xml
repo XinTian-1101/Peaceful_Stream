@@ -118,7 +118,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:animateLayoutChanges="true">
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/buttonSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_50sdp"

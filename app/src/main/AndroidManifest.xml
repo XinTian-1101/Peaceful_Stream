@@ -26,7 +26,8 @@
             android:exported="false" />
         <activity
             android:name=".activties.UsersActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".EmergencyMenu"/>
         <activity
             android:name=".activties.SignUpActivity"
             android:exported="false"

@@ -7,8 +7,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.group_project.EmergencyMenu;
 import com.example.group_project.databinding.ActivitySignInBinding;
 import com.example.group_project.utilities.Constants;
 import com.example.group_project.MenuBtn;
@@ -25,7 +23,7 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         preferenceManager = new PreferenceManager(getApplicationContext());
         if(preferenceManager.getBoolean(Constants.KEY_IS_SIGNED_IN)){
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            Intent intent = new Intent(getApplicationContext(), MenuBtn.class);
             startActivity(intent);
             finish();
         }
