@@ -70,11 +70,6 @@ public class RealTimeLocation extends AppCompatActivity implements OnMapReadyCal
             shareIntent.setType("text/plain");
             shareIntent.putExtra(Intent.EXTRA_TEXT, message);
 
-//            // Create an intent to open UsersActivity
-//            Intent intent = new Intent(this, UsersActivity.class);
-//            intent.putExtra(Constants.KEY_LOCATION_MESSAGE, message);
-//            startActivity(intent);
-
             // Launch the default messaging app
             startActivity(Intent.createChooser(shareIntent, "Share location via"));
         } else {
@@ -105,16 +100,6 @@ public class RealTimeLocation extends AppCompatActivity implements OnMapReadyCal
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap){
 
-//        LatLng latLng = new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude());
-//        MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("Current Location !");
-//        System.out.println(currentLocation.getLatitude());
-//        System.out.println(currentLocation.getLongitude());
-//        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
-//        googleMap.addMarker(markerOptions);
-
-        System.out.println(currentLocation.getLatitude());
-        System.out.println(currentLocation.getLongitude());
-
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             googleMap.setMyLocationEnabled(true); // Enables the My Location button
@@ -131,8 +116,6 @@ public class RealTimeLocation extends AppCompatActivity implements OnMapReadyCal
         Marker userLocationMarker = googleMap.addMarker(userMarkerOptions);
 
         userLocationMarker.showInfoWindow();
-
-
 
         // Enabling zoom controls
         googleMap.getUiSettings().setZoomControlsEnabled(true);
