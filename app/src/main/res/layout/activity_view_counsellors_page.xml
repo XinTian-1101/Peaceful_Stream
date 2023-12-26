@@ -4,12 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewCounsellorsPage">
+    tools:context=".CommunicationModule.ChatCounsellorsPage">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/counsellorsRecyclerView"
         android:layout_width="409dp"
         android:layout_height="729dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewCounsellorsToolbar" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/viewCounsellorsToolbar"
+        android:layout_width="408dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:title="All Counsellors"
+        android:backgroundTint="@color/mainBgColour"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

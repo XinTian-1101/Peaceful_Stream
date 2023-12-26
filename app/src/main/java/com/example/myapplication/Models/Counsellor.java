@@ -1,14 +1,34 @@
 package com.example.myapplication.Models;
 
-public class Counsellor {
-    private String name , position , description , workingTime , imageUrl;
+import android.net.Uri;
 
-    public Counsellor(String name, String position, String description, String workingTime, String imageUrl) {
+import java.util.List;
+
+public class Counsellor extends User{
+    private User user;
+    private String name , position , description , workingTime;
+    private List<String> workingDays;
+    private boolean isCounsellor;
+
+    public Counsellor() {
+    }
+
+    public Counsellor(User user, String name, String position, String description, String workingTime, List<String> workingDays, boolean isCounsellor) {
+        this.user = user;
         this.name = name;
         this.position = position;
         this.description = description;
         this.workingTime = workingTime;
-        this.imageUrl = imageUrl;
+        this.workingDays = workingDays;
+        this.isCounsellor = isCounsellor;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getName() {
@@ -43,11 +63,19 @@ public class Counsellor {
         this.workingTime = workingTime;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public List<String> getWorkingDays() {
+        return workingDays;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setWorkingDays(List<String> workingDays) {
+        this.workingDays = workingDays;
+    }
+
+    public boolean isCounsellor() {
+        return isCounsellor;
+    }
+
+    public void setCounsellor(boolean counsellor) {
+        isCounsellor = counsellor;
     }
 }

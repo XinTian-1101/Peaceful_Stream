@@ -1,7 +1,8 @@
-package com.example.myapplication;
+package com.example.myapplication.MusicModule;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.media3.common.MediaItem;
@@ -18,9 +19,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewStub;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -29,32 +30,31 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.myapplication.Adapters.SongsRecViewAdapter;
 import com.example.myapplication.Models.Song;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.example.myapplication.R;
+import com.example.myapplication.RecViewClickListener;
+import com.example.myapplication.Utils.AndroidUtil;
+import com.example.myapplication.Utils.FirebaseUtil;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class SongsMainPage extends AppCompatActivity implements RecViewClickListener{
+public class SongsMainPage extends AppCompatActivity implements RecViewClickListener {
     private ConstraintLayout layout;
     private RecyclerView recyclerView;
     private List<Song> songList;
     private FirebaseFirestore db;
-    private FirebaseAuth mAuth;
-    private FirebaseUser user;
     private SongsRecViewAdapter adapter;
     private ExoPlayer player;
     private RelativeLayout customPlayer;
     private TextView playlistDisplayName;
-    private ViewStub playlistImage;
+    private LinearLayout playlistImage;
     private ImageButton playAll;
+    private Toolbar toolbar;
     private View customPlayerSongsMainPage;
     private DocumentReference playlistDoc , favSongsDoc;
     private int repeatMode = 0;
@@ -73,8 +73,10 @@ public class SongsMainPage extends AppCompatActivity implements RecViewClickList
         playAll = findViewById(R.id.playAll);
         playlistName = getIntent().getExtras().getString("playlistName");
         playlistImage = findViewById(R.id.playlistImage);
+        toolbar = findViewById(R.id.songsMainPageToolbar);
         playlistDisplayName.setText(playlistName);
 
+        AndroidUtil.setToolbar(this , toolbar);
         player = new ExoPlayer.Builder(SongsMainPage.this).build();
 
         adapter = new SongsRecViewAdapter(this , getSupportFragmentManager() , songList , true , playlistName ,this);
@@ -82,47 +84,40 @@ public class SongsMainPage extends AppCompatActivity implements RecViewClickList
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         db = FirebaseFirestore.getInstance();
-        mAuth = FirebaseAuth.getInstance();
-        user = mAuth.getCurrentUser();
-        playlistDoc = db.collection(getString(R.string.user_collection_name)).document(Objects.requireNonNull(user.getDisplayName()))
-                .collection(getString(R.string.playlist_collection_name)).document(playlistName);
-        favSongsDoc = db.collection(getString(R.string.user_collection_name)).document(Objects.requireNonNull(user.getDisplayName()))
-                .collection(getString(R.string.playlist_collection_name)).document(getString(R.string.fav_songs_document_name));
+        playlistDoc = FirebaseUtil.getOnePlaylistReference(playlistName);
+        favSongsDoc = FirebaseUtil.getFavSongReference();
 
-        playlistDoc.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                List<String> songArr = (List<String>) documentSnapshot.get("songArr");
-                if (songArr.size() < 4) {
-                    playlistImage.setLayoutResource(R.layout.single_playlist_image);
-                    View inflated = playlistImage.inflate();
-                    db.collection(getString(R.string.songs_collection_name)).document(songArr.get(0))
-                            .get().addOnSuccessListener(documentSnapshot1 -> {
-                                Song songInfo = documentSnapshot1.toObject(Song.class);
-                                ImageView playlistImg = inflated.findViewById(R.id.playlistImg);
-                                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(200 , 200);
-                                playlistImg.setLayoutParams(params);
+        playlistDoc.get().addOnSuccessListener(documentSnapshot -> {
+            List<String> songArr = (List<String>) documentSnapshot.get("songArr");
+            playlistImage.removeAllViews();
+            if (songArr.isEmpty()) {
+                View inflatedView = LayoutInflater.from(SongsMainPage.this).inflate(R.layout.single_playlist_image , playlistImage);
+                ImageView playlistImg = inflatedView.findViewById(R.id.playlistImg);
+                Glide.with(SongsMainPage.this).asBitmap().load(getString(R.string.default_music_icon_image_url)).into(playlistImg);
+            }
+            else if (songArr.size() < 4) {
+                View inflatedView = LayoutInflater.from(SongsMainPage.this).inflate(R.layout.single_playlist_image , playlistImage);
+                FirebaseUtil.getOneSong(songArr.get(0))
+                        .get().addOnSuccessListener(documentSnapshot1 -> {
+                            Song songInfo = documentSnapshot1.toObject(Song.class);
+                            ImageView playlistImg = inflatedView.findViewById(R.id.playlistImg);
+                            Glide.with(SongsMainPage.this).asBitmap().load(songInfo.getImageUrl()).into(playlistImg);
+                        });
+            }
+            else {
+                View inflatedView = LayoutInflater.from(SongsMainPage.this).inflate(R.layout.four_playlist_image , playlistImage);
+                for (int i = 0 ; i < 4 ; i++) {
+                    int finalI = i;
+                    FirebaseUtil.getOneSong(songArr.get(i))
+                            .get().addOnSuccessListener(documentSnapshot12 -> {
+                                Song songInfo = documentSnapshot12.toObject(Song.class);
+                                ImageView playlistImg;
+                                if (finalI == 0) playlistImg = inflatedView.findViewById(R.id.playlistImageOne);
+                                else if (finalI == 1) playlistImg = inflatedView.findViewById(R.id.playlistImageTwo);
+                                else if (finalI == 2) playlistImg = inflatedView.findViewById(R.id.playlistImageThree);
+                                else playlistImg = inflatedView.findViewById(R.id.playlistImageFour);
                                 Glide.with(SongsMainPage.this).asBitmap().load(songInfo.getImageUrl()).into(playlistImg);
                             });
-                }
-                else {
-                    playlistImage.setLayoutResource(R.layout.single_playlist_image);
-                    View inflated = playlistImage.inflate();
-                    for (int i = 0 ; i < 4 ; i++) {
-                        int finalI = i;
-                        db.collection(getString(R.string.songs_collection_name)).document(songArr.get(i))
-                                .get().addOnSuccessListener(documentSnapshot12 -> {
-                                    Song songInfo = documentSnapshot12.toObject(Song.class);
-                                    ImageView playlistImg;
-                                    if (finalI == 0) playlistImg = inflated.findViewById(R.id.playlistImageOne);
-                                    else if (finalI == 1) playlistImg = inflated.findViewById(R.id.playlistImageTwo);
-                                    else if (finalI == 2) playlistImg = inflated.findViewById(R.id.playlistImageThree);
-                                    else playlistImg = inflated.findViewById(R.id.playlistImageFour);
-                                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(100 , 100);
-                                    playlistImage.setLayoutParams(params);
-                                    Glide.with(SongsMainPage.this).asBitmap().load(songInfo.getImageUrl()).into(playlistImg);
-                                });
-                    }
                 }
             }
         });
@@ -186,7 +181,7 @@ public class SongsMainPage extends AppCompatActivity implements RecViewClickList
                     }
                 }
                 for (String song : songArr) {
-                    DocumentReference oneSong = firestore.collection("Songs").document(song);
+                    DocumentReference oneSong = FirebaseUtil.getOneSong(song);
                     oneSong.get().addOnSuccessListener(documentSnapshot -> {
                         Song currSong = documentSnapshot.toObject(Song.class);
                         if (!songList.contains(currSong)) {

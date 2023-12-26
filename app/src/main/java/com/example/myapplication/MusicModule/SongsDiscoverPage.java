@@ -1,6 +1,7 @@
-package com.example.myapplication;
+package com.example.myapplication.MusicModule;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,9 +13,11 @@ import android.widget.Toast;
 
 import com.example.myapplication.Adapters.DiscoverRecViewAdapter;
 import com.example.myapplication.Models.Playlist;
+import com.example.myapplication.R;
+import com.example.myapplication.RecViewClickListener;
+import com.example.myapplication.Utils.AndroidUtil;
+import com.example.myapplication.Utils.FirebaseUtil;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -23,13 +26,12 @@ import com.google.firebase.firestore.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SongsDiscoverPage extends AppCompatActivity implements RecViewClickListener{
+public class SongsDiscoverPage extends AppCompatActivity implements RecViewClickListener {
     private FirebaseFirestore db;
-    private FirebaseAuth mAuth;
-    private FirebaseUser user;
     private CollectionReference playlistCollection;
     private List<Playlist> playlistList;
     private RecyclerView recyclerViewDiscover;
+    private Toolbar toolbar;
     private SearchView searchDiscover;
     private DiscoverRecViewAdapter adapter;
     private ExtendedFloatingActionButton fabCreatePlaylist;
@@ -39,13 +41,12 @@ public class SongsDiscoverPage extends AppCompatActivity implements RecViewClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_songs_discover_page);
         db = FirebaseFirestore.getInstance();
-        mAuth = FirebaseAuth.getInstance();
-        user = mAuth.getCurrentUser();
         fabCreatePlaylist = findViewById(R.id.fabCreatePlaylist);
-        playlistCollection = db.collection(getString(R.string.user_collection_name)).document(user.getDisplayName())
-                .collection(getString(R.string.playlist_collection_name));
+        playlistCollection = FirebaseUtil.getPlaylistReference();
         recyclerViewDiscover = findViewById(R.id.discoverRecView);
         searchDiscover = findViewById(R.id.searchDiscover);
+        toolbar = findViewById(R.id.songsDiscoverPageToolbar);
+        AndroidUtil.setToolbar(this , toolbar);
         playlistList = new ArrayList<>();
 
         adapter = new DiscoverRecViewAdapter(playlistList , this , this);
@@ -63,7 +64,6 @@ public class SongsDiscoverPage extends AppCompatActivity implements RecViewClick
                 intent.putExtra("searchText" , query);
                 startActivity(intent);
                 Log.d("textSubmit" , "Submitted");
-//                finish();
                 return true;
             }
 
@@ -95,13 +95,10 @@ public class SongsDiscoverPage extends AppCompatActivity implements RecViewClick
         Intent intent = new Intent(SongsDiscoverPage.this , SongsMainPage.class);
         intent.putExtra("playlistName" , playlistList.get(position).getName());
         startActivity(intent);
-//        finish();
     }
 
     public void showCreatePlaylistDialog () {
         CreatePlaylistDialog dialog = new CreatePlaylistDialog(this);
         dialog.show(getSupportFragmentManager() ,"Create Playlist");
     }
-
-
 }

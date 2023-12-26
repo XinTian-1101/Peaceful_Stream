@@ -4,8 +4,13 @@
     <color name="white">#FFFFFFFF</color>
     <color name="lightGrey">#D3D3D3</color>
     <color name="mainBgColour">#4D76A6</color>
+    <color name="kindaDarkBlue">#406B9D</color>
     <color name="lighterBlue">#E7F5FF</color>
     <color name="lightBlue">#A5C2E9</color>
     <color name="red">#FF0000</color>
     <color name="blue">#7792B2</color>
+    <color name="orange">#FF9561</color>
+    <color name="pastelYellow">#FFFAA0</color>
+    <color name="pastelBlue">#A7C7E7</color>
+    <color name="periwinkle">#CCCCFF</color>
 </resources>

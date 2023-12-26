@@ -17,6 +17,7 @@ import com.example.myapplication.Models.Playlist;
 import com.example.myapplication.R;
 import com.example.myapplication.RecViewClickListener;
 import com.example.myapplication.Models.Song;
+import com.example.myapplication.Utils.FirebaseUtil;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -48,25 +49,17 @@ public class DiscoverRecViewAdapter extends RecyclerView.Adapter<DiscoverRecView
         LinearLayout viewStubLayout = holder.viewStubLayout;
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        db.collection(context.getString(R.string.user_collection_name)).document(user.getDisplayName())
-                .collection(context.getString(R.string.playlist_collection_name))
-                .document(playlistList.get(position).getName()).get().addOnSuccessListener(documentSnapshot -> {
+        FirebaseUtil.getOnePlaylistReference(playlistList.get(position).getName()).get().addOnSuccessListener(documentSnapshot -> {
                     List <String> songArr = (List<String>) documentSnapshot.get("songArr");
                     viewStubLayout.removeAllViews();
                     if (songArr.isEmpty()) {
                         View inflatedView = LayoutInflater.from(context).inflate(R.layout.single_playlist_image , viewStubLayout);
                         ImageView playlistImg = inflatedView.findViewById(R.id.playlistImg);
-//                        holder.playlistImageDiscover.setLayoutResource(R.layout.single_playlist_image);
-//                        View inflated = holder.playlistImageDiscover.inflate();
-//                        ImageView playlistImg = inflated.findViewById(R.id.playlistImg);
                         Glide.with(context).asBitmap().load(context.getString(R.string.default_music_icon_image_url)).into(playlistImg);
                     }
                     else if (songArr.size() < 4) {
                         View inflatedView = LayoutInflater.from(context).inflate(R.layout.single_playlist_image , viewStubLayout);
-//                        ImageView playlistImg = inflatedView.findViewById(R.id.playlistImg);
-//                        holder.playlistImageDiscover.setLayoutResource(R.layout.single_playlist_image);
-//                        View inflated = holder.playlistImageDiscover.inflate();
-                        db.collection(context.getString(R.string.songs_collection_name)).document(songArr.get(0))
+                        FirebaseUtil.getOneSong(songArr.get(0))
                                 .get().addOnSuccessListener(documentSnapshot1 -> {
                                     Song songInfo = documentSnapshot1.toObject(Song.class);
                                         ImageView playlistImg = inflatedView.findViewById(R.id.playlistImg);
@@ -75,12 +68,9 @@ public class DiscoverRecViewAdapter extends RecyclerView.Adapter<DiscoverRecView
                     }
                     else {
                         View inflatedView = LayoutInflater.from(context).inflate(R.layout.four_playlist_image , viewStubLayout);
-//                        ImageView playlistImg = inflatedView.findViewById(R.id.playlistImg);
-//                        holder.playlistImageDiscover.setLayoutResource(R.layout.four_playlist_image);
-//                        View inflated = holder.playlistImageDiscover.inflate();
                         for (int i = 0 ; i < 4 ; i++) {
                             int finalI = i;
-                            db.collection(context.getString(R.string.songs_collection_name)).document(songArr.get(i))
+                            FirebaseUtil.getOneSong(songArr.get(i))
                                     .get().addOnSuccessListener(documentSnapshot12 -> {
                                         Song songInfo = documentSnapshot12.toObject(Song.class);
                                         ImageView playlistImg;
@@ -101,13 +91,11 @@ public class DiscoverRecViewAdapter extends RecyclerView.Adapter<DiscoverRecView
     }
 
     public class DiscoverViewHolder extends RecyclerView.ViewHolder {
-        ViewStub playlistImageDiscover;
         TextView playlistNameDiscover;
         LinearLayout viewStubLayout;
 
         public DiscoverViewHolder(@NonNull View itemView , RecViewClickListener recViewClickListener) {
             super(itemView);
-            playlistImageDiscover = itemView.findViewById(R.id.playlistImageDiscover);
             playlistNameDiscover = itemView.findViewById(R.id.playlistNameDiscover);
             viewStubLayout = itemView.findViewById(R.id.viewStubLayout);
 

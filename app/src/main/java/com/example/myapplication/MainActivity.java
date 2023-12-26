@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.myapplication.Utils.AndroidUtil;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -20,10 +22,9 @@ public class MainActivity extends AppCompatActivity {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                Intent intent = new Intent(MainActivity.this , SignUpPage.class);
-                startActivity(intent);
+                AndroidUtil.intentChg(MainActivity.this , SignUpAsPage.class);
                 finish();
             }
-        } , 2000);
+        } , 1000);
     }
 } 

@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.example.myapplication.Models.Playlist;
 import com.example.myapplication.R;
 import com.example.myapplication.RecViewClickListener;
+import com.example.myapplication.Utils.AndroidUtil;
 
 import java.util.List;
 
@@ -39,6 +40,7 @@ public class PlaylistRecViewAdapter extends RecyclerView.Adapter<PlaylistRecView
     @Override
     public void onBindViewHolder(@NonNull PlaylistViewHolder holder, int position) {
         holder.playlistNameAdd.setText(playlistList.get(position).getName());
+        AndroidUtil.logMsg("playlist Image" , playlistList.get(position).getImageUrl());
         Glide.with(context).asBitmap().load(playlistList.get(position).getImageUrl()).into(holder.playlistImageAdd);
     }
     @Override

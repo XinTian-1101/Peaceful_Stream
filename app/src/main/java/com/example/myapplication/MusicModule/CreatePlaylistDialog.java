@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.MusicModule;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -14,6 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.example.myapplication.Models.Playlist;
+import com.example.myapplication.R;
+import com.example.myapplication.SignUpPage;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;

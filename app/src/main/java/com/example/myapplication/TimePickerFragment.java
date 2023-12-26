@@ -12,7 +12,7 @@ import androidx.fragment.app.DialogFragment;
 
 import java.util.Calendar;
 
-public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
+public class TimePickerFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -20,11 +20,6 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         int hour = calendar.get(calendar.HOUR_OF_DAY);
         int min = calendar.get(calendar.MINUTE);
 
-        return new TimePickerDialog(getActivity() , this , hour , min , DateFormat.is24HourFormat(getActivity()));
-    }
-
-    @Override
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
+        return new TimePickerDialog(getActivity() , (TimePickerDialog.OnTimeSetListener) getActivity() , hour , min , DateFormat.is24HourFormat(getActivity()));
     }
 }

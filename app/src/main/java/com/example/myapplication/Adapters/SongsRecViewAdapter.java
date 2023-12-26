@@ -13,12 +13,13 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.AddToPlaylistDialog;
+import com.example.myapplication.MusicModule.AddToPlaylistDialog;
 import com.example.myapplication.Models.Playlist;
 import com.example.myapplication.R;
 import com.example.myapplication.RecViewClickListener;
 import com.example.myapplication.Models.Song;
-import com.example.myapplication.SongsMainPage;
+import com.example.myapplication.MusicModule.SongsMainPage;
+import com.example.myapplication.Utils.FirebaseUtil;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -61,9 +62,7 @@ public class SongsRecViewAdapter extends RecyclerView.Adapter<SongsRecViewAdapte
         holder.artist.setText(songList.get(position).getArtist());
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        DocumentReference favSongsDoc = db.collection(context.getString(R.string.user_collection_name))
-                .document(user.getDisplayName()).collection(context.getString(R.string.playlist_collection_name))
-                .document(context.getString(R.string.fav_songs_document_name));
+        DocumentReference favSongsDoc = FirebaseUtil.getFavSongReference();
         favSongsDoc.get().addOnSuccessListener(documentSnapshot -> {
             List<String> songArr = documentSnapshot.toObject(Playlist.class).getSongArr();
             if (songArr.contains(songTitle)) holder.favouriteBtn.setImageResource(R.drawable.ic_favourite_filled_red);

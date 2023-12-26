@@ -11,10 +11,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.myapplication.Models.Counsellor;
 import com.example.myapplication.R;
 import com.example.myapplication.RecViewClickListener;
+import com.example.myapplication.Utils.AndroidUtil;
+import com.example.myapplication.Utils.FirebaseUtil;
 
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class CounsellorRecViewAdapter extends RecyclerView.Adapter<CounsellorRec
     @NonNull
     @Override
     public CounsellorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.counsellor_item , null , false);
+        View view = LayoutInflater.from(context).inflate(R.layout.counsellor_chat_item, null , false);
         CounsellorViewHolder viewHolder = new CounsellorViewHolder(view , recViewClickListener);
         return viewHolder;
     }
@@ -40,9 +41,10 @@ public class CounsellorRecViewAdapter extends RecyclerView.Adapter<CounsellorRec
     @Override
     public void onBindViewHolder(@NonNull CounsellorViewHolder holder, int position) {
         Counsellor counsellor = counsellorList.get(position);
+        AndroidUtil.logMsg("counsellor present" , counsellor.getName());
         holder.counsellorName.setText(counsellor.getName());
         holder.counsellorPosition.setText(counsellor.getPosition());
-        Glide.with(context).asBitmap().load(counsellor.getImageUrl()).into(holder.counsellorImg);
+        FirebaseUtil.setImage(holder.counsellorImg , counsellor.getUser().getUsername());
     }
 
     @Override

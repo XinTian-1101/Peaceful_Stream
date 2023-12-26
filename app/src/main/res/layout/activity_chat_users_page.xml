@@ -4,31 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MusicModule.SearchResultsPage">
+    tools:context=".CommunicationModule.ChatUsersPage">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/searchResultsRecView"
+        android:id="@+id/chatUserRecView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchResultsToolbar" />
-
-    <include layout="@layout/custom_player"
-        android:id="@+id/customPlayerSearchResultsPage"/>
+        app:layout_constraintTop_toBottomOf="@+id/chatUsersToolbar" />
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/searchResultsToolbar"
+        android:id="@+id/chatUsersToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/mainBgColour"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
+        app:title="Users"
+        app:titleTextColor="@color/lighterBlue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="Search Results"
-        app:titleTextColor="@color/lighterBlue" />
-
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

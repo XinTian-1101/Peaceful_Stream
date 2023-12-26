@@ -20,12 +20,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication.Utils.AndroidUtil;
+import com.example.myapplication.Utils.FirebaseUtil;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 public class LoginPage extends AppCompatActivity{
     private TextView signUpTxt;
@@ -39,11 +42,7 @@ public class LoginPage extends AppCompatActivity{
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            startActivity(new Intent(LoginPage.this , UserLandingPage.class));
-            finish();
-        }
+        FirebaseUtil.userAuth(LoginPage.this , this);
     }
 
     @Override
@@ -64,9 +63,7 @@ public class LoginPage extends AppCompatActivity{
         ClickableSpan clickSignUp = new ClickableSpan() {
             @Override
             public void onClick(@NonNull View view) {
-                Intent intent = new Intent(LoginPage.this , CounsellorDetailsPage.class);
-                startActivity(intent);
-                finish();
+                AndroidUtil.intentChg(LoginPage.this , SignUpAsPage.class);
             }
             @Override
             public void updateDrawState(@NonNull TextPaint ds) {
@@ -86,8 +83,7 @@ public class LoginPage extends AppCompatActivity{
                     .addOnCompleteListener(this, task -> {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            startActivity(new Intent(LoginPage.this , UserLandingPage.class));
-                            finish();
+                            FirebaseUtil.userAuth(LoginPage.this , this);
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(LoginPage.this, "Authentication failed.",
