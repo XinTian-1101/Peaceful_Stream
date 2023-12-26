@@ -1,14 +1,17 @@
 package com.example.group_project.activties;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.group_project.R;
 import com.example.group_project.adapter.ChatAdapter;
 import com.example.group_project.databinding.ActivityChatBinding;
 import com.example.group_project.model.ChatMessage;
@@ -56,16 +59,22 @@ public class ChatActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        getSupportActionBar().setTitle("Emergency Chat");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         binding = ActivityChatBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setListeners();
         loadReceiverDetails();
         init();
         listenMessages();
+
+        ImageView backarrow_menu = findViewById(R.id.back_arrow_chat);
+        backarrow_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChatActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void init(){

@@ -1,5 +1,5 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Base.Theme.Group_Project" parent="Theme.AppCompat.Light.DarkActionBar">
+<resources>
+    <style name="Base.Theme.Group_Project" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/theme_darkblue</item>
         <item name="android:titleTextAppearance">@string/moduleTitle</item>
         <item name="statusBarBackground">@color/theme_darkblue</item>
@@ -7,8 +7,4 @@
 
     <style name="Theme.Group_Project" parent="Base.Theme.Group_Project" />
 
-    <style name="roundedImageViewROunded">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">50%</item>
-    </style>
 </resources>

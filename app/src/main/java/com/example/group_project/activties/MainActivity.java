@@ -3,12 +3,13 @@ package com.example.group_project.activties;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.group_project.EmergencyMenu;
 import com.example.group_project.R;
 import com.example.group_project.adapter.RecentConversationsAdapter;
 import com.example.group_project.databinding.ActivityMainBinding;
@@ -43,8 +44,15 @@ public class MainActivity extends BaseActivity implements ConversionListener {
         setContentView(binding.getRoot());
         preferenceManager = new PreferenceManager(getApplicationContext());
 
-        getSupportActionBar().setTitle("Emergency Chat");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ImageView backarrow_chat = findViewById(R.id.back_arrow_chat);
+        backarrow_chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this, EmergencyMenu.class);
+                startActivity(intent);
+            }
+        });
 
         init();
         loadUserDetails();

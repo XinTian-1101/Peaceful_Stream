@@ -1,26 +1,21 @@
 <resources>
     <string name="app_name">Group_Project</string>
     <string name="moduleTitle">Emergency Assistance Module</string>
-    <string name="emergency">Emergency\nDialing</string>
-    <string name="location">Sharing\nLocation</string>
+    <string name="emergency">Emergency Dialing</string>
+    <string name="location">Sharing Location</string>
     <string name="locationTitle">Location</string>
     <string name="shareLocation">Share location</string>
-    <string name="chat">Emergency\nServices Chat</string>
-    <string name="dailingTitle">Emergency Dialing</string>
-    <string name="chatTitle">Emergency Chat</string>
+    <string name="chat">Emergency Chat</string>
     <string name="predefinedHotlines">Predefined Hotlines</string>
     <string name="ambulance">Ambulance</string>
     <string name="polis">Polis</string>
     <string name="fireBrigade">Fire Brigade</string>
     <string name="naturalDisaster">Natural Disaster</string>
-    <string name="civilDefense">Civil Defense</string>
-    <string name="todo">TODO</string>
     <string name="callBtn1">Call Ambulance</string>
     <string name="callBtn2">Call Police</string>
     <string name="callBtn3">Call Fire Brigade</string>
     <string name="callBtn4">Call Natural Disaster</string>
     <string name="hintText">Type a message</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -7,16 +7,14 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.group_project.activties.UsersActivity;
-import com.example.group_project.utilities.Constants;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -41,13 +39,22 @@ public class RealTimeLocation extends AppCompatActivity implements OnMapReadyCal
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_real_time_location);
 
-        getSupportActionBar().setTitle("Sharing Location");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         map = findViewById(R.id.google_map);
 
         fusedClient = LocationServices.getFusedLocationProviderClient(this);
         getLocation();
+
+        ImageView backarrow_menu = findViewById(R.id.back_arrow_location);
+
+        backarrow_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(RealTimeLocation.this, EmergencyMenu.class);
+                startActivity(intent);
+
+            }
+        });
 
         ImageButton btnShareLocation = (ImageButton) findViewById(R.id.BtnshareLocation);
         btnShareLocation.setOnClickListener(new View.OnClickListener() {

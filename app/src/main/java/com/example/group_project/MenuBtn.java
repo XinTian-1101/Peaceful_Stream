@@ -15,7 +15,6 @@ public class MenuBtn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_btn);
-        getSupportActionBar().setTitle("Emergency Assistance Module");
 
         btnEnter =(Button) findViewById(R.id.button);
         btnEnter.setOnClickListener(new View.OnClickListener() {

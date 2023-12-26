@@ -8,11 +8,21 @@
     android:background="@color/theme2_babyblue"
     tools:context=".activties.UsersActivity">
 
+    <ImageView
+        android:id="@+id/back_arrow_chat2"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back_arrow" />
+
     <TextView
         android:id="@+id/titleSelectUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Select User"
+        android:fontFamily="sans-serif"
         android:textColor="@color/black"
         android:textSize="@dimen/_14ssp"
         android:textStyle="bold"

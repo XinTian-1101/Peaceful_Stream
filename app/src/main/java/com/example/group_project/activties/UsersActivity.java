@@ -3,7 +3,10 @@ package com.example.group_project.activties;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.example.group_project.EmergencyMenu;
+import com.example.group_project.R;
 import com.example.group_project.adapter.UsersAdapter;
 import com.example.group_project.databinding.ActivityUsersBinding;
 import com.example.group_project.listeners.UserListener;
@@ -25,14 +28,21 @@ public class UsersActivity extends BaseActivity implements UserListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityUsersBinding.inflate(getLayoutInflater());
-
-        getSupportActionBar().setTitle("Emergency Chat");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
         setContentView(binding.getRoot());
         preferenceManager = new PreferenceManager(getApplicationContext());
         getUsers();
+
+        ImageView backarrow_menu = findViewById(R.id.back_arrow_chat2);
+
+        backarrow_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(UsersActivity.this, EmergencyMenu.class);
+                startActivity(intent);
+
+            }
+        });
     }
 
 

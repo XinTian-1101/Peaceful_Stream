@@ -6,23 +6,54 @@
     android:layout_height="match_parent"
     tools:context=".EmergencyMenu">
 
+    <View
+        android:id="@+id/View2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/theme_darkblue"
+        app:layout_constraintBottom_toBottomOf="@+id/EmergencyDialPage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/EmergencyDialPage"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginStart="62dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/emergency"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/back_arrow_dialing"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back_arrow" />
 
     <TextView
         android:id="@+id/dailingTitle"
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/baloo"
+        android:layout_marginTop="100dp"
+        android:fontFamily="sans-serif"
         android:text="@string/predefinedHotlines"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/emergencyDialIcon"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/View2"
         tools:ignore="TextSizeCheck" />
-
 
     <ImageView
         android:id="@+id/emergencyDialIcon"
@@ -44,12 +75,11 @@
         app:layout_constraintTop_toBottomOf="@+id/emergencyDialIcon">
 
         <TextView
-            android:id="@+id/TVambulance"
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:background="@drawable/fourside_roundbutton"
             android:clickable="false"
-            android:fontFamily="@font/baloo"
+            android:fontFamily="sans-serif"
             android:paddingTop="13dp"
             android:text="@string/ambulance"
             android:textAlignment="center"
@@ -57,7 +87,6 @@
             android:textSize="26sp"/>
 
         <ImageView
-            android:id="@+id/hospitalIcon"
             android:layout_width="60dp"
             android:layout_height="53dp"
             android:layout_marginHorizontal="10dp"
@@ -91,12 +120,11 @@
         app:layout_constraintTop_toBottomOf="@+id/ambulanceFrame">
 
         <TextView
-            android:id="@+id/TVpolice"
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:background="@drawable/fourside_roundbutton"
             android:clickable="false"
-            android:fontFamily="@font/baloo"
+            android:fontFamily="sans-serif"
             android:paddingTop="13dp"
             android:text="@string/polis"
             android:textAlignment="center"
@@ -114,7 +142,6 @@
             app:srcCompat="@drawable/call_icon" />
 
         <ImageView
-            android:id="@+id/polisIcon"
             android:layout_width="60dp"
             android:layout_height="53dp"
             android:layout_marginHorizontal="10dp"
@@ -136,12 +163,11 @@
         app:layout_constraintTop_toBottomOf="@+id/polisFrame">
 
         <TextView
-            android:id="@+id/TVFireBridgade"
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:background="@drawable/fourside_roundbutton"
             android:clickable="false"
-            android:fontFamily="@font/baloo"
+            android:fontFamily="sans-serif"
             android:paddingTop="13dp"
             android:text="@string/fireBrigade"
             android:textAlignment="center"
@@ -160,7 +186,6 @@
             app:srcCompat="@drawable/call_icon" />
 
         <ImageView
-            android:id="@+id/fireBrigadeIcon"
             android:layout_width="60dp"
             android:layout_height="53dp"
             android:layout_marginHorizontal="10dp"
@@ -169,7 +194,6 @@
     </FrameLayout>
 
     <FrameLayout
-        android:id="@+id/NaturalDisasterFrame"
         android:layout_width="330dp"
         android:layout_height="65dp"
         android:layout_marginTop="22dp"
@@ -180,12 +204,11 @@
 
 
         <TextView
-            android:id="@+id/TVNaturalDisaster"
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:background="@drawable/fourside_roundbutton"
             android:clickable="false"
-            android:fontFamily="@font/baloo"
+            android:fontFamily="sans-serif"
             android:paddingTop="13dp"
             android:text="@string/naturalDisaster"
             android:textAlignment="center"
@@ -203,7 +226,6 @@
             app:srcCompat="@drawable/call_icon" />
 
         <ImageView
-            android:id="@+id/naturalDIsasterIcon"
             android:layout_width="50dp"
             android:layout_height="53dp"
             android:layout_marginHorizontal="10dp"
