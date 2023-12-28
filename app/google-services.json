@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "552351010350",
+    "project_id": "cncmodule-fd717",
+    "storage_bucket": "cncmodule-fd717.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:552351010350:android:66df5f1866894778ef59bf",
+        "android_client_info": {
+          "package_name": "com.example.completecnc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2HB-VrchzlDD4TzVQtaLpFSOBPPEUU6A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

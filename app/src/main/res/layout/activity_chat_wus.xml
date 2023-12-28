@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.ChatWUs">
+
+    <View
+        android:id="@+id/UpperPanel"
+        android:layout_width="415dp"
+        android:layout_height="62dp"
+        android:background="#7792B2"
+        app:layout_constraintBottom_toBottomOf="@+id/TVModuleName"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+
+        />
+
+
+    <TextView
+        android:id="@+id/TVModuleName"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginStart="62dp"
+        android:layout_marginTop="8dp"
+        android:text="Chat With Us"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/BackButton"
+        android:layout_width="62dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="3dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back" />
+
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:id="@+id/UpperPanel"-->
+<!--        android:layout_width="414dp"-->
+<!--        android:layout_height="98dp"-->
+<!--        android:background="#7792B2"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.666"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.0">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/TVChat"-->
+<!--            android:layout_width="338dp"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:text="Chat With Us"-->
+<!--            android:textSize="24sp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.789"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.578" />-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/BackButton"-->
+<!--            android:layout_width="48dp"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/TVChat"-->
+<!--            app:layout_constraintHorizontal_bias="0.034"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.29"-->
+<!--            app:srcCompat="@drawable/baseline_arrow_back_ios_24" />-->
+
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+    <EditText
+        android:id="@+id/ETSearch"
+        android:layout_width="343dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/text_box_edit"
+        android:drawableStart="@drawable/ic_search"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UpperPanel" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chatRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ETSearch" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
