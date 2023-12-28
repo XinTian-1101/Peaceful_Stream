@@ -26,7 +26,7 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create Table playlist (playlist_id INTEGER primary key autoincrement, title TEXT)");
         db.execSQL("create Table song (song_id INTEGER primary key autoincrement, song_title TEXT, artist_name TEXT, url INTEGER)");
-        db.execSQL("create Table song_playlist (playlist_id INTEGER, song_title TEXT, artist_name TEXT, url INTEGER)");
+        db.execSQL("create Table song_playlist (playlist_id INTEGER, song_icon INT, song_title TEXT, artist_name TEXT, url INTEGER)");
         db.execSQL("create Table video_playlist (video_id INTEGER primary key autoincrement, video_title TEXT, artist_name TEXT, url INTEGER)");
 
         createInitialData(db);
@@ -60,19 +60,19 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
 
         //set songs into playlist
         //playlist id 4 for liked songs
-        db.execSQL("insert into song_playlist (playlist_id, song_title, artist_name, url) VALUES (6, 'After Dark', 'Take Me Far Away', "+R.raw.after_dark+")");
-        db.execSQL("insert into song_playlist (playlist_id, song_title, artist_name, url) VALUES (6, 'Calm World', 'little Circuits', "+R.raw.calm_world+")");
-        db.execSQL("insert into song_playlist (playlist_id, song_title, artist_name, url) VALUES (6, 'Deep and Hollow', 'Thoas Galla', "+R.raw.deep_and_hollow+")");
-        db.execSQL("insert into song_playlist (playlist_id, song_title, artist_name, url) VALUES (1, 'Calm World', 'little Circuits', "+R.raw.calm_world+")");
-        db.execSQL("insert into song_playlist (playlist_id, song_title, artist_name, url) VALUES (1, 'Deep and Hollow', 'Thoas Galla', "+R.raw.deep_and_hollow+")");
-        db.execSQL("insert into song_playlist (playlist_id, song_title, artist_name, url) VALUES (2, 'Reverie Lofi', 'Juanita Garcia', "+R.raw.reverie_lofi+")");
-        db.execSQL("insert into song_playlist (playlist_id, song_title, artist_name, url) VALUES (2, 'After Dark', 'Take Me Far Away', "+R.raw.after_dark+")");
-        db.execSQL("insert into song_playlist (playlist_id, song_title, artist_name, url) VALUES (3, 'Grow', 'Natana Bach', "+R.raw.grow+")");
-        db.execSQL("insert into song_playlist (playlist_id, song_title, artist_name, url) VALUES (4, 'Calm World', 'little Circuits', "+R.raw.calm_world+")");
-        db.execSQL("insert into song_playlist (playlist_id, song_title, artist_name, url) VALUES (4, 'Deep and Hollow', 'Thoas Galla', "+R.raw.deep_and_hollow+")");
-        db.execSQL("insert into song_playlist (playlist_id, song_title, artist_name, url) VALUES (4, 'Reverie Lofi', 'Juanita Garcia', "+R.raw.reverie_lofi+")");
-        db.execSQL("insert into song_playlist (playlist_id, song_title, artist_name, url) VALUES (4, 'After Dark', 'Take Me Far Away', "+R.raw.after_dark+")");
-        db.execSQL("insert into song_playlist (playlist_id, song_title, artist_name, url) VALUES (4, 'Grow', 'Natana Bach', "+R.raw.grow+")");
+        db.execSQL("insert into song_playlist (playlist_id, song_icon, song_title, artist_name, url) VALUES (6, "+R.drawable.afterdark_ic+", 'After Dark', 'Take Me Far Away', "+R.raw.after_dark+")");
+        db.execSQL("insert into song_playlist (playlist_id, song_icon, song_title, artist_name, url) VALUES (6, "+R.drawable.little_circuit_ic+",  'Calm World', 'little Circuits', "+R.raw.calm_world+")");
+        db.execSQL("insert into song_playlist (playlist_id, song_icon, song_title, artist_name, url) VALUES (6, "+R.drawable.deepnhollow_ic+",  'Deep and Hollow', 'Thoas Galla', "+R.raw.deep_and_hollow+")");
+        db.execSQL("insert into song_playlist (playlist_id, song_icon, song_title, artist_name, url) VALUES (1, "+R.drawable.little_circuit_ic+",  'Calm World', 'little Circuits', "+R.raw.calm_world+")");
+        db.execSQL("insert into song_playlist (playlist_id, song_icon, song_title, artist_name, url) VALUES (1, "+R.drawable.deepnhollow_ic+",  'Deep and Hollow', 'Thoas Galla', "+R.raw.deep_and_hollow+")");
+        db.execSQL("insert into song_playlist (playlist_id, song_icon, song_title, artist_name, url) VALUES (2, "+R.drawable.reverie_lofi_ic+",  'Reverie Lofi', 'Juanita Garcia', "+R.raw.reverie_lofi+")");
+        db.execSQL("insert into song_playlist (playlist_id, song_icon, song_title, artist_name, url) VALUES (2, "+R.drawable.afterdark_ic+",  'After Dark', 'Take Me Far Away', "+R.raw.after_dark+")");
+        db.execSQL("insert into song_playlist (playlist_id, song_icon, song_title, artist_name, url) VALUES (3, "+R.drawable.grow_ic+",  'Grow', 'Natana Bach', "+R.raw.grow+")");
+        db.execSQL("insert into song_playlist (playlist_id, song_icon, song_title, artist_name, url) VALUES (4, "+R.drawable.little_circuit_ic+",  'Calm World', 'little Circuits', "+R.raw.calm_world+")");
+        db.execSQL("insert into song_playlist (playlist_id, song_icon, song_title, artist_name, url) VALUES (4, "+R.drawable.deepnhollow_ic+",  'Deep and Hollow', 'Thoas Galla', "+R.raw.deep_and_hollow+")");
+        db.execSQL("insert into song_playlist (playlist_id, song_icon, song_title, artist_name, url) VALUES (4, "+R.drawable.reverie_lofi_ic+",  'Reverie Lofi', 'Juanita Garcia', "+R.raw.reverie_lofi+")");
+        db.execSQL("insert into song_playlist (playlist_id, song_icon, song_title, artist_name, url) VALUES (4, "+R.drawable.afterdark_ic+",  'After Dark', 'Take Me Far Away', "+R.raw.after_dark+")");
+        db.execSQL("insert into song_playlist (playlist_id, song_icon, song_title, artist_name, url) VALUES (4, "+R.drawable.grow_ic+",  'Grow', 'Natana Bach', "+R.raw.grow+")");
 
 
         db.execSQL("insert into video_playlist (video_title, artist_name, url) VALUES ('How To Meditate 1', 'Artist 1', "+R.raw.how_to_meditate_1+")");
@@ -140,17 +140,6 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
             Toast.makeText(context,"Removed",Toast.LENGTH_SHORT).show();
         }
     }
-
-//    void addSongToGoodNightPlaylist(String song_title, String artist_name, int song_url){
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ContentValues cv = new ContentValues();
-//
-//        cv.put("song_title",song_title);
-//        cv.put("artist_name",artist_name);
-//        cv.put("song_url",song_url);
-//
-//        db.insert("goodnight_playlist",null,cv);
-//    }
 
     //read playlist title from database
     Cursor readPlaylistNameData(){
@@ -234,5 +223,15 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
             cursor.close();
             return false;
         }
+    }
+
+    Cursor readNumSongs(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(db != null){
+            cursor = db.rawQuery("select * from song_playlist where playlist_id = "+id,null);
+        }
+        return cursor;
     }
 }

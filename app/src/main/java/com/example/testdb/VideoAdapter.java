@@ -41,6 +41,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.MyViewHolder
 
         holder.videoTV.setText(videoModel.get(position).getVideoName());
         holder.artistTV.setText(videoModel.get(position).getArtistName());
+        holder.videoPosition.setText(Integer.toString(position+1));
 
 //        if(mdh.checkLikedSong(videoModel.get(position).getVideoName())){
 //            holder.likeBtn.setImageResource(R.drawable.ic_like_off);
@@ -57,7 +58,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.MyViewHolder
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView videoTV, artistTV;
+        TextView videoTV, artistTV, videoPosition;
 //        ImageButton likeBtn, adpBtn;
 
         public MyViewHolder(@NonNull View itemView, rvInterface rv) {
@@ -67,6 +68,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.MyViewHolder
 
             videoTV = itemView.findViewById(R.id.video_name);
             artistTV = itemView.findViewById(R.id.artist_name);
+            videoPosition = itemView.findViewById(R.id.vidPosition);
 //            likeBtn = itemView.findViewById(R.id.likeOffButton);
 //            adpBtn = itemView.findViewById(R.id.adpButton);
 

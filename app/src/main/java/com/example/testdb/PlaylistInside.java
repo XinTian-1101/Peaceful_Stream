@@ -1,6 +1,7 @@
 package com.example.testdb;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +23,7 @@ public class PlaylistInside extends AppCompatActivity implements saInterface {
     RecyclerView rv;
     ImageView playlistIcon;
     ImageButton playButton;
+    Toolbar toolbar;
     ArrayList<SonglistModel> song_list = new ArrayList<>();
     int playlist_id;
     MyDatabaseHelper mdh = new MyDatabaseHelper(PlaylistInside.this);
@@ -31,15 +33,27 @@ public class PlaylistInside extends AppCompatActivity implements saInterface {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playlist_inside);
 
+        toolbar = findViewById(R.id.toolBar);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);
+
         TextView playlistNameTV = findViewById(R.id.textView2);
-        TextView check = findViewById(R.id.checkID);
         String playlist_name = getIntent().getStringExtra("PLAYLIST NAME");
+        getSupportActionBar().setTitle(playlist_name);
         playlistNameTV.setText(playlist_name);
         playlistIcon = findViewById(R.id.imageView);
-        playlistIcon.setImageResource(getIntent().getIntExtra("PLAYLIST ICON",-1));
 
         //get which playlist
         playlist_id = getIntent().getIntExtra("PLAYLIST ID",10);
+
+        if(playlist_id<4 || playlist_id >4){
+            playlistIcon.setImageResource(getIntent().getIntExtra("PLAYLIST ICON",-1));
+        }
+//        else{
+//            playlistIcon.setImageResource(R.drawable.extra_pl_ic2);
+//        }
 
 
         //get all songs from playlist id
@@ -86,6 +100,19 @@ public class PlaylistInside extends AppCompatActivity implements saInterface {
         cursor.close();
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        mdh = new MyDatabaseHelper(PlaylistInside.this);
+        song_list = new ArrayList<>();
+
+        displayData(playlist_id);
+
+        adapter = new SongAdapter(PlaylistInside.this, song_list,this);
+        rv.setAdapter(adapter);
+    }
+
 
     public void onItemClick(int position) {
         Intent intent = new Intent(PlaylistInside.this, MusicPlayer.class);
@@ -100,19 +127,16 @@ public class PlaylistInside extends AppCompatActivity implements saInterface {
 
     public void onLikeButtonClick(int position){
 
-        //if exist, remove from song_playlist
-
+        //fetch data
         String title = song_list.get(position).getSongName();
         String artist = song_list.get(position).getArtistName();
         int url = song_list.get(position).getUrl();
 
-        if(mdh.checkLikedSong(title)){
+        if(mdh.checkLikedSong(title)){ //check if song is liked
             mdh.removeFromLiked(title, artist, url);
-            Toast.makeText(PlaylistInside.this,"Ada!",Toast.LENGTH_SHORT).show();
         }
         else{
             mdh.addIntoLiked(title, artist, url);
-            Toast.makeText(PlaylistInside.this,"Tiada!",Toast.LENGTH_SHORT).show();
         }
     }
 

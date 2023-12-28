@@ -6,23 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".searchSong">
 
+    <include layout="@layout/appbar"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="109dp"
+        android:layout_height="673dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="414dp"
-        android:layout_height="109dp"
-        android:background="#4B68B3"
+        android:layout_height="79dp"
+        android:layout_marginTop="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -31,15 +32,25 @@
             android:id="@+id/search_bar"
             android:layout_width="350dp"
             android:layout_height="48dp"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="16dp"
             android:background="@android:color/background_light"
             android:ems="10"
-            android:hint="Search your songs!"
+            android:hint="What do you want to listen to?"
             android:inputType="text"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/searchIcon"
+            android:layout_width="43dp"
+            android:layout_height="43dp"
+            android:layout_marginStart="2dp"
+            app:layout_constraintBottom_toBottomOf="@+id/search_bar"
+            app:layout_constraintStart_toStartOf="@+id/search_bar"
+            app:layout_constraintTop_toTopOf="@+id/search_bar"
+            app:srcCompat="@drawable/ic_search_glass" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,7 +1,9 @@
 package com.example.testdb;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -10,8 +12,10 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,16 +29,18 @@ public class MusicPlayer extends AppCompatActivity implements MediaPlayer.OnComp
     private MediaPlayer mediaPlayer;
 
     TextView artistNameTV, songTitleTV, timeElapsed, totalDuration;
+    ImageView icon;
 
-    private MyDatabaseHelper mdh;
+    MyDatabaseHelper mdh;
     private Handler handler = new Handler();
     private ArrayList<SonglistModel> playlist = new ArrayList<>();
     private int currentSongIndex = 0;
 
     SeekBar seekBar;
+    Toolbar toolbar;
     int id;
     String title;
-    ImageButton playBtn, pauseBtn, nextBtn, prevBtn, shuffleBtn, loopBtn;
+    ImageButton playBtn, pauseBtn, nextBtn, prevBtn, shuffleBtn, loopBtn, likeBtn, atpBtn;
     private boolean isShuffle = false;
     private boolean isLoop = false;
 
@@ -50,18 +56,45 @@ public class MusicPlayer extends AppCompatActivity implements MediaPlayer.OnComp
         nextBtn = findViewById(R.id.nextButton);
         shuffleBtn = findViewById(R.id.shuffleButton);
         loopBtn = findViewById(R.id.loopButton);
+        likeBtn = findViewById(R.id.likeButton);
+        atpBtn = findViewById(R.id.addToPlaylistButton);
+        songTitleTV = findViewById(R.id.title_song);
+        artistNameTV = findViewById(R.id.name_artist);
+        seekBar = findViewById(R.id.seekBar);
+
+        icon = findViewById(R.id.imageView2);
 
         timeElapsed = findViewById(R.id.timeElapsed);
         totalDuration = findViewById(R.id.totalDuration);
 
+        toolbar = findViewById(R.id.toolBar);
 
+        mdh = new MyDatabaseHelper(this);
 
+        title = getIntent().getStringExtra("SONG TITLE");
+        String artist_name = getIntent().getStringExtra("ARTIST NAME");
+        int url = getIntent().getIntExtra("SONG URL",-1);
+
+        //setup toolbar
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);
+
+        if(mdh.checkLikedSong(title)){ //if liked, heart filled
+            likeBtn.setImageResource(R.drawable.ic_like_on);
+        }
+        else{ //if not liked, heart empty
+            likeBtn.setImageResource(R.drawable.ic_like_off);
+        }
+
+        //play button onclick
         playBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!mediaPlayer.isPlaying()){
                     pauseBtn.setVisibility(View.VISIBLE);
                     playBtn.setVisibility(View.INVISIBLE);
+                    //play the media
                     mediaPlayer.start();
                 }
                 else{
@@ -70,34 +103,42 @@ public class MusicPlayer extends AppCompatActivity implements MediaPlayer.OnComp
             }
         });
 
+        //pause button onclick
         pauseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(mediaPlayer.isPlaying()){
                     playBtn.setVisibility(View.VISIBLE);
                     pauseBtn.setVisibility(View.INVISIBLE);
+                    //pause the media
                     mediaPlayer.pause();
                 }
             }
         });
 
+        //next song button onclick
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                pauseBtn.setVisibility(View.VISIBLE);
+                playBtn.setVisibility(View.INVISIBLE);
+                //call method to play next song
                 playNextSong();
             }
         });
 
+        //previous song button onclick
         prevBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 currentSongIndex--;
-                if (currentSongIndex >= 0) {
-                    // Play the previous song
+                pauseBtn.setVisibility(View.VISIBLE);
+                playBtn.setVisibility(View.INVISIBLE);
+                if (currentSongIndex >= 0) { //take previous song
                     mediaPlayer.reset();
                     playSong(currentSongIndex);
-                } else {
-                    // If at the beginning of the playlist, play the last song
+                }
+                else { //take last song in the list
                     currentSongIndex = playlist.size() - 1;
                     mediaPlayer.reset();
                     playSong(currentSongIndex);
@@ -105,58 +146,93 @@ public class MusicPlayer extends AppCompatActivity implements MediaPlayer.OnComp
             }
         });
 
+        //shuffle song onclick
         shuffleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toggleShuffle();
+//                toggleShuffle();
+                isShuffle = !isShuffle;
+
+                if (isShuffle) {
+                    // Shuffle the playlist
+                    Collections.shuffle(playlist);
+                    Toast.makeText(MusicPlayer.this,"In Shuffle", Toast.LENGTH_SHORT).show();
+                }
+                else
+                    Toast.makeText(MusicPlayer.this,"Not in Shuffle", Toast.LENGTH_SHORT).show();
             }
         });
 
+        //loop song onclick
         loopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toggleLoop();
+//                toggleLoop();
+                isLoop = !isLoop;
+                if(isLoop)
+                    Toast.makeText(MusicPlayer.this,"In Loop", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(MusicPlayer.this,"Not In Loop", Toast.LENGTH_SHORT).show();
+                mediaPlayer.setLooping(isLoop);
             }
         });
-        title = getIntent().getStringExtra("SONG TITLE");
-        String artist_name = getIntent().getStringExtra("ARTIST NAME");
 
-        songTitleTV = findViewById(R.id.title_song);
-        artistNameTV = findViewById(R.id.name_artist);
-        seekBar = findViewById(R.id.seekBar);
+        //like button onclick
+        likeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mdh.checkLikedSong(title)){ //check song is liked or not
+                    likeBtn.setImageResource(R.drawable.ic_like_off);
+                    mdh.removeFromLiked(title, artist_name, url); //if liked, remove from liked song
+                }
+                else{
+                    likeBtn.setImageResource(R.drawable.ic_like_on);
+                    mdh.addIntoLiked(title, artist_name, url); //add into liked songs
+                }
+            }
+        });
 
+        //add to playlist onclick
+        atpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MusicPlayer.this, AddSongToPlaylist.class);
+
+                //bring data to next activity
+                intent.putExtra("SONG TITLE", title);
+                intent.putExtra("ARTIST NAME", artist_name);
+                intent.putExtra("SONG URL", url);
+
+                startActivity(intent);
+            }
+        });
+
+        //to make seekbar can control the song
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if(fromUser){
                     mediaPlayer.seekTo(progress);
+                    timeElapsed.setText(formatDuration(progress)); //update the elapsed time text
                 }
             }
-
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                mediaPlayer.pause();
             }
-
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                mediaPlayer.start();
             }
         });
 
         songTitleTV.setText(title);
         artistNameTV.setText(artist_name);
 
-        mdh = new MyDatabaseHelper(this);
         id = getIntent().getIntExtra("PLAYLIST ID",100);
-//        Toast.makeText(MusicPlayer.this,"Di sini masih belum",Toast.LENGTH_LONG).show();
         playlist = getPlaylistFromDatabase(id);
-//        Toast.makeText(this,playlist.size(),Toast.LENGTH_LONG).show();
-////        // Example: Play the first song in the playlist
         playSong(currentSongIndex);
-//        playSong();
     }
 
+    //format for time elapsed and total duration
     private String formatDuration(int duration) {
         int minutes = (duration / 1000) / 60;
         int seconds = (duration / 1000) % 60;
@@ -164,41 +240,56 @@ public class MusicPlayer extends AppCompatActivity implements MediaPlayer.OnComp
     }
 
     public void toggleShuffle() {
-        isShuffle = !isShuffle;
-
-        if (isShuffle) {
-            // Shuffle the playlist
-            Collections.shuffle(playlist);
-            Toast.makeText(MusicPlayer.this,"In Shuffle", Toast.LENGTH_SHORT).show();
-        }
-        else
-            Toast.makeText(MusicPlayer.this,"Not in Shuffle", Toast.LENGTH_SHORT).show();
+//        isShuffle = !isShuffle;
+//
+//        if (isShuffle) {
+//            // Shuffle the playlist
+//            Collections.shuffle(playlist);
+//            Toast.makeText(MusicPlayer.this,"In Shuffle", Toast.LENGTH_SHORT).show();
+//        }
+//        else
+//            Toast.makeText(MusicPlayer.this,"Not in Shuffle", Toast.LENGTH_SHORT).show();
     }
 
     public void toggleLoop() {
-        isLoop = !isLoop;
-        if(isLoop)
-            Toast.makeText(MusicPlayer.this,"In Loop", Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(MusicPlayer.this,"Not In Loop", Toast.LENGTH_SHORT).show();
-        mediaPlayer.setLooping(isLoop);
+//        isLoop = !isLoop;
+//        if(isLoop)
+//            Toast.makeText(MusicPlayer.this,"In Loop", Toast.LENGTH_SHORT).show();
+//        else
+//            Toast.makeText(MusicPlayer.this,"Not In Loop", Toast.LENGTH_SHORT).show();
+//        mediaPlayer.setLooping(isLoop);
     }
+
+    //apply back to up button
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // Pause the MediaPlayer
+                if (mediaPlayer.isPlaying()) {
+                    mediaPlayer.pause();
+                }
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    //add song into list to play from specific playlist
     private ArrayList<SonglistModel> getPlaylistFromDatabase(int id) {
-        // Retrieve the playlist from the databaseific query based on your needs
         SQLiteDatabase db = mdh.getReadableDatabase();
 
         addPriority();
-        Cursor cursor = db.rawQuery("select song_title, artist_name, url from song_playlist where playlist_id = "+id,null);
+        Cursor cursor = db.rawQuery("select song_title, artist_name, url, song_icon from song_playlist where playlist_id = "+id,null);
         // fill the song model
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 String title = cursor.getString(0);
                 String artist = cursor.getString(1);
                 int url = cursor.getInt(2);
-                playlist.add(new SonglistModel(title, artist, url));
-            } while (cursor.moveToNext());
+                int icon_song = cursor.getInt(3);
 
-            Toast.makeText(this, "Ini punca",Toast.LENGTH_LONG).show();
+                playlist.add(new SonglistModel(title, artist, url, icon_song));
+            } while (cursor.moveToNext());
 
             cursor.close();
         }
@@ -206,11 +297,11 @@ public class MusicPlayer extends AppCompatActivity implements MediaPlayer.OnComp
         return playlist;
     }
 
+    //add selected song to be first in queue
     void addPriority(){
         SQLiteDatabase db = mdh.getReadableDatabase();
 
-        Cursor prioritize = db.rawQuery("select song_title, artist_name, url from song_playlist where playlist_id = "+id+" and song_title = '"+title+"'",null);
-
+        Cursor prioritize = db.rawQuery("select song_title, artist_name, url, song_icon  from song_playlist where playlist_id = "+id+" and song_title = '"+title+"'",null);
 
 
         if (prioritize != null && prioritize.moveToFirst()) {
@@ -218,14 +309,15 @@ public class MusicPlayer extends AppCompatActivity implements MediaPlayer.OnComp
                 String priorTitle = prioritize.getString(0);
                 String priorArtist = prioritize.getString(1);
                 int priorUrl = prioritize.getInt(2);
-                playlist.add(new SonglistModel(priorTitle, priorArtist, priorUrl));
+                int priorIcon = prioritize.getInt(3);
+
+                playlist.add(new SonglistModel(priorTitle, priorArtist, priorUrl, priorIcon));
             } while (prioritize.moveToNext());
 
             prioritize.close();
         }
     }
         private void playSong(int songIndex) {
-        // Set the data source and prepare the MediaPlayer
             int resid = playlist.get(songIndex).getUrl();
 
             mediaPlayer = MediaPlayer.create(this, resid);
@@ -238,36 +330,32 @@ public class MusicPlayer extends AppCompatActivity implements MediaPlayer.OnComp
                 mediaPlayer.release();
             }
 
+            icon.setImageResource(playlist.get(songIndex).getIcon());
             songTitleTV.setText(playlist.get(songIndex).getSongName());
             artistNameTV.setText(playlist.get(songIndex).getArtistName());
             seekBar.setMax(mediaPlayer.getDuration());
             updateSeekBar();
-            // Start playing the song
+
             mediaPlayer.start();
-            // Update the current song index
             currentSongIndex = songIndex;
         }
 
         @Override
         public void onCompletion(MediaPlayer mp) {
-            // Called when the current song finishes playing
-            // Play the next song in the playlist
             mp.reset();
             playNextSong();
         }
 
         private void updateSeekBar() {
-            // Update SeekBar and duration text every 100 milliseconds
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if (mediaPlayer != null) {
-                        // Update SeekBar progress
+                    if (mediaPlayer != null && mediaPlayer.isPlaying()) {
                         int pos = mediaPlayer.getCurrentPosition();
                         seekBar.setProgress(pos);
                         timeElapsed.setText(formatDuration(pos));
 
-                        // Call recursively to keep updating
+                        //always call to always update
                         updateSeekBar();
                     }
                 }
@@ -277,25 +365,27 @@ public class MusicPlayer extends AppCompatActivity implements MediaPlayer.OnComp
         private void playNextSong() {
             currentSongIndex++;
             if (currentSongIndex < playlist.size()) {
-                // Play the next song
                 mediaPlayer.reset();
                 playSong(currentSongIndex);
             } else {
-                // Playlist finished
                 currentSongIndex = 0;
                 mediaPlayer.reset();
                 playSong(currentSongIndex);
             }
         }
 
+        protected void onStop(){
+            super.onStop();
+            if (mediaPlayer != null) {
+                mediaPlayer.pause();
+            }
+        }
+
         @Override
         protected void onDestroy() {
             super.onDestroy();
-            // Release the MediaPlayer resources when destroyed
             if (mediaPlayer != null) {
                 mediaPlayer.release();
             }
         }
-
-
 }

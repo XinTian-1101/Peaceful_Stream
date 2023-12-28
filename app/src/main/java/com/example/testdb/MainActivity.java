@@ -8,9 +8,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -19,30 +21,47 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements rvInterface{
 
     RecyclerView rv;
-    ImageButton pl1, pl2, pl3, pl4;
+    ImageButton playlist1, playlist2, playlist3, playlist4;
     FloatingActionButton addButton;
 
     MyDatabaseHelper mdh = new MyDatabaseHelper(MainActivity.this);
-    ArrayList<PlaylistModel> pl_title = new ArrayList<>();
+    ArrayList<PlaylistModel> pl_title = new ArrayList<>(); //arraylist to store data of each playlist
     Adapter adapter;
+
+    Toolbar toolbar;
+    EditText search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //initialize data field
         rv = findViewById(R.id.playlistRV);
         addButton = findViewById(R.id.floatingActionButton);
-        pl1 = findViewById(R.id.ic_lofiMedi);
-        pl2 = findViewById(R.id.ic_peacefulMedi);
-        pl3 = findViewById(R.id.ic_peacefulPiano);
-        pl4 = findViewById(R.id.ic_mediVideo);
+        playlist1 = findViewById(R.id.ic_lofiMedi);
+        playlist2 = findViewById(R.id.ic_peacefulMedi);
+        playlist3 = findViewById(R.id.ic_peacefulPiano);
+        playlist4 = findViewById(R.id.ic_mediVideo);
+        toolbar = findViewById(R.id.toolBar);
+        search = findViewById(R.id.search_bar);
 
-        //create liked song playlist
-//        Toast.makeText(this,"Successful",Toast.LENGTH_SHORT).show();
+        //set up toolbar
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);
 
-//        //for relaxation playlist
-        pl1.setOnClickListener(new View.OnClickListener() {
+        //onclick to go to search songs page
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, searchSong.class);
+                startActivity(i);
+            }
+        });
+
+        //for lofi meditation playlist
+        playlist1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, PlaylistInside.class);
@@ -50,8 +69,9 @@ public class MainActivity extends AppCompatActivity implements rvInterface{
                 TextView tv = findViewById(R.id.title_lofiMedi);
                 String playlist = tv.getText().toString();
                 intent.putExtra("PLAYLIST NAME",playlist);
-                intent.putExtra("PLAYLIST ICON",R.drawable.lofi_icon);
-                Toast.makeText(MainActivity.this, playlist, Toast.LENGTH_SHORT).show();
+                intent.putExtra("PLAYLIST ICON",R.drawable.lofimedi_ic);
+
+                //fetch playlist id from database
                 int id = syncPlaylistData(playlist);
                 intent.putExtra("PLAYLIST ID",id);
 
@@ -59,8 +79,8 @@ public class MainActivity extends AppCompatActivity implements rvInterface{
             }
         });
 
-        //for good night playlist
-        pl2.setOnClickListener(new View.OnClickListener() {
+        //for peaceful meditation playlist
+        playlist2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, PlaylistInside.class);
@@ -68,7 +88,9 @@ public class MainActivity extends AppCompatActivity implements rvInterface{
                 TextView tv = findViewById(R.id.title_peacefulMedi);
                 String playlist = tv.getText().toString();
                 intent.putExtra("PLAYLIST NAME",playlist);
-                intent.putExtra("PLAYLIST ICON",R.drawable.peaceful_icon);
+                intent.putExtra("PLAYLIST ICON",R.drawable.peacefulmedi_i);
+
+                //fetch playlist id from database
                 int id = syncPlaylistData(playlist);
                 intent.putExtra("PLAYLIST ID",id);
 
@@ -76,24 +98,27 @@ public class MainActivity extends AppCompatActivity implements rvInterface{
             }
         });
 
-        //for good night playlist
-        pl3.setOnClickListener(new View.OnClickListener() {
+        //for peaceful piano playlist
+        playlist3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, PlaylistInside.class);
 
                 TextView tv = findViewById(R.id.title_peacefulPiano);
                 String playlist = tv.getText().toString();
-                int id = syncPlaylistData(playlist);
                 intent.putExtra("PLAYLIST NAME",playlist);
+                intent.putExtra("PLAYLIST ICON",R.drawable.peacefulpiano_ic);
+
+                //fetch playlist id from database
+                int id = syncPlaylistData(playlist);
                 intent.putExtra("PLAYLIST ID",id);
 
                 startActivity(intent);
             }
         });
 
-        //for meditation vids playlist
-        pl4.setOnClickListener(new View.OnClickListener() {
+        //for meditation videos playlist
+        playlist4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, VideoPlaylistInside.class);
@@ -102,17 +127,16 @@ public class MainActivity extends AppCompatActivity implements rvInterface{
         });
 
 //        search songs
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, searchSong.class);
-                startActivity(i);
-            }
-        });
+//        addButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(MainActivity.this, searchSong.class);
+//                startActivity(i);
+//            }
+//        });
 
+        //store data to display
         storeDisplayData();
-
-        Toast.makeText(this,"Here",Toast.LENGTH_SHORT).show();
 
         adapter = new Adapter(MainActivity.this, pl_title,this);
         rv.setAdapter(adapter);
@@ -149,13 +173,13 @@ public class MainActivity extends AppCompatActivity implements rvInterface{
 
     private int syncPlaylistData(String title){
         Cursor cursor = mdh.syncPlaylistID(title);
-        int s = 0;
+        int id = 0;
 
         while(cursor.moveToNext()){
-            s = cursor.getInt(0);
+            id = cursor.getInt(0);
         }
 
-        return s;
+        return id;
     }
 
     public void onItemClick(int position) {
@@ -163,8 +187,14 @@ public class MainActivity extends AppCompatActivity implements rvInterface{
 
         String title = pl_title.get(position).getPlaylistTitle();
         intent.putExtra("PLAYLIST NAME",title);
-        intent.putExtra("PLAYLIST ICON",R.drawable.lofi_icon);
+        if(position==0) //liked song playlist
+            intent.putExtra("PLAYLIST ICON",R.drawable.likedsong_ic);
+        else if(position==1) //you are the best playlist
+            intent.putExtra("PLAYLIST ICON",R.drawable.urthebest_ic);
+        else //other new playlist
+            intent.putExtra("PLAYLIST ICON",R.drawable.extra_pl_ic2);
 
+        //fetch playlist id from database
         int id = syncPlaylistData(title);
         intent.putExtra("PLAYLIST ID",id);
 

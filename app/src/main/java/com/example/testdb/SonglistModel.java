@@ -13,6 +13,14 @@ public class SonglistModel implements Serializable {
     private String artistName;
 
     private int url;
+    private int icon;
+
+    public SonglistModel(String songName, String artistName, int url, int icon) {
+        this.songName = songName;
+        this.artistName = artistName;
+        this.url = url;
+        this.icon=icon;
+    }
 
     public SonglistModel(String songName, String artistName, int url) {
         this.songName = songName;
@@ -31,4 +39,6 @@ public class SonglistModel implements Serializable {
     public int getUrl() {
         return url;
     }
+
+    public int getIcon(){return icon;}
 }

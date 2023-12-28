@@ -1,12 +1,14 @@
 package com.example.testdb;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.MediaController;
@@ -20,7 +22,9 @@ public class VideoPlayer extends AppCompatActivity {
     MyDatabaseHelper mdh;
     TextView videoTitleTV, artistNameTV;
     Button nextBtn, prevBtn;
+    VideoView vv;
     String title;
+    Toolbar toolbar;
     private ArrayList<VideolistModel> playlist = new ArrayList<>();
     private int currentVideoIndex = 0;
 
@@ -29,15 +33,11 @@ public class VideoPlayer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_player);
 
-//        VideoView vv = findViewById(R.id.videoView);
-//        String path = "android.resource://"+getPackageName()+"/"+R.raw.how_to_meditate_1;
-//        Uri uri = Uri.parse(path);
-//        vv.setVideoURI(uri);
-//        vv.start();
-//
-//        MediaController mc = new MediaController(this);
-//        vv.setMediaController(mc);
-//        mc.setAnchorView(vv);
+        toolbar = findViewById(R.id.toolBar);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);
 
         title = getIntent().getStringExtra("VIDEO TITLE");
         String artist_name = getIntent().getStringExtra("ARTIST NAME");
@@ -66,7 +66,6 @@ public class VideoPlayer extends AppCompatActivity {
                     currentVideoIndex--;
                     playVideo(currentVideoIndex);
                 } else {
-                    // If at the beginning of the playlist, play the last song
                     currentVideoIndex = playlist.size() - 1;
                     playVideo(currentVideoIndex);
                 }
@@ -80,20 +79,27 @@ public class VideoPlayer extends AppCompatActivity {
         playVideo(currentVideoIndex);
     }
 
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // Pause the MediaPlayer
+                if (vv.isPlaying()) {
+                    vv.pause();
+                }
+
+                // Navigate back to the previous activity
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     private ArrayList<VideolistModel> getPlaylistFromDatabase() {
-        // Retrieve the playlist from the database
-        // Implement this method based on your database structure
-        // For simplicity, I'm assuming a method that returns all songs in the database
-        // You might want to implement a more specific query based on your needs
         SQLiteDatabase db = mdh.getReadableDatabase();
         addPriority();
         Cursor cursor = db.rawQuery("select video_title, artist_name, url from video_playlist",null);
-//            Cursor prioritize = db.rawQuery("select song_title, artist_name, url from song_playlist where playlist_id = "+id+" and song_title = '"+title+"'",null);
-//
-//            String priorTitle = prioritize.getString(0);
-//            String priorArtist = prioritize.getString(1);
-//            int priorUrl = prioritize.getInt(2);
-//            playlist.add(new SonglistModel(priorTitle, priorArtist, priorUrl));
+
         // fill the song model
         if (cursor != null && cursor.moveToFirst()) {
             do {
@@ -103,7 +109,6 @@ public class VideoPlayer extends AppCompatActivity {
                 playlist.add(new VideolistModel(title, artist, url));
             } while (cursor.moveToNext());
 
-//                playlist.remove(new SonglistModel(priorTitle, priorArtist, priorUrl));
             Toast.makeText(this, "Ini punca",Toast.LENGTH_LONG).show();
 
             cursor.close();
@@ -114,18 +119,7 @@ public class VideoPlayer extends AppCompatActivity {
     }
 
     private void playVideo(int videoIndex) {
-//                if (songIndex < 0 || songIndex >= playlist.size()) {
-////
-////                    Toast.makeText(this, "LAGU TAK PLAY "+songIndex,Toast.LENGTH_LONG).show();
-////                    // Invalid song index
-////                    return;
-////                }
-//
-//            // Reset MediaPlayer
-//                mediaPlayer.reset();
-
-
-        VideoView vv = findViewById(R.id.videoView);
+        vv = findViewById(R.id.videoView);
         String path = "android.resource://"+getPackageName()+"/"+playlist.get(videoIndex).getUrl();
         Uri uri = Uri.parse(path);
 
@@ -136,29 +130,14 @@ public class VideoPlayer extends AppCompatActivity {
 
         vv.setVideoURI(uri);
         vv.start();
-//
-        // Set the data source and prepare the MediaPlayer
-//        int resid = playlist.get(videoIndex).getUrl();
-//                try {
-//
-//        mediaPlayer = MediaPlayer.create(this, resid);
-//        mediaPlayer.setOnCompletionListener(this);
+
         videoTitleTV.setText(playlist.get(videoIndex).getVideoName());
         artistNameTV.setText(playlist.get(videoIndex).getArtistName());
-////                mediaPlayer.prepare();
-//        seekBar.setMax(mediaPlayer.getDuration());
-//        updateSeekBar();
-//        // Start playing the song
-//        mediaPlayer.start();
+
         // Update the current song index
         currentVideoIndex = videoIndex;
 
         vv.setOnCompletionListener(mediaPlayer -> playNextVideo());
-
-//                    mediaPlayer.reset();
-//                }catch(IOException e){
-//                    e.printStackTrace();
-//                }
     }
 
     private void playNextVideo() {
@@ -167,8 +146,6 @@ public class VideoPlayer extends AppCompatActivity {
             // Play the next song
             playVideo(currentVideoIndex);
         } else {
-            // Playlist finished, you might want to handle this case
-            // For simplicity, I'm resetting the playlist to play from the beginning
             currentVideoIndex = 0;
             playVideo(currentVideoIndex);
         }
@@ -179,12 +156,9 @@ public class VideoPlayer extends AppCompatActivity {
 
         Cursor prioritize = db.rawQuery("select video_title, artist_name, url from video_playlist where video_title = '"+title+"'",null);
 
-
-
         if (prioritize != null && prioritize.moveToFirst()) {
 //
             do {
-//                    String path = "android.resources://"+getPackageName();
                 String priorTitle = prioritize.getString(0);
                 String priorArtist = prioritize.getString(1);
                 int priorUrl = prioritize.getInt(2);

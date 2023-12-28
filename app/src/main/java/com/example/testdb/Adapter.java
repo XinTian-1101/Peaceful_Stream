@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull Adapter.MyViewHolder holder, int position) {
         holder.titleTxt.setText(title.get(position).getPlaylistTitle());
+        if(position==0) //liked song in recyclerview
+            holder.iconPlaylist.setImageResource(R.drawable.likedsong_ic);
+        else if(position==1) //you are the best in recyclerview
+            holder.iconPlaylist.setImageResource(R.drawable.urthebest_ic);
+        else //new playlist
+            holder.iconPlaylist.setImageResource(R.drawable.extra_pl_ic2);
     }
 
     @Override
@@ -45,11 +52,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView titleTxt;
+        TextView titleTxt; //playlist title
+        ImageView iconPlaylist; //playlist icon
 
         public MyViewHolder(@NonNull View itemView, rvInterface rv) {
             super(itemView);
             titleTxt = itemView.findViewById(R.id.playlist_name);
+            iconPlaylist = itemView.findViewById(R.id.playlist_icon);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override

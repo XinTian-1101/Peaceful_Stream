@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="#6CB9DC"
+    android:background="#6CB9DC"
     tools:context=".VideoPlayer">
+
+    <include layout="@layout/appbar"/>
 
     <VideoView
         android:id="@+id/videoView"
@@ -32,8 +34,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/mediaController"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="212dp"
+        android:backgroundTint="#7792b2"
         android:onClick="playPreviousVideo"
         android:text="Previous"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -45,8 +48,9 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/mediaController"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="212dp"
+        android:backgroundTint="#7792b2"
         android:onClick="playNextVideo"
         android:text="Next"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -57,9 +61,13 @@
         android:layout_width="382dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:paddingTop="5dp"
         android:text="Video Title"
+        android:fontFamily="sans-serif"
+        android:textColor="#ffffff"
         android:textSize="25sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -69,8 +77,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:text="Artist Name"
+        android:fontFamily="sans-serif"
+        android:textColor="#ffffff"
         android:textSize="18sp"
-        android:textStyle="italic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/videoTitle" />
 </androidx.constraintlayout.widget.ConstraintLayout>

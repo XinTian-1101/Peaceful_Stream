@@ -1,6 +1,7 @@
 package com.example.testdb;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,12 +26,20 @@ public class searchSong extends AppCompatActivity implements saInterface {
     ArrayList<SonglistModel> allSong = new ArrayList<>();
     ArrayList<SonglistModel> filteredSong = new ArrayList<>();
 
+    Toolbar toolbar;
+
     MyDatabaseHelper mdh = new MyDatabaseHelper(searchSong.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_song);
+
+        toolbar = findViewById(R.id.toolBar);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_arrow);
 
         rv = findViewById(R.id.rview);
 
@@ -43,6 +52,7 @@ public class searchSong extends AppCompatActivity implements saInterface {
 
         EditText et = findViewById(R.id.search_bar);
 
+        //detect change in edit text
         et.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -64,6 +74,7 @@ public class searchSong extends AppCompatActivity implements saInterface {
     private ArrayList<SonglistModel> filter(String text){
         ArrayList<SonglistModel> filteredList = new ArrayList<>();
 
+        //filter songs
         for(SonglistModel song : allSong){
             if(song.getSongName().toLowerCase().contains(text.toLowerCase())){
                 filteredList.add(song);
@@ -111,11 +122,9 @@ public class searchSong extends AppCompatActivity implements saInterface {
 
         if(mdh.checkLikedSong(title)){
             mdh.removeFromLiked(title, artist, url);
-//            Toast.makeText(PlaylistInside.this,"Ada!",Toast.LENGTH_SHORT).show();
         }
         else{
             mdh.addIntoLiked(title, artist, url);
-//            Toast.makeText(PlaylistInside.this,"Tiada!",Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,12 +44,13 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.MyViewHolder>{
 
         holder.songTV.setText(songModel.get(position).getSongName());
         holder.artistTV.setText(songModel.get(position).getArtistName());
+        holder.songPos.setText(Integer.toString(position+1));
 
         if(mdh.checkLikedSong(songModel.get(position).getSongName())){
-            holder.likeBtn.setImageResource(R.drawable.ic_like_off);
+            holder.likeBtn.setImageResource(R.drawable.ic_like_on);
         }
         else{
-            holder.likeBtn.setImageResource(R.drawable.ic_like_on);
+            holder.likeBtn.setImageResource(R.drawable.ic_like_off);
         }
     }
 
@@ -59,8 +61,9 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.MyViewHolder>{
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView songTV, artistTV;
+        TextView songTV, artistTV, songPos;
         ImageButton likeBtn, adpBtn;
+
 
         public MyViewHolder(@NonNull View itemView, saInterface rv) {
             super(itemView);
@@ -71,13 +74,14 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.MyViewHolder>{
             artistTV = itemView.findViewById(R.id.artist_name);
             likeBtn = itemView.findViewById(R.id.likeOffButton);
             adpBtn = itemView.findViewById(R.id.adpButton);
+            songPos = itemView.findViewById(R.id.songPosition);
 
-            if(mdh.checkLikedSong(itemView.findViewById(R.id.song_name).toString())){
-                likeBtn.setImageResource(R.drawable.ic_like_on);
-            }
-            else{
-                likeBtn.setImageResource(R.drawable.ic_like_off);
-            }
+//            if(mdh.checkLikedSong(itemView.findViewById(R.id.song_name).toString())){
+//                likeBtn.setImageResource(R.drawable.ic_playlist);
+//            }
+//            else{
+//                likeBtn.setImageResource(R.drawable.ic_like_on);
+//            }
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -102,11 +106,11 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.MyViewHolder>{
                         if(pos!=RecyclerView.NO_POSITION){
 
                             if(mdh.checkLikedSong(songModel.get(pos).getSongName())){
-                                likeBtn.setImageResource(R.drawable.ic_like_on);
+                                likeBtn.setImageResource(R.drawable.ic_like_off);
 //                                mdh.removeFromLiked(songModel.get(pos).getSongName(), songModel.get(pos).getArtistName(), songModel.get(pos).getUrl());
                             }
                             else{
-                                likeBtn.setImageResource(R.drawable.ic_like_off);
+                                likeBtn.setImageResource(R.drawable.ic_like_on);
 //                                mdh.addIntoLiked(songModel.get(pos).getSongName(), songModel.get(pos).getArtistName(), songModel.get(pos).getUrl());
                             }
 

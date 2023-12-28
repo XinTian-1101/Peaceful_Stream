@@ -6,37 +6,48 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher_foreground"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/ic_launcher_foreground"
         android:supportsRtl="true"
         android:theme="@style/Theme.TestDB"
         tools:targetApi="31">
         <activity
             android:name=".searchSong"
             android:windowSoftInputMode="adjustNothing"
+            android:label="Wellness and Relaxation Module"
+            android:parentActivityName=".PlaylistInside"
             android:exported="false" />
         <activity
             android:name=".VideoPlaylistInside"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Meditation Videos"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".VideoPlayer"
+            android:label="Video Player"
             android:exported="false" />
         <activity
             android:name=".AddSongToPlaylist"
+            android:label="Add Songs Into Playlist"
             android:exported="false" />
         <activity
             android:name=".MusicPlayer"
-            android:exported="false" />
+            android:label="Music Player"
+            android:exported="false"
+            />
         <activity
             android:name=".PlaylistInside"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".AddPlaylist"
+            android:label="Create Playlist"
             android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            />
         <activity
             android:name=".MainActivity"
+            android:label="Wellness and Relaxation Module"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

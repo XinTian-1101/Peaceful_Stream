@@ -42,6 +42,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
 
         holder.songTV.setText(filteredSong.get(position).getSongName());
         holder.artistTV.setText(filteredSong.get(position).getArtistName());
+        holder.songPos.setText(Integer.toString(position+1));
 
         if(mdh.checkLikedSong(filteredSong.get(position).getSongName())){
             holder.likeBtn.setImageResource(R.drawable.ic_like_on);
@@ -63,7 +64,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView songTV, artistTV;
+        TextView songTV, artistTV, songPos;
         ImageButton likeBtn, adpBtn;
 
         public MyViewHolder(@NonNull View itemView, saInterface rv) {
@@ -73,6 +74,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
 
             songTV = itemView.findViewById(R.id.song_name);
             artistTV = itemView.findViewById(R.id.artist_name);
+            songPos = itemView.findViewById(R.id.songPosition);
             likeBtn = itemView.findViewById(R.id.likeOffButton);
             adpBtn = itemView.findViewById(R.id.adpButton);
 

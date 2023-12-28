@@ -3,60 +3,60 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="6dp">
+    android:layout_height="wrap_content">
 
 
-    <androidx.cardview.widget.CardView
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:layout_width="127dp"-->
+<!--        android:layout_height="140dp"-->
+<!--        android:layout_marginLeft="10dp"-->
+<!--        android:layout_marginRight="1dp"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        android:backgroundTint="@android:color/transparent"-->
+<!--        android:paddingStart="4dp"-->
+<!--        android:tint="@android:color/transparent"-->
+<!--        app:cardCornerRadius="10dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="85dp"
-        android:paddingStart="4dp"
-        android:layout_marginRight="1dp"
-        android:layout_marginLeft="10dp"
+        android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:backgroundTint="@android:color/transparent"
-        android:tint="@android:color/transparent"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent">
+        <ImageView
+            android:id="@+id/playlist_icon"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/lofi_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.533"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/playlist_name"
+            android:layout_width="85dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="3dp"
+            android:ellipsize="end"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.516"
+            app:layout_constraintStart_toStartOf="@+id/playlist_icon"
+            app:layout_constraintTop_toBottomOf="@+id/playlist_icon" />
 
 
-            <ImageView
-                android:id="@+id/playlist_icon"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="4dp"
-                android:background="@drawable/lofi_icon"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.533"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/playlist_name"
-                android:layout_width="60dp"
-                android:layout_height="17dp"
-                android:layout_marginTop="3dp"
-                android:text="TextView"
-                android:textAlignment="center"
-                android:textSize="12sp"
-                android:textStyle="italic"
-                android:singleLine="true"
-                android:ellipsize="end"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.516"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/playlist_icon" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+<!--    </androidx.cardview.widget.CardView>-->
 </androidx.constraintlayout.widget.ConstraintLayout>
