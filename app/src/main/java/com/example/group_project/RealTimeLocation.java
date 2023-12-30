@@ -56,7 +56,7 @@ public class RealTimeLocation extends AppCompatActivity implements OnMapReadyCal
             }
         });
 
-        ImageButton btnShareLocation = (ImageButton) findViewById(R.id.BtnshareLocation);
+        ImageButton btnShareLocation = findViewById(R.id.BtnshareLocation);
         btnShareLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,13 +107,6 @@ public class RealTimeLocation extends AppCompatActivity implements OnMapReadyCal
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap){
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            googleMap.setMyLocationEnabled(true); // Enables the My Location button
-            googleMap.getUiSettings().setMyLocationButtonEnabled(true); // Shows the My Location button on the map interface
-        } else {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
-        }
         LatLng UserlatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(UserlatLng, 15));
         MarkerOptions userMarkerOptions = new MarkerOptions()
