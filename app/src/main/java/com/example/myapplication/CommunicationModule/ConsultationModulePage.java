@@ -25,5 +25,6 @@ public class ConsultationModulePage extends AppCompatActivity {
 
         confessionsModule.setOnClickListener(v -> AndroidUtil.intentChg(this , ConfessionsPage.class));
         chatWithUsModule.setOnClickListener(v -> AndroidUtil.intentChg(this , ChatCounsellorsPage.class));
+        scheduleSeesionModule.setOnClickListener(v -> AndroidUtil.intentChg(this , SessionsPage.class));
     }
 }

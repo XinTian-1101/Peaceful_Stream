@@ -11,6 +11,7 @@ import com.example.myapplication.Models.Comment;
 import com.example.myapplication.Models.Counsellor;
 import com.example.myapplication.Models.Message;
 import com.example.myapplication.Models.Post;
+import com.example.myapplication.Models.Session;
 import com.example.myapplication.Models.Song;
 import com.example.myapplication.Models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,6 +26,9 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class EventListeners {
@@ -162,6 +166,33 @@ public class EventListeners {
             for (DocumentSnapshot doc : documentSnapshotList) {
                 commentList.add(doc.toObject(Comment.class));
                 adapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    public static void SessionEventChangeListener (List<Session> sessionList , RecyclerView.Adapter adapter) {
+        FirebaseUtil.getSessionReference().addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                for (DocumentSnapshot doc : value.getDocuments()) {
+                    Session session = doc.toObject(Session.class);
+                    String dateTimeString = session.getDate() + " " + session.getTime();
+                    SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd.MM.yyyy hh:mm a");
+                    try {
+                        Date dateTime = dateTimeFormat.parse(dateTimeString);
+                        if (new Date().after(dateTime)) FirebaseUtil.getSessionReference().document(session.getId()).delete();
+                    }
+                    catch (ParseException e){
+                        e.printStackTrace();
+                    }
+                }
+                for (DocumentChange dc : value.getDocumentChanges()) {
+                    Session session = dc.getDocument().toObject(Session.class);
+                    if (dc.getType() == DocumentChange.Type.ADDED && session.getId().contains(FirebaseUtil.currentUserUsername())) {
+                        sessionList.add(session);
+                        adapter.notifyItemInserted(sessionList.size() - 1);
+                    }
+                }
             }
         });
     }

@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.GeneralModule;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,7 +9,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.myapplication.CommunicationModule.ChatUsersPage;
-import com.example.myapplication.LoginPage;
 import com.example.myapplication.R;
 import com.example.myapplication.Utils.AndroidUtil;
 import com.example.myapplication.Utils.FirebaseUtil;

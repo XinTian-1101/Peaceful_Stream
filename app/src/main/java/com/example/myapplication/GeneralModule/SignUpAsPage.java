@@ -1,11 +1,12 @@
-package com.example.myapplication;
+package com.example.myapplication.GeneralModule;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.RelativeLayout;
 
-import com.example.myapplication.CommunicationModule.CounsellorDetailsPage;
+import com.example.myapplication.CounsellorDetailsPage;
+import com.example.myapplication.R;
 import com.example.myapplication.Utils.AndroidUtil;
 import com.example.myapplication.Utils.FirebaseUtil;
 

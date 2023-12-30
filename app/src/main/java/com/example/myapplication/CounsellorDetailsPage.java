@@ -1,4 +1,4 @@
-package com.example.myapplication.CommunicationModule;
+package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -6,18 +6,13 @@ import androidx.fragment.app.DialogFragment;
 
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TimePicker;
 
-import com.example.myapplication.R;
-import com.example.myapplication.SignUpPage;
-import com.example.myapplication.TimePickerFragment;
-import com.example.myapplication.UserLandingPage;
+import com.example.myapplication.GeneralModule.SignUpPage;
+import com.example.myapplication.GeneralModule.UserLandingPage;
 import com.example.myapplication.Utils.AndroidUtil;
 import com.example.myapplication.Utils.FirebaseUtil;
 import com.google.android.material.textfield.TextInputEditText;

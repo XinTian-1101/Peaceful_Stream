@@ -43,7 +43,6 @@ public class MessagesRecViewAdapter extends RecyclerView.Adapter<MessagesRecView
         Message message = messageList.get(position);
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.clone(holder.chatItemLayout);
-        AndroidUtil.logMsg("sender ID is ", message.getSenderId() + "");
         if (message.getSenderId().equals(FirebaseUtil.currentUserUsername()))
             constraintSet.clear(R.id.chatBubble , ConstraintSet.START);
         else constraintSet.clear(R.id.chatBubble , ConstraintSet.END);

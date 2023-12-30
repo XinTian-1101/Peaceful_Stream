@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.GeneralModule;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,8 +13,10 @@ import android.widget.TextView;
 
 import com.example.myapplication.Adapters.ModulesRecViewAdapter;
 import com.example.myapplication.CommunicationModule.ConsultationModulePage;
+import com.example.myapplication.GridAdapter;
 import com.example.myapplication.Models.Module;
 import com.example.myapplication.MusicModule.SongsDiscoverPage;
+import com.example.myapplication.R;
 import com.example.myapplication.Utils.AndroidUtil;
 import com.example.myapplication.Utils.FirebaseUtil;
 import com.google.firebase.auth.FirebaseAuth;

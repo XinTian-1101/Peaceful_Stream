@@ -2,9 +2,9 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.myapplication.GeneralModule.SignUpAsPage;
 import com.example.myapplication.Utils.AndroidUtil;
 
 import java.util.Timer;

@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.GeneralModule;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,7 +17,6 @@ import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -27,6 +26,7 @@ import android.widget.Toast;
 import com.example.myapplication.Models.Counsellor;
 import com.example.myapplication.Models.Playlist;
 import com.example.myapplication.Models.User;
+import com.example.myapplication.R;
 import com.example.myapplication.Utils.AndroidUtil;
 import com.example.myapplication.Utils.FirebaseUtil;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -131,8 +131,6 @@ public class SignUpPage extends AppCompatActivity{
             startActivityForResult(intent , 100);
         });
 
-
-
         signUpBtn.setOnClickListener(view -> {
             String username = usernameInput.getText().toString();
             String email = emailInput.getText().toString();
@@ -152,8 +150,15 @@ public class SignUpPage extends AppCompatActivity{
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(getApplicationContext() , "Register Successful" , Toast.LENGTH_SHORT).show();
-                                        AndroidUtil.intentChg(SignUpPage.this , LoginPage.class);
+                                        mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    AndroidUtil.showToast(SignUpPage.this , "Register Successful. Please verify your email address");
+                                                    AndroidUtil.intentChg(SignUpPage.this , LoginPage.class);
+                                                }
+                                            }
+                                        });
                                     }
                                     else AndroidUtil.showToast(SignUpPage.this , "Could not update name");
                                 }

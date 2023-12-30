@@ -7,8 +7,8 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.CounsellorLandingPage;
-import com.example.myapplication.UserLandingPage;
+import com.example.myapplication.GeneralModule.CounsellorLandingPage;
+import com.example.myapplication.GeneralModule.UserLandingPage;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -52,6 +52,9 @@ public class FirebaseUtil {
     }
     public static DocumentReference getOneUserReference (String userId) {
         return FirebaseFirestore.getInstance().collection("Users").document(userId);
+    }
+    public static CollectionReference getSessionReference () {
+        return FirebaseFirestore.getInstance().collection("Sessions");
     }
     public static void userAuth (Context context , AppCompatActivity activity) {
         if (isLoggedIn()){

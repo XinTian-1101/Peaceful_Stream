@@ -20,24 +20,30 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+            android:name=".CommunicationModule.SchedulePage"
+            android:exported="false" />
+        <activity
+            android:name=".CommunicationModule.SessionsPage"
+            android:exported="false" />
+        <activity
             android:name=".CommunicationModule.ChatUsersPage"
             android:exported="false"
-            android:parentActivityName=".CounsellorLandingPage" />
+            android:parentActivityName=".GeneralModule.CounsellorLandingPage" />
         <activity
-            android:name=".CounsellorLandingPage"
+            android:name=".GeneralModule.CounsellorLandingPage"
             android:exported="false" />
         <activity
             android:name=".CommunicationModule.ConsultationModulePage"
             android:exported="false"
-            android:parentActivityName=".UserLandingPage"/>
+            android:parentActivityName=".GeneralModule.UserLandingPage" />
         <activity
             android:name=".CommunicationModule.ChatPage"
             android:exported="false" />
         <activity
-            android:name=".SignUpAsPage"
+            android:name=".GeneralModule.SignUpAsPage"
             android:exported="false" />
         <activity
-            android:name=".CommunicationModule.CounsellorDetailsPage"
+            android:name=".CounsellorDetailsPage"
             android:exported="false" />
         <activity
             android:name=".CommunicationModule.ChatCounsellorsPage"
@@ -46,27 +52,27 @@
         <activity
             android:name=".CommunicationModule.ConfessionsPage"
             android:exported="false"
-            android:parentActivityName=".CommunicationModule.ConsultationModulePage"/>
+            android:parentActivityName=".CommunicationModule.ConsultationModulePage" />
         <activity
             android:name=".MusicModule.SearchResultsPage"
             android:exported="false"
-            android:parentActivityName=".MusicModule.SongsDiscoverPage"/>
+            android:parentActivityName=".MusicModule.SongsDiscoverPage" />
         <activity
             android:name=".MusicModule.SongsDiscoverPage"
             android:exported="false"
-            android:parentActivityName=".UserLandingPage" />
+            android:parentActivityName=".GeneralModule.UserLandingPage" />
         <activity
             android:name=".MusicModule.SongsMainPage"
             android:exported="false"
-            android:parentActivityName=".MusicModule.SongsDiscoverPage"/>
+            android:parentActivityName=".MusicModule.SongsDiscoverPage" />
         <activity
-            android:name=".UserLandingPage"
+            android:name=".GeneralModule.UserLandingPage"
             android:exported="false" />
         <activity
-            android:name=".SignUpPage"
+            android:name=".GeneralModule.SignUpPage"
             android:exported="false" />
         <activity
-            android:name=".LoginPage"
+            android:name=".GeneralModule.LoginPage"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

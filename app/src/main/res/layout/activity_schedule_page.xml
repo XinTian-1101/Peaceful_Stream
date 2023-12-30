@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue"
+    tools:context=".CommunicationModule.SchedulePage">
+
+    <TextView
+        android:id="@+id/scheduleDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/scheduleTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Time"
+        app:layout_constraintEnd_toEndOf="@+id/scheduleDateBtn"
+        app:layout_constraintStart_toStartOf="@+id/scheduleDateBtn"
+        app:layout_constraintTop_toBottomOf="@+id/scheduleDateBtn" />
+
+    <TextView
+        android:id="@+id/scheduleCounsellor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Counsellor"
+        app:layout_constraintEnd_toEndOf="@+id/scheduleTimeBtn"
+        app:layout_constraintStart_toStartOf="@+id/scheduleTimeBtn"
+        app:layout_constraintTop_toBottomOf="@+id/scheduleTimeBtn" />
+
+    <Button
+        android:id="@+id/scheduleDateBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="@+id/scheduleDate"
+        app:layout_constraintStart_toStartOf="@+id/scheduleDate"
+        app:layout_constraintTop_toBottomOf="@+id/scheduleDate" />
+
+    <Button
+        android:id="@+id/scheduleTimeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="@+id/scheduleTime"
+        app:layout_constraintStart_toStartOf="@+id/scheduleTime"
+        app:layout_constraintTop_toBottomOf="@+id/scheduleTime" />
+
+    <Spinner
+        android:id="@+id/scheduleSpinner"
+        android:spinnerMode="dropdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/scheduleCounsellor"
+        app:layout_constraintStart_toStartOf="@+id/scheduleCounsellor"
+        app:layout_constraintTop_toBottomOf="@+id/scheduleCounsellor" />
+
+    <Button
+        android:id="@+id/scheduleConfirmBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Schedule"
+        app:layout_constraintEnd_toEndOf="@+id/scheduleSpinner"
+        app:layout_constraintStart_toStartOf="@+id/scheduleSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/scheduleSpinner" />
+</androidx.constraintlayout.widget.ConstraintLayout>
