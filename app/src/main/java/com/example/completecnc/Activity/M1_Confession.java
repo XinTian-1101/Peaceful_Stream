@@ -19,8 +19,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.completecnc.Adapter.PostAdapter;
-import com.example.completecnc.Item.PostItem;
+import com.example.completecnc.Adapter.M1_PostAdapter;
+import com.example.completecnc.Item.M1_PostItem;
 import com.example.completecnc.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -38,7 +38,7 @@ import com.google.firebase.storage.UploadTask;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Confession extends AppCompatActivity {
+public class M1_Confession extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
     ImageButton mButtonChooseImage;
@@ -48,10 +48,10 @@ public class Confession extends AppCompatActivity {
     ImageView mImageView;
     ProgressBar mProgressBar;
     RecyclerView mRecyclerView;
-    PostAdapter mAdapter;
+    M1_PostAdapter mAdapter;
     Uri mImageUri;
-    List<PostItem> mUploads;
-    PostAdapter postAdapter;
+    List<M1_PostItem> mUploads;
+    M1_PostAdapter postAdapter;
 
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     StorageReference mStorageRef;
@@ -62,7 +62,7 @@ public class Confession extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_confession);
+        setContentView(R.layout.m1_activity_confession);
 
         ImageView BackButton = findViewById(R.id.BackButton);
         mButtonChooseImage = findViewById(R.id.ButtonAttach);
@@ -76,7 +76,7 @@ public class Confession extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         mUploads = new ArrayList<>();
-        postAdapter = new PostAdapter(this, mUploads);
+        postAdapter = new M1_PostAdapter(this, mUploads);
         mRecyclerView.setAdapter(postAdapter);
 
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
@@ -85,7 +85,7 @@ public class Confession extends AppCompatActivity {
         BackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent back = new Intent(Confession.this, MainActivity.class);
+                Intent back = new Intent(M1_Confession.this, MainActivity.class);
                 startActivity(back);
             }
         });
@@ -101,7 +101,7 @@ public class Confession extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (mUploadTask != null && mUploadTask.isInProgress()) {
-                    Toast.makeText(Confession.this, "Upload in progress", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(M1_Confession.this, "Upload in progress", Toast.LENGTH_SHORT).show();
                 } else {
                     uploadFile();
                 }
@@ -112,14 +112,14 @@ public class Confession extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    PostItem upload = postSnapshot.getValue(PostItem.class);
+                    M1_PostItem upload = postSnapshot.getValue(M1_PostItem.class);
                     mUploads.add(upload);
                 }
                 mRecyclerView.setAdapter(mAdapter);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(Confession.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(M1_Confession.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -166,8 +166,8 @@ public class Confession extends AppCompatActivity {
                                 }
                             }, 500);
 
-                            Toast.makeText(Confession.this, "Upload successful", Toast.LENGTH_LONG).show();
-                            PostItem upload = new PostItem(mEditTextFileName.getText().toString().trim(),
+                            Toast.makeText(M1_Confession.this, "Upload successful", Toast.LENGTH_LONG).show();
+                            M1_PostItem upload = new M1_PostItem(mEditTextFileName.getText().toString().trim(),
                                     taskSnapshot.getUploadSessionUri().toString());
                             String uploadId = mDatabaseRef.push().getKey();
                             mDatabaseRef.child(uploadId).setValue(upload);
@@ -176,7 +176,7 @@ public class Confession extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(Confession.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(M1_Confession.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {

@@ -1,6 +1,6 @@
 package com.example.completecnc.Item;
 
-public class ChatItem {
+public class M2_ChatItem {
     String Name;
     String Hospital;
     String Image;

@@ -12,15 +12,15 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.completecnc.Item.ChatItem;
+import com.example.completecnc.Item.M2_ChatItem;
 import com.example.completecnc.R;
 import com.squareup.picasso.Picasso;
 
-public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder>{
-    ArrayList<ChatItem> list;
+public class M2_ChatAdapter extends RecyclerView.Adapter<M2_ChatAdapter.ChatViewHolder>{
+    ArrayList<M2_ChatItem> list;
     Context context;
 
-    public ChatAdapter(Context context, ArrayList<ChatItem> list){
+    public M2_ChatAdapter(Context context, ArrayList<M2_ChatItem> list){
         this.list = list;
         this.context = context;
     }
@@ -28,13 +28,13 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
     @NonNull
     @Override
     public ChatViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.chat_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.m2_chat_item, parent, false);
         return new ChatViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ChatViewHolder holder, int position) {
-        ChatItem chatItem = list.get(position);
+        M2_ChatItem chatItem = list.get(position);
         holder.counsellorName.setText(chatItem.getName());
         holder.counsellorHospital.setText(chatItem.getHospital());
 

@@ -10,8 +10,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.example.completecnc.Adapter.ChatAdapter;
-import com.example.completecnc.Item.ChatItem;
+import com.example.completecnc.Adapter.M2_ChatAdapter;
+import com.example.completecnc.Item.M2_ChatItem;
 import com.example.completecnc.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,23 +21,23 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ChatWUs extends AppCompatActivity {
+public class M2_ChatWUs extends AppCompatActivity {
     RecyclerView recyclerView;
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = firebaseDatabase.getReference().child("Counsellor");
-    ChatAdapter chatAdapter;
-    ArrayList<ChatItem> list;
+    M2_ChatAdapter chatAdapter;
+    ArrayList<M2_ChatItem> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat_wus);
+        setContentView(R.layout.m2_activity_chat_wus);
 
         ImageView BackButton = findViewById(R.id.BackButton);
         BackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent back = new Intent(ChatWUs.this, MainActivity.class);
+                Intent back = new Intent(M2_ChatWUs.this, MainActivity.class);
                 startActivity(back);
             }
         });
@@ -47,7 +47,7 @@ public class ChatWUs extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         list = new ArrayList<>();
-        chatAdapter = new ChatAdapter(this, list);
+        chatAdapter = new M2_ChatAdapter(this, list);
 
         recyclerView.setAdapter(chatAdapter);
 
@@ -55,7 +55,7 @@ public class ChatWUs extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    ChatItem chatItem = dataSnapshot.getValue(ChatItem.class);
+                    M2_ChatItem chatItem = dataSnapshot.getValue(M2_ChatItem.class);
                     list.add(chatItem);
                 }
                 chatAdapter.notifyDataSetChanged();

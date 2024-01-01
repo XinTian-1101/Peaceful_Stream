@@ -18,10 +18,10 @@
             android:name=".ViewConfession"
             android:exported="false" />
         <activity
-            android:name=".Activity.ChatWUs"
+            android:name=".Activity.M2_ChatWUs"
             android:exported="false" />
         <activity
-            android:name=".Activity.Confession"
+            android:name=".Activity.M1_Confession"
             android:exported="false" />
         <activity
             android:name=".Activity.MainActivity"

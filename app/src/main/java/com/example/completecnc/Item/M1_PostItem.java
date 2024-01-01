@@ -1,14 +1,14 @@
 package com.example.completecnc.Item;
 
-public class PostItem {
+public class M1_PostItem {
     String name;
     String imageUrl;
 
-    public PostItem() {
+    public M1_PostItem() {
         //empty constructor needed
     }
 
-    public PostItem(String name, String imageUrl) {
+    public M1_PostItem(String name, String imageUrl) {
         if (name.trim().equals("")) {
             name = "";
         }

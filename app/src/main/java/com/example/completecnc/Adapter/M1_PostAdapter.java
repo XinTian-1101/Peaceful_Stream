@@ -9,31 +9,31 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.completecnc.Item.PostItem;
+import com.example.completecnc.Item.M1_PostItem;
 import com.example.completecnc.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ImageViewHolder> {
+public class M1_PostAdapter extends RecyclerView.Adapter<M1_PostAdapter.ImageViewHolder> {
     Context context;
-    List<PostItem> list;
+    List<M1_PostItem> list;
 
-    public PostAdapter(Context context, List<PostItem> list) {
+    public M1_PostAdapter(Context context, List<M1_PostItem> list) {
         this.context = context;
         this.list = list;
     }
 
     @Override
     public ImageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.post_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.m1_post_item, parent, false);
         return new ImageViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ImageViewHolder holder, int position) {
-        PostItem postItem = list.get(position);
+        M1_PostItem postItem = list.get(position);
         holder.postDesc.setText(postItem.getName());
 //        Picasso.get()
 //                .load(postItem.getImageUrl())
