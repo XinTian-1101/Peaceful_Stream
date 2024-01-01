@@ -60,7 +60,7 @@
             app:layout_constraintStart_toEndOf="@+id/song_name"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.555"
-            app:srcCompat="@drawable/ic_like_off" />
+            app:srcCompat="@drawable/m1_ic_like_off" />
 
 <!--        <ImageButton-->
 <!--            android:id="@+id/likeOnButton"-->
@@ -80,7 +80,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:contentDescription="Add to playlist"
-            android:src="@drawable/ic_add_song"
+            android:src="@drawable/m1_ic_add_song"
             app:backgroundTint="@android:color/transparent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/likeOffButton"

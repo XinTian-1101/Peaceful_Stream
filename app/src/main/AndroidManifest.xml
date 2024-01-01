@@ -6,47 +6,47 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:icon="@drawable/m1_ic_launcher_foreground"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/ic_launcher_foreground"
+        android:roundIcon="@drawable/m1_ic_launcher_foreground"
         android:supportsRtl="true"
         android:theme="@style/Theme.TestDB"
         tools:targetApi="31">
         <activity
-            android:name=".searchSong"
+            android:name=".M1_SearchSong"
             android:windowSoftInputMode="adjustNothing"
             android:label="Wellness and Relaxation Module"
-            android:parentActivityName=".PlaylistInside"
+            android:parentActivityName=".M1_PlaylistInside"
             android:exported="false" />
         <activity
-            android:name=".VideoPlaylistInside"
+            android:name=".M1_VideoPlaylistInside"
             android:exported="false"
             android:label="Meditation Videos"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".M1_MainActivity"/>
         <activity
-            android:name=".VideoPlayer"
+            android:name=".M1_VideoPlayer"
             android:label="Video Player"
             android:exported="false" />
         <activity
-            android:name=".AddSongToPlaylist"
+            android:name=".M1_AddSongToPlaylist"
             android:label="Add Songs Into Playlist"
             android:exported="false" />
         <activity
-            android:name=".MusicPlayer"
+            android:name=".M1_MusicPlayer"
             android:label="Music Player"
             android:exported="false"
             />
         <activity
-            android:name=".PlaylistInside"
+            android:name=".M1_PlaylistInside"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".M1_MainActivity"/>
         <activity
-            android:name=".AddPlaylist"
+            android:name=".M1_AddPlaylist"
             android:label="Create Playlist"
             android:exported="false"
             />
         <activity
-            android:name=".MainActivity"
+            android:name=".M1_MainActivity"
             android:label="Wellness and Relaxation Module"
             android:exported="true">
             <intent-filter>

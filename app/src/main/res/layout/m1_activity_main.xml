@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#C8D5FB"
+    tools:context=".M1_MainActivity">
+
+    <include layout="@layout/m1_appbar" />
+
+    <EditText
+        android:id="@+id/search_bar"
+        android:layout_width="350dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="80dp"
+        android:background="@android:color/background_light"
+        android:ems="10"
+        android:hint="What do you want to listen to?"
+        android:inputType="text"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/myPlaylistTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="12dp"
+        android:paddingTop="5dp"
+        android:text="My Playlist"
+        android:textColor="@color/playlist_name"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/playlistRV"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/playlistRV"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:layout_marginTop="192dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/relaxTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="4dp"
+        android:text="Relaxation Songs"
+        android:textColor="@color/playlist_name"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/ic_peacefulMedi"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ic_lofiMedi"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="356dp"
+        android:background="@drawable/m1_lofimedi_ic"
+        android:contentDescription="lol"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/title_peacefulMedi"
+        android:layout_width="85dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="4dp"
+        android:text="Peaceful Meditation"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="@+id/ic_peacefulMedi"
+        app:layout_constraintTop_toBottomOf="@+id/ic_peacefulMedi" />
+
+    <TextView
+        android:id="@+id/title_lofiMedi"
+        android:layout_width="85dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="4dp"
+        android:text="lofi meditation"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="@+id/ic_lofiMedi"
+        app:layout_constraintTop_toBottomOf="@+id/ic_lofiMedi" />
+
+    <ImageButton
+        android:id="@+id/ic_peacefulMedi"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="356dp"
+        android:background="@drawable/m1_peacefulmedi_ic"
+        android:contentDescription="lol"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/goodNightTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="4dp"
+        android:text="Good Night Songs"
+        android:textColor="@color/playlist_name"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/ic_peacefulPiano"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ic_peacefulPiano"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="512dp"
+        android:background="@drawable/m1_peacefulpiano_ic"
+        android:contentDescription="lol"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ic_mediVideo"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="672dp"
+        android:background="@drawable/m1_meditate_icon"
+        android:contentDescription="lol"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/title_peacefulPiano"
+        android:layout_width="85dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="4dp"
+        android:text="Peaceful Piano"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="@+id/ic_peacefulPiano"
+        app:layout_constraintTop_toBottomOf="@+id/ic_peacefulPiano" />
+
+    <TextView
+        android:id="@+id/videoPlaylistTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="8dp"
+        android:text="Meditation Videos"
+        android:textColor="@color/playlist_name"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/ic_mediVideo"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/title_mediVideo"
+        android:layout_width="85dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="4dp"
+        android:text="Professional Wild Child"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="@+id/ic_mediVideo"
+        app:layout_constraintTop_toBottomOf="@+id/ic_mediVideo" />
+
+    <ImageView
+        android:id="@+id/searchIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/search_bar"
+        app:layout_constraintStart_toStartOf="@+id/search_bar"
+        app:layout_constraintTop_toTopOf="@+id/search_bar"
+        app:srcCompat="@drawable/m1_ic_search_glass" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
