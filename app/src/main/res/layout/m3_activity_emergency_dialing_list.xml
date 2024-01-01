@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".M3_EmergencyMenu">
+
+    <View
+        android:id="@+id/View2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/theme_darkblue"
+        app:layout_constraintBottom_toBottomOf="@+id/EmergencyDialPage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/EmergencyDialPage"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginStart="62dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/emergency"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/back_arrow_dialing"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/m3_back_arrow" />
+
+    <TextView
+        android:id="@+id/dailingTitle"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="100dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/predefinedHotlines"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/View2"
+        tools:ignore="TextSizeCheck" />
+
+    <ImageView
+        android:id="@+id/emergencyDialIcon"
+        android:layout_width="match_parent"
+        android:layout_height="69dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dailingTitle"
+        app:srcCompat="@drawable/m3_emergency_call_icon" />
+
+    <FrameLayout
+        android:id="@+id/ambulanceFrame"
+        android:layout_width="330dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="22dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emergencyDialIcon">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@drawable/m3_fourside_roundbutton"
+            android:clickable="false"
+            android:fontFamily="sans-serif"
+            android:paddingTop="13dp"
+            android:text="@string/ambulance"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="26sp"/>
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="53dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="6dp"
+            app:srcCompat="@drawable/m3_hospital_icon" />
+
+        <ImageButton
+            android:id="@+id/callButton1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginVertical="8dp"
+            android:layout_marginLeft="270dp"
+            android:background="@drawable/m3_call_button"
+            android:contentDescription="@string/callBtn1"
+            app:srcCompat="@drawable/m3_call_icon"
+            android:clickable="true"/>
+
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:id="@+id/polisFrame"
+        android:layout_width="330dp"
+        android:layout_height="65dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="28dp"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="398dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ambulanceFrame">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@drawable/m3_fourside_roundbutton"
+            android:clickable="false"
+            android:fontFamily="sans-serif"
+            android:paddingTop="13dp"
+            android:text="@string/polis"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="26dp" />
+
+        <ImageButton
+            android:id="@+id/callButton2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginVertical="8dp"
+            android:layout_marginLeft="270dp"
+            android:background="@drawable/m3_call_button"
+            android:contentDescription="@string/callBtn2"
+            app:srcCompat="@drawable/m3_call_icon" />
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="53dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="6dp"
+            app:srcCompat="@drawable/m3_polis_icon" />
+
+
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:id="@+id/FireBrigadeFrame"
+        android:layout_width="330dp"
+        android:layout_height="65dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="22dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/polisFrame">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@drawable/m3_fourside_roundbutton"
+            android:clickable="false"
+            android:fontFamily="sans-serif"
+            android:paddingTop="13dp"
+            android:text="@string/fireBrigade"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            tools:ignore="TextSizeCheck" />
+
+        <ImageButton
+            android:id="@+id/callButton3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginVertical="8dp"
+            android:layout_marginLeft="270dp"
+            android:background="@drawable/m3_call_button"
+            android:contentDescription="@string/callBtn3"
+            app:srcCompat="@drawable/m3_call_icon" />
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="53dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="6dp"
+            app:srcCompat="@drawable/m3_fire_truck_icon" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="330dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="22dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/FireBrigadeFrame">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@drawable/m3_fourside_roundbutton"
+            android:clickable="false"
+            android:fontFamily="sans-serif"
+            android:paddingTop="13dp"
+            android:text="@string/naturalDisaster"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="26sp" />
+
+        <ImageButton
+            android:id="@+id/callButton4"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginVertical="8dp"
+            android:layout_marginLeft="270dp"
+            android:background="@drawable/m3_call_button"
+            android:contentDescription="@string/callBtn4"
+            app:srcCompat="@drawable/m3_call_icon" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="53dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="6dp"
+            app:srcCompat="@drawable/m3_natural_disaster_icon" />
+
+    </FrameLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

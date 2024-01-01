@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".M3_RealTimeLocation">
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:background="@color/theme_darkblue"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        />
+
+    <TextView
+        android:id="@+id/EmergencyLocationPage"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_toRightOf="@+id/back_arrow_location"
+        android:layout_alignTop="@+id/back_arrow_location"
+        android:text="@string/location"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/back_arrow_location"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="10dp"
+        app:srcCompat="@drawable/m3_back_arrow" />
+
+    <fragment
+        android:id="@+id/google_map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="350dp"
+        android:layout_height="500dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/LocateTitle"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp" />
+
+    <TextView
+        android:id="@+id/LocateTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/EmergencyLocationPage"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="70dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/locationTitle"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/LocateTitle"
+        android:layout_toRightOf="@id/LocateTitle"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="6dp"
+        app:srcCompat="@drawable/m3_location_icon" />
+
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="61dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@id/google_map"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="520dp"
+        android:layout_marginEnd="50dp"
+        >
+
+        <ImageButton
+            android:id="@+id/BtnshareLocation"
+            android:layout_width="310dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/m3_blue_fourside_roundbutton"
+            android:text="@string/shareLocation"
+            android:textColor="@color/black"
+            android:textSize="25sp"/>
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="80dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="@string/shareLocation"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp"
+            app:srcCompat="@drawable/m3_share_icon" />
+
+    </FrameLayout>
+
+</RelativeLayout>

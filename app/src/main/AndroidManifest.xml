@@ -12,27 +12,26 @@
 
     <application
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:dataExtractionRules="@xml/m3_data_extraction_rules"
+        android:fullBackupContent="@xml/m3_backup_rules"
+        android:icon="@mipmap/m3_ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Group_Project"
         tools:targetApi="31">
         <activity
-            android:name=".MenuBtn"
+            android:name=".M3_MenuBtn"
             android:exported="false" />
         <activity
-            android:name=".activties.UsersActivity"
+            android:name=".activties.M3_UsersActivity"
             android:exported="false"
-            android:parentActivityName=".EmergencyMenu"/>
+            android:parentActivityName=".M3_EmergencyMenu"/>
         <activity
-            android:name=".activties.SignUpActivity"
+            android:name=".activties.M3_SignUpActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".activties.SignInActivity"
+            android:name=".activties.M3_SignInActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
@@ -46,31 +45,31 @@
             android:value="AIzaSyCtPaoZKA8UCltVls3UCQjH02KCieTAquU" />
 
         <activity
-            android:name=".RealTimeLocation"
+            android:name=".M3_RealTimeLocation"
             android:exported="false"
-            android:parentActivityName=".EmergencyMenu"/>
+            android:parentActivityName=".M3_EmergencyMenu"/>
         <activity
-            android:name=".activties.ChatActivity"
+            android:name=".activties.M3_ChatActivity"
             android:exported="false"
-            android:parentActivityName=".activties.UsersActivity"
+            android:parentActivityName=".activties.M3_UsersActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".activties.MainActivity"
+            android:name=".activties.M3_MainActivity"
             android:exported="false"
-            android:parentActivityName=".EmergencyMenu">
+            android:parentActivityName=".M3_EmergencyMenu">
 
         </activity>
         <activity
-            android:name=".EmergencyMenu"
+            android:name=".M3_EmergencyMenu"
             android:exported="false"
-            android:parentActivityName=".MenuBtn"/>
+            android:parentActivityName=".M3_MenuBtn"/>
         <activity
-            android:name=".EmergencyDialingList"
+            android:name=".M3_EmergencyDialingList"
             android:exported="false"
-            android:parentActivityName=".EmergencyMenu"/>
+            android:parentActivityName=".M3_EmergencyMenu"/>
 
         <service
-            android:name=".firebase.MessagingService"
+            android:name=".firebase.M3_MessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
