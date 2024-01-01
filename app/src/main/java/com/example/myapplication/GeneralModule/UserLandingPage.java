@@ -25,7 +25,6 @@ import java.util.ArrayList;
 
 public class UserLandingPage extends AppCompatActivity implements ModulesRecViewAdapter.OnModuleListener {
     private RecyclerView modulesRecView;
-    private GridView gridView;
     private TextView username;
     private ImageView profilePic;
     private Button logoutBtn;
@@ -44,7 +43,6 @@ public class UserLandingPage extends AppCompatActivity implements ModulesRecView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_landing_page);
         modulesRecView = findViewById(R.id.modulesRecView);
-        gridView = findViewById(R.id.grid);
         username = findViewById(R.id.landingPageUsername);
         profilePic = findViewById(R.id.landingPageProfilePic);
         logoutBtn = findViewById(R.id.logoutBtn);
@@ -71,11 +69,6 @@ public class UserLandingPage extends AppCompatActivity implements ModulesRecView
         adapter.setModuleList(list);
         modulesRecView.setAdapter(adapter);
         modulesRecView.setLayoutManager(new LinearLayoutManager(this));
-
-        String [] name = {"Emergency Dial" , "Chats" , "Careline" , "Profile"};
-        int [] img = {R.drawable.bird_only_removed_bg , R.drawable.bird_only_removed_bg , R.drawable.bird_only_removed_bg , R.drawable.bird_only_removed_bg};
-        GridAdapter gridAdapter = new GridAdapter(UserLandingPage.this , img , name);
-        gridView.setAdapter(gridAdapter);
 
         logoutBtn.setOnClickListener(view -> {
             auth.signOut();

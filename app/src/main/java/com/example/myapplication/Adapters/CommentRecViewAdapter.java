@@ -14,6 +14,7 @@ import com.example.myapplication.Models.Comment;
 import com.example.myapplication.R;
 import com.example.myapplication.Utils.FirebaseUtil;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class CommentRecViewAdapter extends RecyclerView.Adapter<CommentRecViewAdapter.CommentViewHolder> {
@@ -38,7 +39,9 @@ public class CommentRecViewAdapter extends RecyclerView.Adapter<CommentRecViewAd
         Comment comment = commentList.get(position);
         FirebaseUtil.setImage(holder.commentUserImage , comment.getUserId());
         holder.commentUserName.setText(comment.getUserId());
-        holder.commentTime.setText(comment.getTimestamp().toDate().toString());
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy hh:mm a");
+        String dateTime = format.format(comment.getTimestamp().toDate());
+        holder.commentTime.setText(dateTime);
         holder.commentContent.setText(comment.getContent().toString());
     }
 

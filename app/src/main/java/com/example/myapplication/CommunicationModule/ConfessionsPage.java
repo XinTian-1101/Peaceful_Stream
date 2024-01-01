@@ -80,8 +80,10 @@ public class ConfessionsPage extends AppCompatActivity {
                             confessionsPostImage.setVisibility(View.GONE);
                         }
                     });
-            StorageReference storageReference = FirebaseStorage.getInstance().getReference("images/" + postId);
-            storageReference.putFile(imageUri);
+            if (imageUri != null) {
+                StorageReference storageReference = FirebaseStorage.getInstance().getReference("images/" + postId);
+                storageReference.putFile(imageUri);
+            }
         });
 
         confessionsPostAttachment.setOnClickListener(v -> {

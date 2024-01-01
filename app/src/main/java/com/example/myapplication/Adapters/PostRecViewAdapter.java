@@ -1,6 +1,8 @@
 package com.example.myapplication.Adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -26,7 +28,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -52,10 +57,11 @@ public class PostRecViewAdapter extends RecyclerView.Adapter<PostRecViewAdapter.
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         Post post = postList.get(position);
         holder.postUserName.setText(post.getUserId());
-        holder.postTime.setText(post.getTimestamp().toDate().toString());
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy hh:mm a");
+        String dateTime = format.format(post.getTimestamp().toDate());
+        holder.postTime.setText(dateTime);
         holder.postContent.setText(post.getContent());
         FirebaseUtil.setImage(holder.postUserImage , post.getUserId());
-        holder.postImage.setVisibility(View.VISIBLE);
 
         holder.commentTyping.setOnKeyListener((v, keyCode, event) -> {
             // If the event is a key-down event on the "enter" button
@@ -77,7 +83,6 @@ public class PostRecViewAdapter extends RecyclerView.Adapter<PostRecViewAdapter.
             }
             return false;
         });
-
 
         List<Comment> commentList = new ArrayList<>();
         FirebaseUtil.setImage(holder.postImage , post.getPostId());

@@ -192,6 +192,10 @@ public class EventListeners {
                         sessionList.add(session);
                         adapter.notifyItemInserted(sessionList.size() - 1);
                     }
+                    else if (dc.getType() == DocumentChange.Type.REMOVED && sessionList.contains(dc.getDocument())) {
+                        sessionList.remove(session);
+                        adapter.notifyDataSetChanged();
+                    }
                 }
             }
         });

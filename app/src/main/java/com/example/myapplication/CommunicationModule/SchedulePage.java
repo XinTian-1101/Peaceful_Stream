@@ -2,6 +2,7 @@ package com.example.myapplication.CommunicationModule;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
 import android.app.DatePickerDialog;
@@ -38,6 +39,7 @@ public class SchedulePage extends AppCompatActivity implements DatePickerDialog.
     private Spinner spinner;
     private List<String> counsellorNames;
     private String selectedCounsellor;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +49,12 @@ public class SchedulePage extends AppCompatActivity implements DatePickerDialog.
         scheduleTimeBtn = findViewById(R.id.scheduleTimeBtn);
         scheduleConfirmBtn = findViewById(R.id.scheduleConfirmBtn);
         spinner = findViewById(R.id.scheduleSpinner);
+        toolbar = findViewById(R.id.scheduleToolbar);
         counsellorNames = new ArrayList<>();
         datePickerFragment = new DatePickerFragment();
         timePickerFragment = new TimePickerFragment();
 
+        AndroidUtil.setToolbar(this , toolbar);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -63,18 +67,15 @@ public class SchedulePage extends AppCompatActivity implements DatePickerDialog.
             }
         });
 
-        FirebaseUtil.getUserReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    List<DocumentSnapshot> snapshots = task.getResult().getDocuments();
-                    for (DocumentSnapshot doc : snapshots) {
-                        if (doc.getBoolean("counsellor")) counsellorNames.add(doc.getString("name"));
-                    }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(getBaseContext() , android.R.layout.simple_spinner_item , counsellorNames);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinner.setAdapter(adapter);
+        FirebaseUtil.getUserReference().get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                List<DocumentSnapshot> snapshots = task.getResult().getDocuments();
+                for (DocumentSnapshot doc : snapshots) {
+                    if (doc.getBoolean("counsellor")) counsellorNames.add(doc.getString("name"));
                 }
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(getBaseContext() , android.R.layout.simple_spinner_item , counsellorNames);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(adapter);
             }
         });
 
@@ -86,14 +87,11 @@ public class SchedulePage extends AppCompatActivity implements DatePickerDialog.
             time = scheduleTimeBtn.getText().toString();
             String sessionId = FirebaseUtil.currentUserUsername() + "_" + selectedCounsellor + "_" + date + " " + time;
             Session session = new Session(sessionId ,FirebaseUtil.currentUserUsername() , selectedCounsellor , date , time);
-            FirebaseUtil.getSessionReference().document(sessionId).set(session).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-                        AndroidUtil.showToast(SchedulePage.this , "Scheduled successfully");
-                        AndroidUtil.intentChg(SchedulePage.this , SessionsPage.class);
-                        finish();
-                    }
+            FirebaseUtil.getSessionReference().document(sessionId).set(session).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    AndroidUtil.showToast(SchedulePage.this , "Scheduled successfully");
+                    AndroidUtil.intentChg(SchedulePage.this , SessionsPage.class);
+                    finish();
                 }
             });
         });

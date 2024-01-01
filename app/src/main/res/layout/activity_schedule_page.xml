@@ -4,18 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue"
     tools:context=".CommunicationModule.SchedulePage">
 
     <TextView
         android:id="@+id/scheduleDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:text="Date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/scheduleToolbar" />
 
     <TextView
         android:id="@+id/scheduleTime"
@@ -39,10 +38,13 @@
 
     <Button
         android:id="@+id/scheduleDateBtn"
+        android:background="@drawable/text_input"
+        app:backgroundTint="@color/blue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Button"
+        android:padding="0dp"
+        android:text="Select Date"
         app:layout_constraintEnd_toEndOf="@+id/scheduleDate"
         app:layout_constraintStart_toStartOf="@+id/scheduleDate"
         app:layout_constraintTop_toBottomOf="@+id/scheduleDate" />
@@ -51,8 +53,11 @@
         android:id="@+id/scheduleTimeBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/text_input"
+        app:backgroundTint="@color/blue"
         android:layout_marginTop="10dp"
-        android:text="Button"
+        android:padding="0dp"
+        android:text="Select Time"
         app:layout_constraintEnd_toEndOf="@+id/scheduleTime"
         app:layout_constraintStart_toStartOf="@+id/scheduleTime"
         app:layout_constraintTop_toBottomOf="@+id/scheduleTime" />
@@ -63,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:backgroundTint="@color/black"
+        app:backgroundTint="@color/blue"
         app:layout_constraintEnd_toEndOf="@+id/scheduleCounsellor"
         app:layout_constraintStart_toStartOf="@+id/scheduleCounsellor"
         app:layout_constraintTop_toBottomOf="@+id/scheduleCounsellor" />
@@ -72,9 +77,24 @@
         android:id="@+id/scheduleConfirmBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/text_input"
+        app:backgroundTint="@color/blue"
         android:layout_marginTop="50dp"
         android:text="Schedule"
         app:layout_constraintEnd_toEndOf="@+id/scheduleSpinner"
         app:layout_constraintStart_toStartOf="@+id/scheduleSpinner"
         app:layout_constraintTop_toBottomOf="@+id/scheduleSpinner" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/scheduleToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/mainBgColour"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:title="Schedule a new session"
+        app:titleTextColor="@color/lighterBlue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

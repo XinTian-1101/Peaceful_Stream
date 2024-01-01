@@ -3,6 +3,7 @@ package com.example.myapplication.Utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -81,6 +82,7 @@ public class FirebaseUtil {
             storageReference.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
                 Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
                 image.setImageBitmap(bitmap);
+                if (image.getDrawable() != null) image.setVisibility(View.VISIBLE);
             });
         }
         catch (IOException e) {
