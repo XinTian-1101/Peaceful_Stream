@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".M5_AbuseSurveyForm">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <View
+            android:id="@+id/View"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#7792B2"
+            app:layout_constraintBottom_toBottomOf="@+id/AbuseSurvey_Page"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+
+            />
+
+        <TextView
+            android:id="@+id/AbuseSurvey_Page"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginStart="62dp"
+            android:layout_marginTop="16dp"
+            android:text="Abuse Survey"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="42dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/m5_correctarrow" />
+
+        <TextView
+            android:id="@+id/question1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="1) Have you ever been emotionally abused by a partner?"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/View" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/question1">
+
+            <RadioButton
+                android:id="@+id/radio_oneone"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="Never" />
+
+            <RadioButton
+                android:id="@+id/radio_onetwo"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="Rarely" />
+
+            <RadioButton
+                android:id="@+id/radio_onethree"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="Sometimes" />
+
+            <RadioButton
+                android:id="@+id/radio_onefour"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="Often" />
+
+            <RadioButton
+                android:id="@+id/radio_onefive"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="Always" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/question2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="2) What kind of emotions did you feel as a result of the emotional abuse?"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+        <EditText
+            android:id="@+id/editTextAns2"
+            android:layout_width="388dp"
+            android:layout_height="125dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/m5_rectanglesurvey2"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint=" Please enter your response"
+            android:inputType="textMultiLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/question2" />
+
+        <TextView
+            android:id="@+id/question3"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="16dp"
+            android:text="3) Did you ever try to talk to your partner about the emotional abuse?"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextAns2" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/question3">
+
+            <RadioButton
+                android:id="@+id/radio_threeone"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="Yes"
+                tools:layout_editor_absoluteX="70dp"
+                tools:layout_editor_absoluteY="543dp" />
+
+            <RadioButton
+                android:id="@+id/radio_threetwo"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="No"
+                tools:layout_editor_absoluteX="218dp"
+                tools:layout_editor_absoluteY="544dp" />
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/question4"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="16dp"
+            android:text="4) Did the emotional abuse have any impact on your relationship?"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup3" />
+
+        <!-- RadioGroup for Question 4 -->
+        <RadioGroup
+            android:id="@+id/radioGroup4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/question4">
+
+            <RadioButton
+                android:id="@+id/radio_fourone"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="Insignificant" />
+
+            <RadioButton
+                android:id="@+id/radio_fourtwo"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="Minor" />
+
+            <RadioButton
+                android:id="@+id/radio_fourthree"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="Moderate" />
+
+            <RadioButton
+                android:id="@+id/radio_fourfour"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="Major" />
+
+            <RadioButton
+                android:id="@+id/radio_fourfive"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="Severe" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/question5"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="16dp"
+            android:text="5) Have you ever sought help for the emotional abuse?"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup4" />
+
+        <!-- RadioGroup for Question 5 -->
+        <RadioGroup
+            android:id="@+id/radioGroup5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/question5">
+
+            <RadioButton
+                android:id="@+id/radio_fiveone"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="Yes"
+                tools:layout_editor_absoluteX="70dp"
+                tools:layout_editor_absoluteY="543dp" />
+
+            <RadioButton
+                android:id="@+id/radio_fivetwo"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="No"
+                tools:layout_editor_absoluteX="218dp"
+                tools:layout_editor_absoluteY="544dp" />
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/m5_btncolor"
+            android:text="Submit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

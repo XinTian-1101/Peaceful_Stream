@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "748261759900",
+    "firebase_url": "https://mad-counsellor-list-default-rtdb.firebaseio.com",
+    "project_id": "mad-counsellor-list",
+    "storage_bucket": "mad-counsellor-list.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:748261759900:android:8d390bdcd40282249fc659",
+        "android_client_info": {
+          "package_name": "com.example.test"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaU8JQ7kxOzLFlZYGRnIHqR439kEUV5nY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
