@@ -5,6 +5,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -17,12 +19,16 @@ import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication.databinding.M3ActivitySignUpBinding;
+import com.example.myapplication.EmergencyModule.utilities.Constants;
+import com.example.myapplication.EmergencyModule.utilities.PreferenceManager;
 import com.example.myapplication.Models.Counsellor;
 import com.example.myapplication.Models.Playlist;
 import com.example.myapplication.Models.User;
@@ -40,9 +46,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 public class SignUpPage extends AppCompatActivity{
@@ -59,6 +69,9 @@ public class SignUpPage extends AppCompatActivity{
     private List<String> workingDays;
     private ImageView profilePictureSet;
     private Uri profilePicUri;
+    private M3ActivitySignUpBinding binding;
+    private PreferenceManager preferenceManager;
+    private String encodedImage;
 
     @Override
     public void onStart() {
@@ -85,6 +98,13 @@ public class SignUpPage extends AppCompatActivity{
             profilePicUri = data.getData();
             profilePictureSet.setImageTintMode(null);
             profilePictureSet.setImageURI(profilePicUri);
+            try{
+                InputStream inputStream = getContentResolver().openInputStream(profilePicUri);
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                encodedImage = encodedImage(bitmap);
+            }catch(FileNotFoundException e){
+                e.printStackTrace();
+            }
         }
     }
 
@@ -92,6 +112,8 @@ public class SignUpPage extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_page);
+        binding = M3ActivitySignUpBinding.inflate(getLayoutInflater());
+        preferenceManager = new PreferenceManager(getApplicationContext());
         signInTxt = findViewById(R.id.signInTxt);
         usernameInput = findViewById(R.id.usernameInput);
         emailInput = findViewById(R.id.emailInput);
@@ -136,6 +158,9 @@ public class SignUpPage extends AppCompatActivity{
             String email = emailInput.getText().toString();
             String password = passwordInput.getText().toString();
 
+            if (!AndroidUtil.isValidEmailFormat(email , SignUpPage.this)
+                    || !AndroidUtil.isValidPassword(password , SignUpPage.this)) return;
+
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, task -> {
                         if (task.isSuccessful()) {
@@ -146,6 +171,7 @@ public class SignUpPage extends AppCompatActivity{
                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                     .setDisplayName(username)
                                     .build();
+                            signUp();
                             user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
@@ -193,6 +219,33 @@ public class SignUpPage extends AppCompatActivity{
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String date = dateFormat.format(calendar.getTime());
         return date;
+    }
+
+    private void signUp(){
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        HashMap<String, Object> user = new HashMap<>();
+        user.put(Constants.KEY_NAME, usernameInput.getText().toString());
+        user.put(Constants.KEY_EMAIL, emailInput.getText().toString());
+        user.put(Constants.KEY_PASSWORD, passwordInput.getText().toString());
+        user.put(Constants.KEY_IMAGE,encodedImage);
+        database.collection(Constants.KEY_COLLECTION_USERS)
+                .add(user)
+                .addOnSuccessListener(documentReference -> {
+                    preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN,true);
+                    preferenceManager.putString(Constants.KEY_USER_ID, documentReference.getId());
+                    preferenceManager.putString(Constants.KEY_NAME, usernameInput.getText().toString());
+                    preferenceManager.putString(Constants.KEY_IMAGE, encodedImage);
+                });
+    }
+
+    private String encodedImage(Bitmap bitmap){
+        int previewWidth =  150;
+        int previewHeight = bitmap.getHeight() *  previewWidth / bitmap.getWidth();
+        Bitmap previewBitmap = Bitmap.createScaledBitmap(bitmap,previewWidth,previewHeight,false);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        previewBitmap.compress(Bitmap.CompressFormat.JPEG,50, byteArrayOutputStream);
+        byte[] bytes = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(bytes, Base64.DEFAULT);
     }
 
 }

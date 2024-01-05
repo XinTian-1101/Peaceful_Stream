@@ -1,6 +1,7 @@
 package com.example.myapplication.Adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,7 @@ public class ModulesRecViewAdapter extends RecyclerView.Adapter<ModulesRecViewAd
             holder.moduleImg.setLayoutParams(imgParams);
             holder.moduleName.setLayoutParams(nameParams);
         }
+        holder.cardView.setCardBackgroundColor(Color.parseColor(moduleList.get(position).getColour()));
         holder.moduleName.setText(moduleList.get(position).getModuleName());
         Glide.with(context).asBitmap().load(moduleList.get(position).getImgSrc()).into(holder.moduleImg);
     }

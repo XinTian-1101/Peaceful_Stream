@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="8dp"
+    app:cardCornerRadius="8dp"
+    android:layout_margin="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Image of the Counsellor -->
+        <ImageView
+            android:id="@+id/imageViewCounsellor"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/m5_placeholder_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="16dp"
+            tools:src="@tools:sample/avatars" />
+
+        <!-- Counsellor's Details -->
+
+        <TextView
+            android:id="@+id/tvname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="DR.Chew"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/imageViewCounsellor"
+            app:layout_constraintTop_toTopOf="@+id/imageViewCounsellor"
+            tools:text="DR.Chew" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="230dp"
+            android:layout_height="46dp"
+            android:layout_marginStart="48dp"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:rating="0"
+            android:scaleX="0.4"
+            android:scaleY="0.4"
+            android:stepSize="1"
+            app:layout_constraintStart_toEndOf="@+id/imageViewCounsellor"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+                android:id="@+id/tvdash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="- "
+                android:textColor="#8A8A8A"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="@id/tvname"
+                app:layout_constraintTop_toBottomOf="@id/tvname" />
+
+            <TextView
+                android:id="@+id/tvexperience"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5 years"
+                android:textColor="#8A8A8A"
+                android:textSize="15sp"
+                app:layout_constraintStart_toEndOf="@id/tvdash"
+                app:layout_constraintTop_toBottomOf="@id/tvname" />
+
+            <TextView
+                android:id="@+id/tvexperience_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" working experiences"
+                android:textColor="#8A8A8A"
+                android:textSize="15sp"
+                app:layout_constraintStart_toEndOf="@id/tvexperience"
+                app:layout_constraintTop_toBottomOf="@id/tvname" />
+
+
+            <TextView
+                android:id="@+id/tvuniversity_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="- from "
+                android:textColor="#8A8A8A"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="@id/tvname"
+                app:layout_constraintTop_toBottomOf="@id/tvexperience_text" />
+
+            <TextView
+                android:id="@+id/tvuniversity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Honward University"
+                android:textColor="#8A8A8A"
+                android:textSize="15sp"
+                app:layout_constraintStart_toEndOf="@+id/tvuniversity_text"
+                app:layout_constraintTop_toBottomOf="@+id/tvexperience_text" />
+
+        <TextView
+            android:id="@+id/tvdash2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- "
+            android:textColor="#8A8A8A"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="@id/tvname"
+            app:layout_constraintTop_toBottomOf="@id/tvuniversity" />
+
+        <TextView
+            android:id="@+id/tvlanguage"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="fluent in English, Chinese, Bahasa Melayu and Hokkien"
+            android:textColor="#8A8A8A"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@id/tvdash2"
+            app:layout_constraintTop_toBottomOf="@id/tvuniversity"
+            app:layout_constraintWidth_default="wrap" />
+
+        <Button
+            android:id="@+id/btnChat"
+            android:layout_width="80dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/m5_btncolor"
+            android:text="Chat Now"
+            app:layout_constraintStart_toStartOf="@id/tvname"
+            app:layout_constraintTop_toBottomOf="@+id/tvlanguage"/>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

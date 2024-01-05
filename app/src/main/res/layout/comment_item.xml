@@ -18,7 +18,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:background="@drawable/text_input"
+        android:background="@drawable/circular_border"
+        android:backgroundTint="@color/lightGrey"
         android:padding="10dp"
         app:layout_constraintStart_toEndOf="@+id/commentUserImage"
         app:layout_constraintTop_toTopOf="parent">

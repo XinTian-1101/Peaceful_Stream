@@ -54,6 +54,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
         android:text="Logout"
+        android:backgroundTint="@color/kindaDarkBlue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,16 +63,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:padding="15dp"
+        android:padding="10dp"
+        android:background="#C8DDED"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view">
 
         <ImageView
             android:id="@+id/counsellorModuleImage"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/counsellor_landing_chat" />
 
         <TextView
             android:id="@+id/counsellorModuleName"
@@ -79,6 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
+            android:textSize="20sp"
             android:layout_toRightOf="@id/counsellorModuleImage"
             android:text="Chats" />
 

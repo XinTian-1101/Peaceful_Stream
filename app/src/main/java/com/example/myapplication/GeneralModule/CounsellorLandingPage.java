@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.myapplication.CommunicationModule.ChatUsersPage;
+import com.example.myapplication.GeneralModule.LoginPage;
 import com.example.myapplication.R;
 import com.example.myapplication.Utils.AndroidUtil;
 import com.example.myapplication.Utils.FirebaseUtil;

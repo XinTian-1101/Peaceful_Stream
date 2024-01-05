@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".M5_alertPage">
+
+    <ImageButton
+        android:id="@+id/cancelButton2"
+        android:layout_width="33dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/frame2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.929"
+        app:layout_constraintStart_toEndOf="@+id/titleAlert"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/m5_cancelbutton" />
+
+    <TextView
+        android:id="@+id/frame2"
+        android:layout_width="350dp"
+        android:layout_height="262dp"
+        android:layout_marginBottom="328dp"
+        android:background="@drawable/m5_textstroke"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="52dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="56dp"
+        app:layout_constraintBottom_toTopOf="@+id/frame2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/m5_alertimage" />
+
+    <TextView
+        android:id="@+id/titleAlert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="ALERT"
+        android:textColor="#CC202D"
+        android:textSize="39dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/frame2"
+        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtcommonlevel2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:text="Your stress level is at"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/frame2"
+        app:layout_constraintStart_toStartOf="@+id/frame2"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+
+    <TextView
+        android:id="@+id/textStressLevel2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#D7282F"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/adviseUser"
+        app:layout_constraintEnd_toEndOf="@+id/frame2"
+        app:layout_constraintStart_toStartOf="@+id/frame2"
+        app:layout_constraintTop_toBottomOf="@+id/txtcommonlevel2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="170dp"
+        android:layout_height="138dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/frame2"
+        app:layout_constraintStart_toStartOf="@+id/frame2"
+        app:layout_constraintTop_toTopOf="@+id/frame2"
+        app:srcCompat="@drawable/m5_alertcomputer" />
+
+    <TextView
+        android:id="@+id/adviseUser"
+        android:layout_width="304dp"
+        android:layout_height="34dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="navigateToNextPage"
+        android:text="Please click here to have a consultation for a medical professional"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#83A0C2"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/frame2"
+        app:layout_constraintEnd_toEndOf="@+id/frame2"
+        app:layout_constraintStart_toStartOf="@+id/frame2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

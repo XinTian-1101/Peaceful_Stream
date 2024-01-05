@@ -68,6 +68,7 @@ public class ConfessionsPage extends AppCompatActivity {
 
         confessionsPostAdd.setOnClickListener(v -> {
             String content = confessionsPostTyping.getText().toString();
+            if (!AndroidUtil.isFieldFilled(content , ConfessionsPage.this)) return;
             String userId = FirebaseUtil.currentUserUsername();
             Timestamp timestamp = Timestamp.now();
             String postId = userId + "_" + timestamp;
