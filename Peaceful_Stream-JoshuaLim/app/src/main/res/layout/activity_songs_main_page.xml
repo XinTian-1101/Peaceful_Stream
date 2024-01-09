@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/songsMainPageLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MusicModule.SongsMainPage">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/songsMainPageToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/mainBgColour"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        android:paddingStart="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Playlist"
+        app:titleTextColor="@color/lighterBlue"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/songsMainPageToolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/songsRecView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/playAll" />
+
+            <LinearLayout
+                android:id="@+id/playlistImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:inflatedId="@id/playlistImage"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/playlistName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Playlist Name"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/playlistImage" />
+
+            <ImageButton
+                android:id="@+id/playAll"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/playlistName"
+                app:srcCompat="@drawable/ic_play_circle_filled" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="Play All"
+                app:layout_constraintBottom_toBottomOf="@+id/playAll"
+                app:layout_constraintStart_toEndOf="@+id/playAll"
+                app:layout_constraintTop_toTopOf="@+id/playAll" />
+
+            <ImageButton
+                android:id="@+id/shuffleSongs"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/white"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="@+id/repeatSongs"
+                app:layout_constraintEnd_toStartOf="@+id/repeatSongs"
+                app:layout_constraintTop_toTopOf="@+id/repeatSongs"
+                app:srcCompat="@drawable/ic_shuffle_blue" />
+
+            <ImageButton
+                android:id="@+id/repeatSongs"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:scaleType="fitXY"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/playlistName"
+                app:srcCompat="@drawable/ic_repeat_blue" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <include
+        android:id="@+id/customPlayerSongsMainPage"
+        layout="@layout/custom_player"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

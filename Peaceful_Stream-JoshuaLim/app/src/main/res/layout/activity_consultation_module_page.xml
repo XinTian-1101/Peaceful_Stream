@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CommunicationModule.ConsultationModulePage">
+
+
+    <RelativeLayout
+        android:id="@+id/scheduleSessionModule"
+        android:layout_width="454dp"
+        android:layout_height="104dp"
+        android:layout_marginTop="100dp"
+        android:background="#BCC5F4"
+        android:padding="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chatWithUsModule">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:maxLines="2"
+            android:text="Schedule Virtual \nSession"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/scheduleSessionImage"
+        android:layout_width="102dp"
+        android:layout_height="104dp"
+        android:layout_marginStart="100dp"
+        android:src="@drawable/schedule_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/scheduleSessionModule"
+        app:layout_constraintStart_toStartOf="@+id/scheduleSessionModule"
+        app:layout_constraintTop_toTopOf="@+id/scheduleSessionModule" />
+
+    <RelativeLayout
+        android:id="@+id/chatWithUsModule"
+        android:layout_width="457dp"
+        android:layout_height="104dp"
+        android:layout_marginTop="100dp"
+        android:background="#E1FAFF"
+        android:padding="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/confessionsModule">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="120dp"
+            android:text="Chat With Us"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/chatWithUsImage"
+        android:layout_width="127dp"
+        android:layout_height="135dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/chat_user_icon_"
+        app:layout_constraintBottom_toBottomOf="@+id/chatWithUsModule"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/chatWithUsModule" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/consultationModuleToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#7792b2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Communication &amp; Consultation"
+        app:titleTextColor="@color/white" />
+
+    <RelativeLayout
+        android:id="@+id/confessionsModule"
+        android:layout_width="457dp"
+        android:layout_height="104dp"
+        android:layout_marginTop="100dp"
+        android:background="#FFE7AB"
+        android:padding="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/consultationModuleToolbar">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="130dp"
+            android:paddingStart="0dp"
+            android:text="Confessions"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/confessionsImage"
+        android:layout_width="130dp"
+        android:layout_height="122dp"
+
+        android:src="@drawable/confession_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/confessionsModule"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/confessionsModule" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/recordBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="224dp"
+        android:layout_marginTop="460dp"
+        android:backgroundTint="#A3B4CB"
+        android:layoutDirection="locale"
+        android:visibility="visible"
+        android:textAlignment="center"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="235dp"
+        android:src="@drawable/m4_ic_mic"
+        ></com.melnykov.fab.FloatingActionButton>
+
+    <TextView
+        android:id="@+id/recording_statusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="165dp"
+        android:text="Record"
+        android:gravity="center"
+        android:textColor="#3069AB"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <Chronometer
+        android:id="@id/chronometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="sans-serif-light"
+        android:layout_alignBottom="@+id/recordProgressBar"
+        android:layout_marginBottom="64dp"
+        android:textColor="#5169A2"
+        android:textSize="60sp"
+        android:textStyle="bold" />
+
+    <ProgressBar
+        android:id="@+id/recordProgressBar"
+        style="?android:progressBarStyleHorizontal"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+
+
+        android:indeterminate="false"
+        android:max="100"
+
+
+        android:progress="0"
+        android:progressDrawable="@drawable/m4_progress_record_bar" />
+
+
+    <Button
+        android:id="@+id/btnPause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#A3B4CB"
+        android:fontFamily="sans-serif"
+        android:text="Pause"
+        android:textAllCaps="true"
+        android:textColor="#3069AB"
+        android:textStyle="bold" />
+
+
+</RelativeLayout>

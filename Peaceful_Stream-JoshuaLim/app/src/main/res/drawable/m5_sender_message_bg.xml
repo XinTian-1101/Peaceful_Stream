@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#83A0C2" /> <!-- Background color for sender's message -->
+    <corners android:radius="8dp" /> <!-- Rounded corners for the message bubble -->
+    <!-- Additional attributes for the sender's message background -->
+</shape>

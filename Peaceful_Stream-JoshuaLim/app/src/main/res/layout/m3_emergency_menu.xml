@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <include
+        layout="@layout/emergency_main" />
+
+    <FrameLayout
+        android:id="@+id/framelayout1"
+        android:layout_width="320dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="152dp"
+        android:background="@drawable/m3_fourside_roundbutton"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.34"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/app_name"
+            android:padding="2dp"
+            android:src="@drawable/m3_sos_icon_foreground" />
+
+        <Button
+            android:id="@+id/emergencyDailButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="10dp"
+
+            android:backgroundTint="@color/ButtonYellow"
+            android:keepScreenOn="true"
+            android:text="@string/emergency"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:id="@+id/framelayout2"
+        android:layout_width="320dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/m3_fourside_roundbutton"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.345"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/framelayout1">
+
+        <ImageView
+            android:layout_width="62dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="12dp"
+
+            android:src="@drawable/m3_share_location" />
+
+        <Button
+            android:id="@+id/shareLocationButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="10dp"
+
+            android:backgroundTint="@color/ButtonYellow"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:keepScreenOn="true"
+            android:text="@string/location" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="320dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/m3_fourside_roundbutton"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.345"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/framelayout2">
+
+        <ImageView
+            android:layout_width="62dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="12dp"
+
+            android:background="@drawable/m3_left_round_icon"
+            android:contentDescription="@string/app_name"
+            android:paddingStart="5dp"
+            android:src="@drawable/m3_medical_icon" />
+
+        <Button
+            android:id="@+id/emergencyChatButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/ButtonYellow"
+            android:text="@string/chat"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </FrameLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

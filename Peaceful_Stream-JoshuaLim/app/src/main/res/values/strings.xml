@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">Peaceful Stream</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sign_up">Don\'t have an account?    Sign Up</string>
+    <string name="sign_in">Already have an account? Sign In</string>
+    <string name="database_url">https://mad-assignment-cb1c0-default-rtdb.asia-southeast1.firebasedatabase.app/</string>
+    <string name="user_collection_name">Users</string>
+    <string name="m1_moduleTitle">Wellness &amp; Relaxation</string>
+    <string name="m5_moduleTitle">Health &amp; Well-Being</string>
+    <string name="m4_moduleTitle">Safety &amp; Security</string>
+    <string name="musicplayer">Music Player</string>
+    <string name="create_musicplayer">Create new Playlist</string>
+    <string name="video">Meditation Video</string>
+    <string name="playlist_collection_name">Playlists</string>
+    <string name="songs_collection_name">Songs</string>
+    <string name="fav_songs_document_name">Favourite Songs</string>
+    <string name="title_activity_communication_landing_page">CommunicationLandingPage</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="default_music_icon_image_url">https://firebasestorage.googleapis.com/v0/b/mad-assignment-cb1c0.appspot.com/o/music%20icon.png?alt=media&amp;token=ebfa700c-ddba-4f37-88ec-a02a9358c92d</string>
+    <string name="m2_moduleTitle">Emergency Assistance</string>
+    <string name="emergency">Emergency Dialing</string>
+    <string name="location">Sharing Location</string>
+    <string name="locationTitle">Location</string>
+    <string name="shareLocation">Share location</string>
+    <string name="chat">Emergency Chat</string>
+    <string name="predefinedHotlines">Predefined Hotlines</string>
+    <string name="ambulance">Ambulance</string>
+    <string name="polis">Polis</string>
+    <string name="fireBrigade">Fire Brigade</string>
+    <string name="naturalDisaster">Natural Disaster</string>
+    <string name="callBtn1">Call Ambulance</string>
+    <string name="callBtn2">Call Police</string>
+    <string name="callBtn3">Call Fire Brigade</string>
+    <string name="callBtn4">Call Natural Disaster</string>
+    <string name="hintText">Type a message</string>
+    <string name="google_maps_key">AIzaSyAuKJq9Uo0Y-uvwKP6c7-eFK9xaNdy4mVQ</string>
+
+</resources>

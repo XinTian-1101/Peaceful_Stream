@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Background shape -->
+    <item android:drawable="@android:color/transparent" />
+
+    <!-- Purple outline shape -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+            <stroke
+                android:width="3dp"
+                android:color="#5169A2" />
+        </shape>
+    </item>
+
+</layer-list>
+
+
+
+
+

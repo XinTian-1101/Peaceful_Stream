@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/customPlayer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#9FB2C8"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/songImagePlayer"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:id="@+id/songNamePlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/songImagePlayer"
+            android:text="Current Song" />
+
+        <ImageButton
+            android:id="@+id/playlistAddPlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_playlist_add"
+            android:background="#9FB2C8"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"/>
+
+        <ImageButton
+            android:id="@+id/favouriteBtnPlayer"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/playPauseBtnPlayer"
+            android:background="#9FB2C8"
+            android:layout_marginRight="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_favourite_red"/>
+
+        <ImageButton
+            android:id="@+id/playPauseBtnPlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="#9FB2C8"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/playlistAddPlayer"
+            android:src="@drawable/ic_pause" />
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
