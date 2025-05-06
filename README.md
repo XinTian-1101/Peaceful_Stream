@@ -65,3 +65,5 @@ This project follows an **Agile methodology**, emphasizing:
 - Iterative, sprint-based development
 - Continuous user feedback and testing
 - A user-centered approach in feature design and implementation
+
+**completeBranch** is the final branch
